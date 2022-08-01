@@ -8,11 +8,11 @@ The process for cloning the repository is different depending on if the package 
 #### __AWS CodeCommit (Current Platform)__
 1. In your browser, navigate to your list of AWS accounts
 2. Search for ___aws-5g.dp.mss.data-science.dev___ and press the arrow to view all available roles
-![expand to see roles](./images/arrow.PNG?raw=true "Expand to see roles")
+![expand to see roles](./images/arrow.PNG.svg?raw=true "Expand to see roles")
 3. To the right of your desired role, click ___Command live or programmatic access___
-![cli_progromatic_access](./images/cli_progromatic_access.PNG?raw=true "CLI Access")
+![cli_progromatic_access](./images/cli_progromatic_access.PNG.svg?raw=true "CLI Access")
 4. You will now be presented with something similar to the following screen, you will only need to focus on the three values presented in ___Option 3___ - AWS Access Key Id, AWS Secret access key, and AWS session token:
-![credentials](./images/Credentials.PNG?raw=true "Credentials")
+![credentials](./images/Credentials.PNG.svg?raw=true "Credentials")
 5. Next, open a terminal and issue the following command:
 ```console
 $ aws configure
@@ -26,11 +26,11 @@ $ aws configure set aws_session_token (AWS-SESSION-TOKEN)
 ```
 10. You should now have CLI access to this AWS Account / Role for a period of time.  The credentials do periodically expire, so you will need to repeat this process from time-to-time
 11. Now to clone the repo, on the AWS Account page, click on the ***aws-5g.dp.mss.data-science.dev*** to expand options and select ***Management console*** to enter the account
-![enter account](./images/Enter_account.PNG?raw=true "Enter MSS Dev account")
+![enter account](./images/Enter_account.PNG.svg?raw=true "Enter MSS Dev account")
 12. Next, using the search bar at the top of the Management console, search for ___CodeCommit___ and select the correct service from the list:
 ![search](./images/Search.PNG?raw=true "Search for CodeCommit")
 13. Now, you will be presented with a list of repositories.  Locate the *msspackages* repository in the list.  Click the ***HTTPS (GRC)*** option on the right hand side in the ***Clone URL*** column; this copies the link to your clip board:
-![clone link](./images/clone_link.PNG?raw=true "Clone Link")
+![clone link](./images/clone_link.PNG.svg?raw=true "Clone Link")
 14. Next, change your present working directory in your terminal to the location you keep your git repositories on your local machine.  Once you have navigated there, issue the following command, replacing ***(HTTPS(GRC)-LINK)*** with the pasted value from the previous step; press enter and the repository will clone
 ```console
 $ git clone (HTTPS(GRC)-LINK)
