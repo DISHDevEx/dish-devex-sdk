@@ -10,9 +10,8 @@ It is assumed that you have already cloned the _msspackages_ __main__ branch to 
 Perform the following commands within your _msspackages_ repository:
 
 1. Get a fresh pull on the the _msspackages_ repository:
-```console
-$ git pull
-```
+> `git pull`
+`
 
 2. Next, create a branch from _main_ on your local machine by executing following command; you will need to replace the fields with your first name and the name of your algorithm:
 ```console
