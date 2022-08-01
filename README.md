@@ -8,7 +8,7 @@ The process for cloning the repository is different depending on if the package 
 #### __AWS CodeCommit (Current Platform)__
 1. In your browser, navigate to your list of AWS accounts
 2. Search for ___aws-5g.dp.mss.data-science.dev___ and press the arrow to view all available roles
-![Expand to See Roles](./images/arrow.PNG.svg?raw=true "Expand to see roles")
+![Expand to See Roles](./images/arrow.PNG?raw=true "Expand to see roles")
 3. To the right of your desired role, click ___Command live or programmatic access___
 ![CLI Programmatic Access ](./images/cli_progromatic_access.PNG?raw=true "CLI Access")
 4. You will now be presented with something similar to the following screen, you will only need to focus on the three values presented in ___Option 3___ - AWS Access Key Id, AWS Secret access key, and AWS session token:
