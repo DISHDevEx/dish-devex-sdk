@@ -13,13 +13,14 @@ The process for cloning the repository is different depending on if the package 
 ![CLI Programmatic Access ](./images/cli_progromatic_access.PNG?raw=true "CLI Access")
 4. You will now be presented with something similar to the following screen, you will only need to focus on the three values presented in ___Option 3___ - AWS Access Key Id, AWS Secret access key, and AWS session token:
 ![AWS CLI Credentials](./images/Credentials.PNG?raw=true "Credentials")
-5. Next, open a terminal and issue the following command:
+5. Next, open a terminal and issue the following commands:
 ```console
+$ pip install git-remote-codecommit
 $ aws configure
 ```
 6. Copy the value for ___AWS Access Key Id___ from your CLI credentials on AWS and paste it in the terminal when prompted for ___AWS Access Key ID:___; press enter
 7. The next prompt will be for ***AWS Secret Access Key***.  Copy and paste the value from your AWS Credentials for ***AWS Secret access key*** and press enter
-8. The next two prompts, ***Default region name*** and ***Default output format***, can be left as defaults; press enter on each to leave as default
+8. The next prompt, ***Default region name***, set to "***us-west-2***" and for the following prompt, ***Default output format***, leave as default by pressing enter
 9. Next, issue the following command in the terminal, replacing ___(AWS-SESSION-TOKEN)___ with the copy/pasted value for ***AWS session token*** from your CLI Credentials on AWS; then press enter:
 ```console
 $ aws configure set aws_session_token (AWS-SESSION-TOKEN)
