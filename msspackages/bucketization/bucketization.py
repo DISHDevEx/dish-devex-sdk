@@ -4,26 +4,29 @@ from datetime import datetime
 from datetime import timedelta
 from tqdm import tqdm
 
-##grouped = df.groupby('instance_id').resample('H').agg({'node_filesystem_utilization':['max', 'var']})
 
-## metrics needs to be a list of all metrics that you want to bucketize in the dataframe. NO categorical features allowed
+def eks_bucketization(df,groupby, metrics, aggregated_outputs, bucket_size):
+    """
+        Inputs:
+            metrics needs to be a list of all metrics that you want to bucketize in the dataframe. NO categorical features allowed
 
-##aggregated_outputs needs to be a list of lists, where each output needs to be a list. 
-    ## ex/ [['max'],['min'],['max',var]]
+            aggregated_outputs needs to be a list of lists, where each output needs to be a list. 
+                ex/ [['max'],['min'],['max',var]]
 
-##this bucketization algorithm operates on a node level. Can be modified to operate on a pod/container/namespace level. 
+            this bucketization algorithm operates on a node level. Can be modified to operate on a pod/container/namespace level. 
 
-##aggregated_outputs need to be the same size as metrics
+            aggregated_outputs need to be the same size as metrics
 
-##metric_epochtime is a requirement
+            metric_epochtime is a requirement
 
-##groupby needs to be a string
+            groupby needs to be a string
 
-##use the pd.resample bucket string formatting for bucketsize 
+            use the pd.resample bucket string formatting for bucketsize 
 
-
-
-def bucketization(df,groupby, metrics, aggregated_outputs, bucket_size):
+        Outputs:
+        
+            Pandas DataFrame - df.groupby(groupby).resample(bucket_size).agg(aggregate_dictionary)
+    """
     
     df = df.set_index('metric_epochtime')
     

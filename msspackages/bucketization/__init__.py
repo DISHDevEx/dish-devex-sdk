@@ -1,1 +1,1 @@
-from .bucketization import bucko
+from .bucketization import eks_bucketization
