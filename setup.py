@@ -9,10 +9,10 @@ setup(
     author= 'Hamza Khokhar, Pierce Lovesee',
     author_email='hamza.khokhar@dish.com, pierce.lovesee@dish.com',
     license='',
-    packages=find_packages(include=['msspackages', 'msspackages.extras', 'msspackages.circles','msspackages.parity']),
+    packages=find_packages(include=['msspackages', 'msspackages.extras', 'msspackages.circles','msspackages.parity','msspackages.bucketization']),
     install_requires=['pandas==1.4.3',
                       'numpy==1.23.1',
-                      'tqdm== 4.64.0'
+                      'tqdm== 4.64.0',
                       ],
     
     classifiers=[
