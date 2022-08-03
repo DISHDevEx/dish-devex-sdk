@@ -7,3 +7,6 @@ from .circles import Circle
 
 from .parity import NumberClass
 from .parity import Number
+
+from .bucketization import eks_bucketization
+from .bucketization import bucketization
