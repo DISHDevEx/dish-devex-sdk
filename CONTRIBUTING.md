@@ -10,8 +10,9 @@ It is assumed that you have already cloned the _msspackages_ __main__ branch to 
 Perform the following commands within your _msspackages_ repository:
 
 1. Get a fresh pull on the the _msspackages_ repository:
-> `git pull`
-`
+```console
+$ git pull
+```
 
 2. Next, create a branch from _main_ on your local machine by executing following command; you will need to replace the fields with your first name and the name of your algorithm:
 ```console
@@ -351,4 +352,34 @@ This is a red circle with a radius of 2.
 ```
 If everything in your algorithm is functioning as expected, then it's time time to submit a merge request to have your code included in the next release of _msspacakges_!
 
+## README.md File Requierments
+
+Each subpackage contributed to *msspackages* must have a README.md file included.  This tells other users how to sussecfully use your functions, the use cases for each function, and the expected outputs.  The README.md files should be included in the following location:
+
+```console
+> msspackages
+    > msspackages
+        __init__.py
+        > circles
+            __init__.py
+            CirclesClass.py
+-->         README.md
+        > [OtherPackages]
+```
+The minimum topics for inclusion in the README file are as follows:
+
+1. Detailed description of each input
+2. Detailed description of the expected output
+3. An example call for each function you are contributing
+
 ## Submitting a Pull Request
+Once all of the above steps are completed, your unit tests are all passing, and you are able to succesfully build *msspacakges* on your local machine, it's now time to submit a pull request.
+
+Pull requests are easy to complete on CodeCommit.  Perform the following steps:
+
+1. Commit and push your branch to the *msspackages* repository
+2. On CodeCommit, navigate to the *msspackages* repository
+3. On the left-hand-side, in the navigation menu, select **Sources --> Repositories --> Pull Requests**
+4. Select your branch as the source, select *main* as the destination
+5. Submit the pull request
+6. A senior member of the team will approve the pull request and reach out if any alterations are needed
