@@ -11,9 +11,9 @@ setup(
     license='',
     packages=find_packages(include=['msspackages', 'msspackages.extras', 'msspackages.circles',
                                     'msspackages.parity','msspackages.bucketization', 'msspackages.update_cwd']),
-    install_requires=['pandas==1.4.3',
-                      'numpy==1.23.1',
-                      'tqdm== 4.64.0',
+    install_requires=['pandas==1.3.5',
+                      'numpy==1.21.6',
+                      'tqdm==4.42.1',
                       ],
     
     classifiers=[
