@@ -1,0 +1,34 @@
+{
+  "CloudWatchMetrics": [
+    {
+      "Metrics": [
+        {
+          "Unit": "Count",
+          "Name": "namespace_number_of_running_pods"
+        }
+      ],
+      "Dimensions": [
+        [
+          "Namespace",
+          "ClusterName"
+        ],
+        [
+          "ClusterName"
+        ]
+      ],
+      "Namespace": "ContainerInsights"
+    }
+  ],
+  "ClusterName": "myCICluster",
+  "Namespace": "amazon-cloudwatch",
+  "Sources": [
+    "apiserver"
+  ],
+  "Timestamp": "1567097594160",
+  "Type": "ClusterNamespace",
+  "Version": "0",
+  "kubernetes": {
+    "namespace_name": "amazon-cloudwatch"
+  },
+  "namespace_number_of_running_pods": 7
+}

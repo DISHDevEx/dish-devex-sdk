@@ -1,0 +1,38 @@
+{
+  "CloudWatchMetrics": [
+    {
+      "Metrics": [
+        {
+          "Unit": "Count",
+          "Name": "service_number_of_running_pods"
+        }
+      ],
+      "Dimensions": [
+        [
+          "Service",
+          "Namespace",
+          "ClusterName"
+        ],
+        [
+          "ClusterName"
+        ]
+      ],
+      "Namespace": "ContainerInsights"
+    }
+  ],
+  "ClusterName": "myCICluster",
+  "Namespace": "amazon-cloudwatch",
+  "Service": "cloudwatch-agent-statsd",
+  "Sources": [
+    "apiserver"
+  ],
+  "Timestamp": "1567097534160",
+  "Type": "ClusterService",
+  "Version": "0",
+  "kubernetes": {
+    "namespace_name": "amazon-cloudwatch",
+    "service_name": "cloudwatch-agent-statsd"
+  },
+  "service_number_of_running_pods": 1
+}
+

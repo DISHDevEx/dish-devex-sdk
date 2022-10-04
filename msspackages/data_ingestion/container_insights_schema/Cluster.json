@@ -1,0 +1,31 @@
+{
+  "CloudWatchMetrics": [
+    {
+      "Metrics": [
+        {
+          "Unit": "Count",
+          "Name": "cluster_node_count"
+        },
+        {
+          "Unit": "Count",
+          "Name": "cluster_failed_node_count"
+        }
+      ],
+      "Dimensions": [
+        [
+          "ClusterName"
+        ]
+      ],
+      "Namespace": "ContainerInsights"
+    }
+  ],
+  "ClusterName": "myCICluster",
+  "Sources": [
+    "apiserver"
+  ],
+  "Timestamp": "1567097534160",
+  "Type": "Cluster",
+  "Version": "0",
+  "cluster_failed_node_count": 0,
+  "cluster_node_count": 3
+}

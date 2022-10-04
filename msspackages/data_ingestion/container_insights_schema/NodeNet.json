@@ -1,0 +1,27 @@
+{
+  "AutoScalingGroupName": "eksctl-myCICluster-nodegroup-standard-workers-NodeGroup-1174PV2WHZAYU",
+  "ClusterName": "myCICluster",
+  "InstanceId": "i-1234567890123456",
+  "InstanceType": "t3.xlarge",
+  "NodeName": "ip-192-0-2-0.us-west-2.compute.internal",
+  "Sources": [
+    "cadvisor",
+    "calculated"
+  ],
+  "Timestamp": "1567096928131",
+  "Type": "NodeNet",
+  "Version": "0",
+  "interface": "eni972f6bfa9a0",
+  "kubernetes": {
+    "host": "ip-192-168-75-26.us-west-2.compute.internal"
+  },
+  "node_interface_network_rx_bytes": 3163.008420864309,
+  "node_interface_network_rx_dropped": 0,
+  "node_interface_network_rx_errors": 0,
+  "node_interface_network_rx_packets": 16.575629266820258,
+  "node_interface_network_total_bytes": 3518.3935157426017,
+  "node_interface_network_tx_bytes": 355.385094878293,
+  "node_interface_network_tx_dropped": 0,
+  "node_interface_network_tx_errors": 0,
+  "node_interface_network_tx_packets": 3.9997714100370625
+}

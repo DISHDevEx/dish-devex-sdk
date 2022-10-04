@@ -1,0 +1,45 @@
+{
+  "AutoScalingGroupName": "eksctl-myCICluster-nodegroup-standard-workers-NodeGroup-1174PV2WHZAYU",
+  "ClusterName": "myCICluster",
+  "EBSVolumeId": "aws://us-west-2b/vol-0a53108976d4a2fda",
+  "InstanceId": "i-1234567890123456",
+  "InstanceType": "t3.xlarge",
+  "Namespace": "amazon-cloudwatch",
+  "NodeName": "ip-192-0-2-0.us-west-2.compute.internal",
+  "PodName": "cloudwatch-agent-statsd",
+  "Service": "cloudwatch-agent-statsd",
+  "Sources": [
+    "cadvisor",
+    "calculated"
+  ],
+  "Timestamp": "1567097399912",
+  "Type": "ContainerFS",
+  "Version": "0",
+  "container_filesystem_available": 0,
+  "container_filesystem_capacity": 21462233088,
+  "container_filesystem_usage": 24576,
+  "container_filesystem_utilization": 0.0001145081217748071,
+  "device": "/dev/nvme0n1p1",
+  "fstype": "vfs",
+  "kubernetes": {
+    "container_name": "cloudwatch-agent",
+    "docker": {
+      "container_id": "8967b6b37da239dfad197c9fdea3e5dfd35a8a759ec86e2e4c3f7b401e232706"
+    },
+    "host": "ip-192-168-75-26.us-west-2.compute.internal",
+    "labels": {
+      "app": "cloudwatch-agent-statsd",
+      "pod-template-hash": "df44f855f"
+    },
+    "namespace_name": "amazon-cloudwatch",
+    "pod_id": "2f4ff5ac-c813-11e9-a31d-06e9dde32928",
+    "pod_name": "cloudwatch-agent-statsd-df44f855f-ts4q2",
+    "pod_owners": [
+      {
+        "owner_kind": "Deployment",
+        "owner_name": "cloudwatch-agent-statsd"
+      }
+    ],
+    "service_name": "cloudwatch-agent-statsd"
+  }
+}

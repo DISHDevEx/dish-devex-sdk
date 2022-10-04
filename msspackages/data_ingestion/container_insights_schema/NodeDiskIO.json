@@ -1,0 +1,28 @@
+{
+  "AutoScalingGroupName": "eksctl-myCICluster-nodegroup-standard-workers-NodeGroup-1174PV2WHZAYU",
+  "ClusterName": "myCICluster",
+  "EBSVolumeId": "aws://us-west-2b/vol-0a53108976d4a2fda",
+  "InstanceId": "i-1234567890123456",
+  "InstanceType": "t3.xlarge",
+  "NodeName": "ip-192-0-2-0.us-west-2.compute.internal",
+  "Sources": [
+    "cadvisor"
+  ],
+  "Timestamp": "1567096928131",
+  "Type": "NodeDiskIO",
+  "Version": "0",
+  "device": "/dev/nvme0n1",
+  "kubernetes": {
+    "host": "ip-192-168-75-26.us-west-2.compute.internal"
+  },
+  "node_diskio_io_service_bytes_async": 9750.505814277016,
+  "node_diskio_io_service_bytes_read": 0,
+  "node_diskio_io_service_bytes_sync": 230.6174506688036,
+  "node_diskio_io_service_bytes_total": 9981.123264945818,
+  "node_diskio_io_service_bytes_write": 9981.123264945818,
+  "node_diskio_io_serviced_async": 1.153087253344018,
+  "node_diskio_io_serviced_read": 0,
+  "node_diskio_io_serviced_sync": 0.03603397666700056,
+  "node_diskio_io_serviced_total": 1.1891212300110185,
+  "node_diskio_io_serviced_write": 1.1891212300110185
+}

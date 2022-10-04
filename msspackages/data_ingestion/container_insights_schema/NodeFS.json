@@ -1,0 +1,47 @@
+{
+  "AutoScalingGroupName": "eksctl-myCICluster-nodegroup-standard-workers-NodeGroup-1174PV2WHZAYU",
+  "CloudWatchMetrics": [
+    {
+      "Metrics": [
+        {
+          "Unit": "Percent",
+          "Name": "node_filesystem_utilization"
+        }
+      ],
+      "Dimensions": [
+        [
+          "NodeName",
+          "InstanceId",
+          "ClusterName"
+        ],
+        [
+          "ClusterName"
+        ]
+      ],
+      "Namespace": "ContainerInsights"
+    }
+  ],
+  "ClusterName": "myCICluster",
+  "EBSVolumeId": "aws://us-west-2b/vol-0a53108976d4a2fda",
+  "InstanceId": "i-1234567890123456",
+  "InstanceType": "t3.xlarge",
+  "NodeName": "ip-192-0-2-0.us-west-2.compute.internal",
+  "Sources": [
+    "cadvisor",
+    "calculated"
+  ],
+  "Timestamp": "1567097939726",
+  "Type": "NodeFS",
+  "Version": "0",
+  "device": "/dev/nvme0n1p1",
+  "fstype": "vfs",
+  "kubernetes": {
+    "host": "ip-192-168-75-26.us-west-2.compute.internal"
+  },
+  "node_filesystem_available": 17298395136,
+  "node_filesystem_capacity": 21462233088,
+  "node_filesystem_inodes": 10484720,
+  "node_filesystem_inodes_free": 10367158,
+  "node_filesystem_usage": 4163837952,
+  "node_filesystem_utilization": 19.400767547940255
+}

@@ -1,0 +1,62 @@
+{
+  "AutoScalingGroupName": "eksctl-myCICluster-nodegroup-standard-workers-NodeGroup-sample",
+  "ClusterName": "myCICluster",
+  "InstanceId": "i-1234567890123456",
+  "InstanceType": "t3.xlarge",
+  "Namespace": "amazon-cloudwatch",
+  "NodeName": "ip-192-0-2-0.us-west-2.compute.internal",
+  "PodName": "cloudwatch-agent-statsd",
+  "Service": "cloudwatch-agent-statsd",
+  "Sources": [
+    "cadvisor",
+    "pod",
+    "calculated"
+  ],
+  "Timestamp": "1567097399912",
+  "Type": "Container",
+  "Version": "0",
+  "container_cpu_limit": 200,
+  "container_cpu_request": 200,
+  "container_cpu_usage_system": 1.87958283771964,
+  "container_cpu_usage_total": 6.159993652997942,
+  "container_cpu_usage_user": 1.6707403001952357,
+  "container_cpu_utilization": 0.15399984132494854,
+  "container_memory_cache": 8192,
+  "container_memory_failcnt": 0,
+  "container_memory_hierarchical_pgfault": 0,
+  "container_memory_hierarchical_pgmajfault": 0,
+  "container_memory_limit": 104857600,
+  "container_memory_mapped_file": 0,
+  "container_memory_max_usage": 24580096,
+  "container_memory_pgfault": 0,
+  "container_memory_pgmajfault": 0,
+  "container_memory_request": 104857600,
+  "container_memory_rss": 22736896,
+  "container_memory_swap": 0,
+  "container_memory_usage": 24453120,
+  "container_memory_utilization": 0.10574541028701798,
+  "container_memory_working_set": 17580032,
+  "container_status": "Running",
+  "kubernetes": {
+    "container_name": "cloudwatch-agent",
+    "docker": {
+      "container_id": "8967b6b37da239dfad197c9fdea3e5dfd35a8a759ec86e2e4c3f7b401e232706"
+    },
+    "host": "ip-192-168-75-26.us-west-2.compute.internal",
+    "labels": {
+      "app": "cloudwatch-agent-statsd",
+      "pod-template-hash": "df44f855f"
+    },
+    "namespace_name": "amazon-cloudwatch",
+    "pod_id": "2f4ff5ac-c813-11e9-a31d-06e9dde32928",
+    "pod_name": "cloudwatch-agent-statsd-df44f855f-ts4q2",
+    "pod_owners": [
+      {
+        "owner_kind": "Deployment",
+        "owner_name": "cloudwatch-agent-statsd"
+      }
+    ],
+    "service_name": "cloudwatch-agent-statsd"
+  },
+  "number_of_container_restarts": 0
+}

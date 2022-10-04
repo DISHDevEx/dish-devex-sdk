@@ -1,0 +1,44 @@
+{
+  "AutoScalingGroupName": "eksctl-myCICluster-nodegroup-standard-workers-NodeGroup-1174PV2WHZAYU",
+  "ClusterName": "myCICluster",
+  "InstanceId": "i-1234567890123456",
+  "InstanceType": "t3.xlarge",
+  "Namespace": "amazon-cloudwatch",
+  "NodeName": "ip-192-0-2-0.us-west-2.compute.internal",
+  "PodName": "cloudwatch-agent-statsd",
+  "Service": "cloudwatch-agent-statsd",
+  "Sources": [
+    "cadvisor",
+    "calculated"
+  ],
+  "Timestamp": "1567097351092",
+  "Type": "PodNet",
+  "Version": "0",
+  "interface": "eth0",
+  "kubernetes": {
+    "host": "ip-192-168-75-26.us-west-2.compute.internal",
+    "labels": {
+      "app": "cloudwatch-agent-statsd",
+      "pod-template-hash": "df44f855f"
+    },
+    "namespace_name": "amazon-cloudwatch",
+    "pod_id": "2f4ff5ac-c813-11e9-a31d-06e9dde32928",
+    "pod_name": "cloudwatch-agent-statsd-df44f855f-ts4q2",
+    "pod_owners": [
+      {
+        "owner_kind": "Deployment",
+        "owner_name": "cloudwatch-agent-statsd"
+      }
+    ],
+    "service_name": "cloudwatch-agent-statsd"
+  },
+  "pod_interface_network_rx_bytes": 9880.697124714186,
+  "pod_interface_network_rx_dropped": 0,
+  "pod_interface_network_rx_errors": 0,
+  "pod_interface_network_rx_packets": 107.80005532263283,
+  "pod_interface_network_total_bytes": 10158.829201483635,
+  "pod_interface_network_tx_bytes": 278.13207676944796,
+  "pod_interface_network_tx_dropped": 0,
+  "pod_interface_network_tx_errors": 0,
+  "pod_interface_network_tx_packets": 1.146027574644318
+}
