@@ -2,14 +2,14 @@
 ## imports
 
 import os
+import sys
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, to_json
 from pyspark.sql.types import StructType, MapType
 import pyspark.sql as pysql
 import configparser
-from .container_insights_schema import eks_raw_pyspark_schema
-
+from msspackages.data_ingestion import eks_raw_pyspark_schema
 
 
 def find_multilevel_schema_items(schema: pysql.types.StructType) -> list:
@@ -168,7 +168,7 @@ class Pyspark_data_ingestion:
         
         ##setup master schemas
         ## Read the master schema for the specified type (args)
-        self._master_schema_path = "data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
+        self._master_schema_path = "/home/sagemaker-user/eks-projects/msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
         self._master_schema_json = self._spark.read.json(self._master_schema_path, multiLine=True)
          
         self._finalTrainingData = None
@@ -179,7 +179,7 @@ class Pyspark_data_ingestion:
     def set_rec_type(self, recType = 'Node'):
         
         self._filter_column_value = str(recType)
-        self._master_schema_path = "data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
+        self._master_schema_path = "/eks-projects/msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
         self._master_schema_json = self._spark.read.json(self._master_schema_path, multiLine=True)
         
     def get_rec_type(self):

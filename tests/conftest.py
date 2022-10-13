@@ -1,7 +1,7 @@
 # content of conftest.py
 # This file provides the ability to call functions once for the entire test suite.
 import pytest
-from msspackages import data_ingestion, find_multilevel_schema_items
+from msspackages import Pyspark_data_ingestion, find_multilevel_schema_items
 from pyspark.sql.types import *
 import dask.dataframe as dd
 from .commons import year, month, day, hour, s3_link_dask
