@@ -168,7 +168,9 @@ class Pyspark_data_ingestion:
         
         ##setup master schemas
         ## Read the master schema for the specified type (args)
-        self._master_schema_path = "/home/sagemaker-user/eks-projects/msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
+        self._master_schema_path = "/root/eks-projects/msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
+
+        #self._master_schema_path = "/root/eks-projects/msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
         self._master_schema_json = self._spark.read.json(self._master_schema_path, multiLine=True)
          
         self._finalTrainingData = None
@@ -179,7 +181,8 @@ class Pyspark_data_ingestion:
     def set_rec_type(self, recType = 'Node'):
         
         self._filter_column_value = str(recType)
-        self._master_schema_path = "/eks-projects/msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
+        
+        self._master_schema_path = "/root/eks-projects/msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
         self._master_schema_json = self._spark.read.json(self._master_schema_path, multiLine=True)
         
     def get_rec_type(self):
