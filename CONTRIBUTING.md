@@ -304,9 +304,13 @@ def test_FunctionInPackage():
 ```
 #### Run the Unit Tests
 When your test functions are complete, you can run the test cases by navigating to the _msspackages_ root and executing the following command:
+RUN: pytest from root dir.
+RUN pytest --slow from root dir to run slow tests.
 ```console
 ~/msspackages$ pytest
+~/msspackages$ pytest --slow
 ```
+
 the _pytest_ command must be within the same directory that the ___tests___ directory is located.  Once run, _pytest_ will generate output on the test.
 ## Test Building _msspacakges_ With your Sub-Pacakge
 It is time for a test build!  If you've followed the steps above, and your unit tests are all passing, then it's time to test-build _msspackages_ with your sub-package on your local machine.  This involves the following steps:

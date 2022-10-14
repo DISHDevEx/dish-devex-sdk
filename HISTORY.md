@@ -12,14 +12,23 @@ dev
 -   Conception
 -   Development
 
+
 0.2dev (2022-08-01)
 ------------------
 
 -   Added bucketization() function
 -   Author: Vinayak Sharma
 
+
 0.3dev (2022-09-14)
 ------------------
 
 -   Added update_cwd_to_root() function
 -   Author: Evgeniya Dontsova
+
+
+0.4dev (2022-10-14)
+------------------
+
+-   Added pyspark ingestion and testing framework
+-   Author: Praveen Mada
