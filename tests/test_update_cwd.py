@@ -4,7 +4,7 @@ import os
 
 def test_update_cwd():
     
-    os.chdir('msspackages/update_cwd')
+    os.chdir('msspackages/msspackages/update_cwd')
     print(os.getcwd())
     
     update_cwd_to_root('msspackages')
