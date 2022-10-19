@@ -1,0 +1,1 @@
+include msspackages/data_ingestion/container_insights_schema/*.json

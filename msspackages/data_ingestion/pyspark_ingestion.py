@@ -11,7 +11,6 @@ import pyspark.sql as pysql
 import configparser
 from msspackages.data_ingestion import eks_raw_pyspark_schema
 
-
 def find_multilevel_schema_items(schema: pysql.types.StructType) -> list:
     """
     This function takes pyspark schema and returns list of columns 
@@ -167,8 +166,16 @@ class Pyspark_data_ingestion:
         self._read_schema = eks_raw_pyspark_schema.eks_performance_logs_schema
         
         ##setup master schemas
-        ## Read the master schema for the specified type (args)
-        self._master_schema_path = "msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
+        ## Read the master schema for the specified type (args)\
+        self._master_schema_path = os.path.join(os.path.dirname(__file__), "container_insights_schema", self._filter_column_value + ".json")
+        
+        #self._master_schema_path = pkg_resources.read_text(container_insights_schema, self._filter_column_value + ".json" )
+        print(self._master_schema_path)
+        # print(os.path.dirname("Cluster.json"))
+        # print(os.path.abspath("Cluster.json"))
+        # self._master_schema_path = os.path.join(os.path.abspath(__file__), self._filter_column_value + ".json")
+        print(self._master_schema_path)
+        #self._master_schema_path = "msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
 
         self._master_schema_json = self._spark.read.json(self._master_schema_path, multiLine=True)
          
@@ -181,7 +188,7 @@ class Pyspark_data_ingestion:
         
         self._filter_column_value = str(recType)
         
-        self._master_schema_path = "msspackages/msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
+        self._master_schema_path = os.path.join(os.path.dirname(__file__), "container_insights_schema", self._filter_column_value + ".json")
         
         self._master_schema_json = self._spark.read.json(self._master_schema_path, multiLine=True)
         

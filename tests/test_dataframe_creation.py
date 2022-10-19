@@ -1,6 +1,4 @@
-# function to test the creation of the dataframes from pyspark. 
-from msspackages import update_cwd_to_root
-update_cwd_to_root("eks-projects")
+# function to test the creation of the dataframes from pyspark.
 
 def test_NodeDiskIO(NodeDiskIO):
     err_code = NodeDiskIO[0]
