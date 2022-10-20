@@ -234,7 +234,7 @@ class Pyspark_data_ingestion:
         ## some of these packages throw warnings, figure out what to do to resolve that (are there deprecated packages)
         
         spark_config = configparser.ConfigParser()
-        spark_config.read("data_ingestion/spark_config.ini")
+        spark_config.read(os.path.join(os.path.dirname(__file__), "spark_config.ini"))
         
         if(len(pkg_list)==0):
             pkg_list.append("io.delta:delta-core_2.12:2.1.0")

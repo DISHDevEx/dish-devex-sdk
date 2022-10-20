@@ -1,2 +1,3 @@
 include msspackages/data_ingestion/container_insights_schema/*.json
+include msspackages/data_ingestion/*.ini
 include msspackages/project_inital_setup/*.sh
