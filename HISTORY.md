@@ -32,3 +32,10 @@ dev
 
 -   Added pyspark ingestion and testing framework
 -   Author: Praveen Mada
+
+
+0.5dev (2022-10-19)
+------------------
+
+-   Added project setup function for notebook and console
+-   Author: Praveen Mada

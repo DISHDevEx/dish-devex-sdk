@@ -168,14 +168,6 @@ class Pyspark_data_ingestion:
         ##setup master schemas
         ## Read the master schema for the specified type (args)\
         self._master_schema_path = os.path.join(os.path.dirname(__file__), "container_insights_schema", self._filter_column_value + ".json")
-        
-        #self._master_schema_path = pkg_resources.read_text(container_insights_schema, self._filter_column_value + ".json" )
-        print(self._master_schema_path)
-        # print(os.path.dirname("Cluster.json"))
-        # print(os.path.abspath("Cluster.json"))
-        # self._master_schema_path = os.path.join(os.path.abspath(__file__), self._filter_column_value + ".json")
-        print(self._master_schema_path)
-        #self._master_schema_path = "msspackages/data_ingestion/container_insights_schema/" + self._filter_column_value + ".json"
 
         self._master_schema_json = self._spark.read.json(self._master_schema_path, multiLine=True)
          

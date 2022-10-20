@@ -9,13 +9,16 @@
 
 from msspackages import Circle
 from msspackages import Pyspark_data_ingestion
+from msspackages import setup_runner
 
-ci = Circle(5,"red")
+# ci = Circle(5,"red")
 
-#ci.describe(ci)
+# #ci.describe(ci)
 
-df_build = Pyspark_data_ingestion(year = '2022', month = '5', day = '5', hour = '5', filter_column_value = 'Cluster')
-spark = df_build.get_spark()
-df_err, df =  df_build.read()
-if df_err == 'PASS':
-    df.show()
+# df_build = Pyspark_data_ingestion(year = '2022', month = '5', day = '5', hour = '5', filter_column_value = 'Cluster')
+# spark = df_build.get_spark()
+# df_err, df =  df_build.read()
+# if df_err == 'PASS':
+#     df.show()
+
+setup_runner('console')
