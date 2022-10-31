@@ -243,7 +243,7 @@ class Pyspark_data_ingestion:
         packages = (",".join(pkg_list))
 
         ##create the config
-        conf = SparkConf().setMaster("local[*]")
+        conf = SparkConf()
         conf.set("spark.jars.packages", packages)
         conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
         conf.set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
@@ -251,7 +251,8 @@ class Pyspark_data_ingestion:
         if setup != 'default':
             conf.set("spark.driver.memory", spark_config.get(setup,'spark.driver.memory'))
             conf.set("spark.driver.maxResultSize", spark_config.get(setup,'spark.driver.maxResultSize'))
-        spark = SparkSession.builder.config(conf=conf).getOrCreate()
+
+        spark = SparkSession.builder.config(conf=conf).master("local[*]").getOrCreate()
 
         
         #use the sparkContext to print information about the spark version that we are implementing
