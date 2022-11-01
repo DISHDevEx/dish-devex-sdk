@@ -252,14 +252,11 @@ class Pyspark_data_ingestion:
             conf.set("spark.driver.memory", spark_config.get(setup,'spark.driver.memory'))
             conf.set("spark.driver.maxResultSize", spark_config.get(setup,'spark.driver.maxResultSize'))
 
-        spark = SparkSession.builder.config(conf=conf).master("local[*]").getOrCreate()
+        spark = SparkSession.builder.config(conf=conf).getOrCreate()
 
         
         #use the sparkContext to print information about the spark version that we are implementing
         sc = spark.sparkContext
-        
-        ## gives number of cores used my spark context
-        #print(sc.defaultParallelism)
 
         self._packages = packages
         
