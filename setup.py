@@ -14,7 +14,13 @@ setup(
                                    'msspackages.project_inital_setup']),
     include_package_data=True,
     install_requires = [
-            'pyspark'
+            'pyspark',
+            'pandas',
+            'numpy',
+            'tqdm',
+            'pyspark',
+            'configparser',
+            'dask'
     ],
     classifiers=[
         'Development Status :: 1 - Planning',
