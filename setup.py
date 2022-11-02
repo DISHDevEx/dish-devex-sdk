@@ -13,6 +13,8 @@ setup(
                                     'msspackages.parity','msspackages.bucketization', 'msspackages.update_cwd','msspackages.data_ingestion','msspackages.data_ingestion.container_insights_schema',
                                    'msspackages.project_inital_setup']),
     include_package_data=True,
+    #entry_points = {'console_scripts': ['msspackages=msspackages.project_inital_setu:setup_runner']}
+    #scripts=['msspackages/project_inital_setup/understanding_eks_setup.py'],
     install_requires = [
             'pyspark',
             'pandas',
@@ -20,8 +22,8 @@ setup(
             'tqdm',
             'pyspark',
             'configparser',
-            'dask'
-    ],
+            'dask'],
+    
     classifiers=[
         'Development Status :: 1 - Planning',
         'Intended Audience :: MSS Team',
