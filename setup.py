@@ -6,8 +6,8 @@ setup(
     description='MSS team packages for distributed use',
     url='https://git-codecommit.us-west-2.amazonaws.com/v1/repos/msspackages',
     
-    author= 'Praveen Mada, Hamza Khokhar, Pierce Lovesee',
-    author_email='praveen.mada@dish.com, hamza.khokhar@dish.com, pierce.lovesee@dish.com',
+    author= 'Hamza Khokhar, Praveen Mada, Pierce Lovesee',
+    author_email='hamza.khokhar@dish.com, praveen.mada@dish.com, pierce.lovesee@dish.com',
     license='Dish Wireless',
     packages=find_packages(include=['msspackages', 'msspackages.extras', 'msspackages.circles',
                                     'msspackages.parity','msspackages.bucketization', 'msspackages.update_cwd','msspackages.data_ingestion','msspackages.data_ingestion.container_insights_schema',
@@ -25,7 +25,7 @@ setup(
             'dask'],
     
     classifiers=[
-        'Development Status :: 1 - Planning',
-        'Intended Audience :: MSS Team',
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Dish Wireless,
     ],
 )
