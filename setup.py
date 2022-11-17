@@ -26,6 +26,6 @@ setup(
     
     classifiers=[
         'Development Status :: 4 - Beta',
-        'Intended Audience :: Dish Wireless,
+        'Intended Audience :: Dish Wireless',
     ],
 )
