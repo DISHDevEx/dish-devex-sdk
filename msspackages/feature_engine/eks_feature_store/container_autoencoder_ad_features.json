@@ -2,26 +2,26 @@
   {
     "feature_group_name": "container_autoencoder_ad_features",
     "created_date": "11-21-2022",
-    "created_by" :"David Cherney",
-    "feature_group_description": "Some General features to track the infrastructure usage underlying Applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "created_by": "David Cherney",
+    "feature_group_description": "Numerical time series data about containers running in Dish Wireless's EKS clusters, intended to train an auto-encoder for use in anomaly definition and detection.",
     "features_list":
     [
       {
-        "feature_name":"container_cpu_utilization",
-        "feature_description":"Percentage of utilization of total Node CPU capacity by node",
-        "feature_datatype":"float",
+        "feature_name": "container_cpu_utilization",
+        "feature_description": "Percentage of utilization of total Node CPU capacity by node",
+        "feature_datatype": "float",
         "feature_type": "existing"
       },
       {
-        "feature_name":"container_memory_utilization",
-        "feature_description":"Percentage of node RAM used by the container",
-        "feature_datatype":"float",
+        "feature_name": "container_memory_utilization",
+        "feature_description": "Percentage of node RAM used by the container",
+        "feature_datatype": "float",
         "feature_type": "existing"
       },
       {
-        "feature_name":"container_memory_working_set",
-        "feature_description":"accessed memory, dirty memory, and kernel memory",
-        "feature_datatype":"float",
+        "feature_name": "container_memory_working_set",
+        "feature_description": "accessed memory, dirty memory, and kernel memory",
+        "feature_datatype": "float",
         "feature_type": "existing"
       }
     ]

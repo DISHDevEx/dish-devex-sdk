@@ -24,5 +24,4 @@ from msspackages import get_features
 # if df_err == 'PASS':
 #     df.show()
 
-features = get_features("container_autoencoder_ad_features")
-print(features)
+print(get_features("node_autoencoder_ad_features","11-21-2022"))
