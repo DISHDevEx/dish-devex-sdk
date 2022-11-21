@@ -1,0 +1,35 @@
+[
+  {
+    "feature_group_name":"node_autoencoder_ad_features",
+    "created_date": "21-11-22",
+    "created_by": "Vinayak Sharma",
+    "feature_group_description":"Some General features to track the infrastructure usage underlying Applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "features_list":
+    [
+      {
+        "feature_name":"InstanceId ",
+        "feature_description":"Instance ID of the EC2 Instance of the node in the cluster.",
+        "feature_datatype":"string",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"node_cpu_utilization ",
+        "feature_description":"The percentage of CPU cores utilized on a per node basis",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"node_memory_utilization",
+        "feature_description":"The percentage of memory currently being used by the node compared to the total limit",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"node_network_total_bytes",
+        "feature_description":"The amount of all network recreived and transfered for the worker node network interfaces in a cluster.",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      }
+    ]
+  }
+]

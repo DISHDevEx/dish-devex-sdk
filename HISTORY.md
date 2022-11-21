@@ -39,3 +39,10 @@ dev
 
 -   Added project setup function for notebook and console
 -   Author: Praveen Mada
+
+
+0.6dev (2022-11-18)
+------------------
+
+-   Added feature Store for eks anomaly detection models
+-   Author: Praveen Mada
