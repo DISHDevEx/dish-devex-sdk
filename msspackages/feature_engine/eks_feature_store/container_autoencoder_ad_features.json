@@ -1,6 +1,6 @@
 [
   {
-    "feature_group_name": "container_autoencoder_ad_features",
+    "feature_group_name": "container_autoencoder_ad",
     "created_date": "11-21-2022",
     "created_by": "David Cherney",
     "feature_group_description": "numerical time series data about containers running in Dish Wireless's EKS clusters, intended to train an auto-encoder for use in anomaly definition and detection.",
@@ -26,6 +26,12 @@
         "feature_datatype": "float",
         "feature_type": "existing"
       }
-    ]
+    ],
+    "model_parameters":
+      {
+        "time_steps": 12,
+        "batch_size" : 6,
+        "sample_multipler": 1000000000
+      }
   }
 ]
