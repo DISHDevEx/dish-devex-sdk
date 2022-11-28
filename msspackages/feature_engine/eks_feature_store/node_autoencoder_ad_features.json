@@ -3,7 +3,9 @@
     "feature_group_name":"node_autoencoder_ad_features",
     "created_date": "11-21-2022",
     "created_by": "Vinayak Sharma",
-    "feature_group_description":"Some General features to track the infrastructure usage underlying Applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "model_type": "autoencoder",
+    "problem_type": "anomaly_detection",
     "features_list":
     [
       {
