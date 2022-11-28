@@ -5,7 +5,7 @@
     "created_by": "David Cherney",
     "feature_group_description": "numerical time series data about containers running in Dish Wireless's EKS clusters, intended to train an auto-encoder for use in anomaly definition and detection.",
     "model_type": "autoencoder",
-    "problem_type": "anomaly_detection",
+    "problem_type": "anomaly detection",
     "features_list":
     [
       {

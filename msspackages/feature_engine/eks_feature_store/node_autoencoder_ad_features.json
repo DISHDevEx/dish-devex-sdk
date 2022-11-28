@@ -5,7 +5,7 @@
     "created_by": "Vinayak Sharma",
     "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
     "model_type": "autoencoder",
-    "problem_type": "anomaly_detection",
+    "problem_type": "anomaly detection",
     "features_list":
     [
       {
