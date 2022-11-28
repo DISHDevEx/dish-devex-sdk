@@ -9,12 +9,6 @@
     "features_list":
     [
       {
-        "feature_name":"InstanceId ",
-        "feature_description":"Instance ID of the EC2 Instance of the node in the cluster.",
-        "feature_datatype":"string",
-        "feature_type": "existing"
-      },
-      {
         "feature_name":"node_cpu_utilization ",
         "feature_description":"The percentage of CPU cores utilized on a per node basis",
         "feature_datatype":"float",
