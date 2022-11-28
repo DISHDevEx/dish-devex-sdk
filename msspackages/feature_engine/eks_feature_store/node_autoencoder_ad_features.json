@@ -37,7 +37,7 @@
       {
         "time_steps": 12,
         "batch_size" : 6,
-        "sample_multipler": 1000000000
+        "sample_multiplier": 1000000000
       }
   }
 ]
