@@ -18,10 +18,10 @@ def get_features(input_feature_group_name = "", input_created_date = ""):
                 feature_data = json.load(f)
                 if count == 0 :
                     features_df = pd.json_normalize(data=feature_data, record_path='features_list', 
-                                meta=['feature_group_name', 'feature_group_description', 'created_by', 'created_date'])
+                                meta=['feature_group_name', 'feature_group_description', 'model_type', 'problem_type', 'created_by', 'created_date'])
                 else:
                     features_df =  features_df.append(pd.json_normalize(data=feature_data, record_path='features_list', 
-                                meta=['feature_group_name', 'feature_group_description', 'created_by', 'created_date']))
+                                meta=['feature_group_name', 'feature_group_description', 'model_type', 'problem_type',  'created_by', 'created_date']))
 
         # pd.set_option('display.max_columns', None)
         # print(features_df)
