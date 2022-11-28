@@ -16,7 +16,6 @@ def get_features(input_feature_group_name = "", input_created_date = ""):
         for count,file_name in enumerate(all_features_path):
             with open(file_name) as f:
                 feature_data = json.load(f)
-                print(feature_data)
                 if count == 0 :
                     features_df = pd.json_normalize(data=feature_data, record_path='features_list', 
                                 meta=['feature_group_name', 'feature_group_description', 'model_type', 'problem_type', 'created_by', 'created_date', 'model_parameters'])
