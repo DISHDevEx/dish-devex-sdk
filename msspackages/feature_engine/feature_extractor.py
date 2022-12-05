@@ -7,6 +7,21 @@ from glob import glob
 
 
 def get_features(input_feature_group_name = "", input_created_date = ""):
+    """
+    INPUT
+    -----
+        input_feature_group_name: STRING
+        filter condition to display features for selected group
+
+        input_created_date: STRING
+        filter condition to display features created on particular date
+    
+    OUTPUT
+    ------
+        features_df: DF
+        filter df will features and model parameters
+
+    """
 
     ##feature schemas
     ## Read the feature schema for the feature store
