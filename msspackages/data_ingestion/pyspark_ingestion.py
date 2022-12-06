@@ -232,39 +232,38 @@ class Pyspark_data_ingestion:
     def create_spark_utils(self, setup,  pkg_list = []):
         ##create a list of packages needed to read in the data
         ## some of these packages throw warnings, figure out what to do to resolve that (are there deprecated packages)
-        
-        spark_config = configparser.ConfigParser()
-        spark_config.read(os.path.join(os.path.dirname(__file__), "spark_config.ini"))
-        
-        if(len(pkg_list)==0):
-            pkg_list.append("io.delta:delta-core_2.12:2.1.0")
-            pkg_list.append("org.apache.hadoop:hadoop-aws:3.3.4")
-        
-        packages = (",".join(pkg_list))
+        if setup == 'emr':
+            #conf = SparkConf()
+            spark = SparkSession.builder.appName("EMRSERVERLESS").getOrCreate()
+            self._spark = spark
+        else:
+            spark_config = configparser.ConfigParser()
+            spark_config.read(os.path.join(os.path.dirname(__file__), "spark_config.ini"))
 
-        ##create the config
-        conf = SparkConf()
-        conf.set("spark.jars.packages", packages)
-        conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
-        conf.set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-        conf.set("fs.s3a.aws.credentials.provider", "com.amazonaws.auth.ContainerCredentialsProvider")
-        if setup != 'default':
-            conf.set("spark.driver.memory", spark_config.get(setup,'spark.driver.memory'))
-            conf.set("spark.driver.maxResultSize", spark_config.get(setup,'spark.driver.maxResultSize'))
+            if(len(pkg_list)==0):
+                pkg_list.append("io.delta:delta-core_2.12:2.1.0")
+                pkg_list.append("org.apache.hadoop:hadoop-aws:3.3.4")
 
-        spark = SparkSession.builder.config(conf=conf).getOrCreate()
+            packages = (",".join(pkg_list))
 
-        
-        #use the sparkContext to print information about the spark version that we are implementing
-        sc = spark.sparkContext
+            ##create the config
+            conf = SparkConf()
+            conf.set("spark.jars.packages", packages)
+            conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+            conf.set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+            conf.set("fs.s3a.aws.credentials.provider", "com.amazonaws.auth.ContainerCredentialsProvider")
+            if setup != 'default':
+                conf.set("spark.driver.memory", spark_config.get(setup,'spark.driver.memory'))
+                conf.set("spark.driver.maxResultSize", spark_config.get(setup,'spark.driver.maxResultSize'))
 
-        self._packages = packages
-        
-        self._spark_config = conf
-        
-        self._spark = spark
-        
-        self._spark_context = sc
+            spark = SparkSession.builder.config(conf=conf).getOrCreate()
+            self._packages = packages
+            self._spark_config = conf
+
+            #use the sparkContext to print information about the spark version that we are implementing
+            sc = spark.sparkContext
+            self._spark = spark
+            self._spark_context = sc
         
         
     def get_packages(self):
