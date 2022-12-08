@@ -329,7 +329,6 @@ class Pyspark_data_ingestion:
             
             ##set the return code as Pass to indicate that this function has succeeded in building out the dataframe. 
             self._last_return_code = 'PASS'
-
         
         except Exception as e: 
         
