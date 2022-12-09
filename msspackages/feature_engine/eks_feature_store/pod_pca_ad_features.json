@@ -1,10 +1,10 @@
 [
   {
-    "feature_group_name":"pod_autoencoder_ad",
+    "feature_group_name":"pod_pca_ad",
     "version": "v0.0.1",
-    "created_by": "Madhu Bandi, Evgeniya Dontsova",
+    "created_by": "David Cherney",
     "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
-    "model_type": "autoencoder",
+    "model_type": "pca",
     "problem_type": "anomaly detection",
     "features_list":
     [
@@ -29,10 +29,10 @@
     ],
     "model_parameters":
       {
-        "time_steps": 12,
-        "batch_size" : 6,
-        "train_sample_multiplier": 100,
-        "test_sample_multiplier": 20
+        "time_steps": 25,
+        "batch_size" : 10,
+        "train_sample_multiplier": 1000,
+        "test_sample_multiplier": 40
       }
   }
 ]

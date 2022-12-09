@@ -6,15 +6,15 @@ import numpy as np
 from glob import glob
 
 
-def get_features(input_feature_group_name = "", input_created_date = ""):
+def get_features(input_feature_group_name = "", input_version = ""):
     """
     INPUT
     -----
         input_feature_group_name: STRING
         filter condition to display features for selected group
 
-        input_created_date: STRING
-        filter condition to display features created on specific date
+        input_version: STRING
+        filter condition to display features based on versions
     
     OUTPUT
     ------
@@ -33,13 +33,13 @@ def get_features(input_feature_group_name = "", input_created_date = ""):
                 feature_data = json.load(f)
                 if count == 0 :
                     features_df = pd.json_normalize(data=feature_data, record_path='features_list', 
-                                meta=['feature_group_name', 'feature_group_description', 'model_type', 'problem_type', 'created_by', 'created_date', 'model_parameters'])
+                                meta=['feature_group_name', 'feature_group_description', 'model_type', 'problem_type', 'created_by', 'version', 'model_parameters'])
                 else:
                     features_df =  features_df.append(pd.json_normalize(data=feature_data, record_path='features_list', 
-                                meta=['feature_group_name', 'feature_group_description', 'model_type', 'problem_type',  'created_by', 'created_date', 'model_parameters']))
+                                meta=['feature_group_name', 'feature_group_description', 'model_type', 'problem_type',  'created_by', 'version', 'model_parameters']))
 
-        if input_feature_group_name != "" and input_created_date != "":
-            features_df = features_df[(features_df['feature_group_name'] == input_feature_group_name) & (features_df['created_date'] == input_created_date)]
+        if input_feature_group_name != "" and input_version != "":
+            features_df = features_df[(features_df['feature_group_name'] == input_feature_group_name) & (features_df['version'] == input_version)]
 
     except Exception as e:
         error_type = type(e)
