@@ -46,3 +46,10 @@ dev
 
 -   Added feature Store for eks anomaly detection models
 -   Author: Praveen Mada
+
+
+0.7dev (2022-12-09)
+------------------
+
+-   Added new features to version control feature store and nested json's
+-   Author: Praveen Mada
