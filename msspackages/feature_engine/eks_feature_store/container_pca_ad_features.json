@@ -31,7 +31,7 @@
       {
         "time_steps": 25,
         "batch_size" : 10,
-        "train_sample_multiplier": 100,
+        "train_sample_multiplier": 1000,
         "test_sample_multiplier": 40
       }
   }

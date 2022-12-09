@@ -30,8 +30,8 @@
     "model_parameters":
       {
         "time_steps": 20,
-        "batch_size" : 18,
-        "train_sample_multiplier": 1000,
+        "batch_size" : 36,
+        "train_sample_multiplier": 500,
         "test_sample_multiplier": 100
       }
   },
