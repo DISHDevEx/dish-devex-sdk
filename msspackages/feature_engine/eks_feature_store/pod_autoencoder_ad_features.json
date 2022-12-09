@@ -30,7 +30,7 @@
     "model_parameters":
       {
         "time_steps": 20,
-        "batch_size" : 36,
+        "batch_size" : 18,
         "train_sample_multiplier": 1000,
         "test_sample_multiplier": 100
       }
@@ -66,7 +66,7 @@
     "model_parameters":
       {
         "time_steps": 20,
-        "batch_size" : 18,
+        "batch_size" : 36,
         "train_sample_multiplier": 1000,
         "test_sample_multiplier": 100
       }
