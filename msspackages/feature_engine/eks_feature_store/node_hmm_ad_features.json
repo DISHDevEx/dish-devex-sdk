@@ -1,0 +1,34 @@
+[
+  {
+    "feature_group_name":"node_hmm_ad",
+    "version": "v0.0.1",
+    "created_by": "Ruyi Yang",
+    "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "model_type": "Hidden Markov Model",
+    "problem_type": "anomaly detection",
+    "features_list":
+    [
+      {
+        "feature_name":"node_cpu_utilization ",
+        "feature_description":"The percentage of CPU cores utilized on a per node basis",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"node_memory_utilization",
+        "feature_description":"The percentage of memory currently being used by the node compared to the total limit",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      }
+    ],
+    "model_parameters":
+      {
+        "n_component":9,
+        "covariance_type":"full",
+        "time_steps": 12,
+        "weight":2,
+        "split_ratio":0.8
+
+      }
+  }
+]
