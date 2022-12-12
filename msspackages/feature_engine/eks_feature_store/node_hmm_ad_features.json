@@ -4,7 +4,7 @@
     "version": "v0.0.1",
     "created_by": "Ruyi Yang",
     "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
-    "model_type": "Hidden Markov Model",
+    "model_type": "hidden markov model",
     "problem_type": "anomaly detection",
     "features_list":
     [
