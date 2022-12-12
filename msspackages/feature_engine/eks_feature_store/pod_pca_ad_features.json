@@ -29,8 +29,8 @@
     ],
     "model_parameters":
       {
-        "time_steps": 25,
-        "batch_size" : 10,
+        "time_steps": 20,
+        "batch_size" : 32,
         "train_sample_multiplier": 1000,
         "split_ratio": 0.8
       }
