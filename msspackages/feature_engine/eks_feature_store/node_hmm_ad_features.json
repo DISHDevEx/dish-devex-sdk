@@ -27,6 +27,7 @@
         "covariance_type":"full",
         "time_steps": 12,
         "weight": 2,
+        "hour_params": 24,
         "split_ratio": 0.8
 
       }
