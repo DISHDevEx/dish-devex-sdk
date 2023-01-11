@@ -1,13 +1,15 @@
 """
 Resample timeseries to desired period; each time interval of period width
-is a bucket. Hence bucketization.
+is a bucket. Hence the name bucketization.
 """
 
 
 import pandas as pd
 
 
-def eks_bucketization(input_df, groupby, metrics, aggregated_outputs, bucket_size):
+def eks_bucketization(
+    input_df, groupby, metrics, 
+    aggregated_outputs, bucket_size):
     """
         Inputs:
             metrics needs to be a list of all metrics that you want to
