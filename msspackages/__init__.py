@@ -5,7 +5,7 @@ from .extras import multiply, divide
 from .circles import circles
 from .circles import Circle
 
-from .parity import NumberClass
+from .parity import number_class
 from .parity import Number
 
 from .bucketization import eks_bucketization
