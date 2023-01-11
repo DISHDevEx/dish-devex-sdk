@@ -251,7 +251,7 @@ class Pyspark_data_ingestion:
         """Method for the attribute _read_schema"""
         return self._read_schema
 
-    def create_spark_utils(self, setup,  pkg_list = []):
+    def create_spark_utils(self, setup, pkg_list = None):
         """
         Create a list of packages needed to read in the data.
         Some of these packages throw warnings.
@@ -267,7 +267,8 @@ class Pyspark_data_ingestion:
             spark_config.read(os.path.join(os.path.dirname(__file__),
                                            "spark_config.ini"))
 
-            if len(pkg_list) == 0:
+            if pkg_list is None:
+                pkg_list = []
                 pkg_list.append("io.delta:delta-core_2.12:2.1.0")
                 pkg_list.append("org.apache.hadoop:hadoop-aws:3.3.4")
 
