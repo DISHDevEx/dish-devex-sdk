@@ -293,9 +293,9 @@ class Pyspark_data_ingestion:
 
             # use the sparkContext to print information about the spark version
             # that we are implementing
-            sc = spark.sparkContext
+            s_c = spark.sparkContext
             self._spark = spark
-            self._spark_context = sc
+            self._spark_context = s_c
 
     def get_packages(self):
         """Method for the attribute _packages"""
