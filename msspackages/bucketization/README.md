@@ -1,11 +1,14 @@
-Description: 
-(1)Bucketization allows for timeseries dataset metrics to be resampled and aggregated at the new sampling rate. 
-(2)This Bucketization algorithm was made to resample node level data collected from cloudwatch. changing the groupby will allow for different level transformation.
-(3)The necessity of this algorithm was driven by the need to conform EKS metrics from multiple accounts reported at different frequencies to the same time intervals. 
+# Description: 
+
+Bucketization allows for timeseries dataset metrics to be resampled and aggregated at the new sampling rate.  
+
+## Why bucketization?
+This algorithm was born from the the need to have a uniform sampling rate across EKS clusters that have non-uniform sampling rates; some clusters sample once per 60s, some sonce per 15s. 
 
 
 
-Expected Inputs: (df,groupby, metrics, aggregated_outputs, bucket_size)
+## Expected Inputs: 
+(df, groupby, metrics, aggregated_outputs, bucket_size)
 
 df: EKS Node Level DF with the following columns: metric_epochtime | instance_id | NodeLevelFeature1 |...| NodeLevelFeatureN
 
@@ -15,8 +18,8 @@ metrics: list [] of all numerical features that you want to transform
 
 aggregated_outputs: list of lists, each nested list represents the transformations to make on a metric from previous argument
 
-bucket_size: size of bucket to resample data by ex/ 'h' for hour(https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.resample.html)
+bucket_size: Period of bucket to resample data with the <a href="(https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.resample.html">Pandas.Resample</a>. ex/ 'h' for hour)
 
-Expected Outputs:
-resampled, and aggregated dataframe. 
+## Expected Outputs:
+resampled, and aggregated dataframe
 
