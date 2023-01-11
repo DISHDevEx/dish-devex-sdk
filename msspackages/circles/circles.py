@@ -1,8 +1,9 @@
 """
 Demonstrate a class with attributes and methods
-and an additional function that is not a method
-but acts on objects from the class.
+and an additional function that acts on objects from that class.
 """
+
+
 import math
 
 class Circle:
@@ -15,7 +16,7 @@ class Circle:
 
     def get_color(self):
         return self.color
-     
+
     def area(self):
         return math.pi*(self.radius*self.radius)
 
@@ -24,3 +25,4 @@ class Circle:
 
 def describe(circle):
     print(f"This is a {circle.color} circle with a radius of {circle.radius}.")
+    
