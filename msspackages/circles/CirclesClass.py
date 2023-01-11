@@ -1,3 +1,8 @@
+"""
+Demonstrate a class with attributes and methods
+and an additional function that is not a method
+but acts on objects from the class.
+"""
 import math
 
 class Circle:
