@@ -12,6 +12,7 @@ from pyspark.sql.types import StructType
 import pyspark.sql as pysql
 from msspackages.data_ingestion import eks_raw_pyspark_schema
 
+
 def find_multilevel_schema_items(schema: pysql.types.StructType) -> list:
     """
     This function takes pyspark schema and returns list of columns
