@@ -2,8 +2,8 @@ from .add import add
 from .subtract import subtract
 from .extras import multiply, divide
 
-from .circles import circles
 from .circles import Circle
+from .circles import describe
 
 from .parity import number_class
 from .parity import Number
