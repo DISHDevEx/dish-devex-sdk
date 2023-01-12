@@ -204,15 +204,15 @@ class Pyspark_data_ingestion:
     def set_s3_path_link(self,s3_path):
         """
         Respond to the user requested s3_path
-        by setting the correstponding attribute value
+        by setting the corresponding attribute value.
         """
         s3_path = str(s3_path)
         self._s3_file_path = s3_path
 
     def set_s3_path_datetime(self, year= -1, month = -1, day = -1, hour = -1):
         """
-        Respond to the user requested date+time
-        by setting the attribute _s3_file_path accordingly
+        Respond to the user requested date and time
+        by setting the attribute _s3_file_path accordingly.
         """
         year_filter = ''
         month_filter = ''
@@ -235,10 +235,10 @@ class Pyspark_data_ingestion:
             hour = str(hour)
             hour_filter = '/hour=' + hour
 
-        self._s3_file_path = 's3a://'\
-            + 'dish-dp-uswest2-992240864529-infra-metrics-raw/'\
-            + 'eks_containerinsights_performance_logs' \
-            + year_filter + month_filter + day_filter + hour_filter
+        self._s3_file_path = ('s3a://'
+            + 'dish-dp-uswest2-992240864529-infra-metrics-raw/'
+            + 'eks_containerinsights_performance_logs' 
+            + year_filter + month_filter + day_filter + hour_filter)
 
     def get_master_schema_path(self):
         """Method for returning the attribute _master_schema_path"""
