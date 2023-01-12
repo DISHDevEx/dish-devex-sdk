@@ -1,5 +1,9 @@
 """
 Read large parquet files from AWS S3.
+
+Contributed by: Vinayak Sharma, (MSS DISH 5g) & Praveen Mada
+Reviewed by: Evgeniya Dontsova
+MSS Dish 5G
 """
 
 
@@ -15,8 +19,7 @@ from msspackages.data_ingestion import eks_raw_pyspark_schema
 
 def find_multilevel_schema_items(schema: pysql.types.StructType) -> list:
     """
-    This function takes pyspark schema and returns list of columns
-    that have nested items.
+    Takes pyspark schema and return a list of columns that have nested items.
 
     Parameters
     ----------
@@ -44,46 +47,44 @@ def find_multilevel_schema_items(schema: pysql.types.StructType) -> list:
 class Pyspark_data_ingestion:
 
     """
-        Contributed by: Vinayak Sharma, (MSS DISH 5g) & Praveen Mada
-        MSS Dish 5G
-        Reviewed by: Evgeniya Dontsova
-
+    Class for ingestion of data with attributes for 
+    
         Constructor -- inputs
         ----------
             year : STRING | Int
-            the year from which to read data, leave empty for all years
+                the year from which to read data, leave empty for all years
 
             month : STRING | Int
-            the month from which to read data, leave empty for all months
+                the month from which to read data, leave empty for all months
 
             day : STRING | Int
-            the day from which to read data, leave empty for all days
+                the day from which to read data, leave empty for all days
 
             hour: STRING | Int
-            the hour from which to read data, leave empty for all hours
+                the hour from which to read data, leave empty for all hours
 
             filter_column_value : STRING
-            rec type for which to read data for
+                rec type for which to read data for
 
         .Read() --outputs
         ------
             err_code : String
-            PASS or FAIL +f{e}
+                PASS or FAIL with the Exception code
 
             df : DataFrame
-            Filled when success, Empty when fail
+                Filled when success, Empty when fail
 
         Attributes
         ----------
 
             filter_column_value : STRING
-            rec type for which to read data for
+                rec type for which to read data for
 
             _s3_file_path : STRING
-            file path to read from
+                file path to read from
 
             _packages : comma seperated STRING
-            packages for our spark object
+                packages for our spark object
 
             _spark : SparkSession object
 
@@ -92,17 +93,17 @@ class Pyspark_data_ingestion:
             _spark_context : Spark context
 
             _master_schema_path : String
-            path to where the schema for the rec type we would like to read lives
+                path to the schema for the rec type 
 
             _master_schema_json : JSON
-            schema for the rec_type we want to read
+                schema for the rec_type we want to read
 
 
             _final_training_data: DF
-            last data read() will be stored as a reference here
+                last data read() will be stored as a reference here
 
             _last_return_code: String
-            last data read() error code will be saved here
+                last data read() error code will be saved here
 
 
 
