@@ -1,4 +1,4 @@
-name: spark-config
+name: emr-venv
 on:
   pull_request:
     types:
