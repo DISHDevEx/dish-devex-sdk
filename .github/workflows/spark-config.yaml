@@ -4,8 +4,8 @@ on:
     types:
       - closed
 env:
-  BUCKET_NAME : "dish-5g.core.pd.g.dp.eks.logs.e"
-  AWS_REGION : "us-east-1"
+  BUCKET_NAME : ${{ secrets.EKS_BUCKET_NAME }}
+  AWS_REGION : ${{ secrets.AWS_REGION }}
 # permission can be added at job level or workflow level
 permissions:
       id-token: write   # This is required for requesting the JWT
@@ -25,7 +25,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           python-version: ${{ matrix.python-version }}
-          role-to-assume: arn:aws:iam::064047601590:role/GitHub_Action_Role
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
