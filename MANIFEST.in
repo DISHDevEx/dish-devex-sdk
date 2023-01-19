@@ -1,4 +1,4 @@
-include msspackages/data_ingestion/container_insights_schema/*.json
-include msspackages/data_ingestion/*.ini
-include msspackages/project_inital_setup/*.sh
-include msspackages/feature_engine/eks_feature_store/*.json
+include devex_sdk/data_ingestion/container_insights_schema/*.json
+include devex_sdk/data_ingestion/*.ini
+include devex_sdk/project_inital_setup/*.sh
+include devex_sdk/feature_engine/eks_feature_store/*.json

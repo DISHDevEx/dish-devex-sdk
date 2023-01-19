@@ -5,7 +5,7 @@ RUN yum install -y python3 git
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-RUN pip3 install git+https://github.com/DISHDevEx/msspackages.git
+RUN pip3 install git+https://github.com/DISHDevEx/devex_sdk.git
 RUN pip3 install git+https://github.com/DISHDevEx/eks-ml-pipeline.git
 WORKDIR /app
 COPY . .

@@ -1,4 +1,4 @@
-import msspackages as mss
+import devex_sdk as mss
 
 num_odd = mss.Number(5)
 num_even = mss.Number(2)
