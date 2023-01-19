@@ -1,4 +1,4 @@
-from msspackages import *
+from devex_sdk import *
 
 circle = Circle(5, 'red')
 

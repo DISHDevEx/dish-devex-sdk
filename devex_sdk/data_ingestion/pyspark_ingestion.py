@@ -14,7 +14,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, to_json
 from pyspark.sql.types import StructType
 import pyspark.sql as pysql
-from msspackages.data_ingestion import eks_raw_pyspark_schema
+from devex_sdk.data_ingestion import eks_raw_pyspark_schema
 
 
 def find_multilevel_schema_items(schema: pysql.types.StructType) -> list:
