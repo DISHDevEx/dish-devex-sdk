@@ -361,7 +361,7 @@ If everything in your algorithm is functioning as expected, then it's time time 
 Each subpackage contributed to *devex_sdk* must have a README.md file included.  This tells other users how to sussecfully use your functions, the use cases for each function, and the expected outputs.  The README.md files should be included in the following location:
 
 ```console
-> devex_sdkdish-devex-sdk
+> dish-devex-sdk
     > devex_sdk
         __init__.py
         > circles
