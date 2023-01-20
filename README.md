@@ -17,7 +17,7 @@ $ pip install /dist/devex_sdk-(version)-py3-non-any.whl
 
 Once complete, _devex_sdk_ will be available in your Python evironment for use.  Enter your Python environment and import _devex_sdk_ as you would with any other library or package.
 ```console
->>> import devex_sdk as mss
+>>> import devex_sdk
 ```
 All functions contained in _devex_sdk_ available for use can be listed by listing the package directory structure:
 ```console

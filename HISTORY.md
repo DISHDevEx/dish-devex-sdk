@@ -47,4 +47,4 @@ dev
 ------------------
 
 - renamed the repo to dish-devex-sdk from msspackages
-- renamed the package to devex-sdk from msspacakges
+- renamed the package to devex-sdk from msspackages
