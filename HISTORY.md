@@ -51,5 +51,12 @@ dev
 0.7dev (2022-12-09)
 ------------------
 
--   Added new features to version control feature store and nested json's
--   Author: Praveen Mada
+- Added new features to version control feature store and nested json's
+- Author: Praveen Mada
+
+0.8dev (2023-01-20)
+------------------
+
+- renamed the repo to dish-devex-sdk from msspackages
+- renamed the package to devex-sdk from msspacakges
+- Author: Hamza Khokhar

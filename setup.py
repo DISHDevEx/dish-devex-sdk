@@ -6,7 +6,7 @@ from setuptools import find_packages, setup
 
 setup(
     name = 'devex_sdk',
-    version = '0.0.7',
+    version = '0.0.8',
     description = 'MSS team packages for distributed use',
     url = 'https://git-codecommit.us-west-2.amazonaws.com/v1/repos/devex_sdk',
     author = 'Hamza Khokhar, Praveen Mada, Pierce Lovesee',
