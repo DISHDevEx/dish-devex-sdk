@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 setup(
     name = 'devex_sdk',
     version = '0.0.8',
-    description = 'MSS team packages for distributed use',
+    description = 'Dish DevEx open source SDK',
     url = 'https://git-codecommit.us-west-2.amazonaws.com/v1/repos/devex_sdk',
     author_email = 'devex@dish.com',
     license='Dish Wireless',
