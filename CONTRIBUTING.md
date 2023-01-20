@@ -377,7 +377,7 @@ The minimum topics for inclusion in the README file are as follows:
 3. An example call for each function you are contributing
 
 ## Submitting a Pull Request
-Once all of the above steps are completed, your unit tests are all passing, and you are able to succesfully build *msspacakges* on your local machine, it's now time to submit a pull request.
+Once all of the above steps are completed, your unit tests are all passing, and you are able to succesfully build *devex_sdk* on your local machine, it's now time to submit a pull request.
 
 Pull requests are easy to complete on CodeCommit.  Perform the following steps:
 
