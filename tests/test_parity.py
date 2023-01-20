@@ -1,7 +1,7 @@
-import devex_sdk as mss
+import devex_sdk
 
-num_odd = mss.Number(5)
-num_even = mss.Number(2)
+num_odd = devex_sdk.Number(5)
+num_even = devex_sdk.Number(2)
 
 def test_odd():
     assert num_odd.parity() == 'odd'
