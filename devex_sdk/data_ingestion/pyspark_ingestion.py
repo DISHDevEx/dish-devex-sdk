@@ -1,9 +1,5 @@
 """
 Read large parquet files from AWS S3.
-
-Contributed by: Vinayak Sharma, (MSS DISH 5g) & Praveen Mada
-Reviewed by: Evgeniya Dontsova
-MSS Dish 5G
 """
 
 
