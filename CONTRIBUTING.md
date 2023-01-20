@@ -111,9 +111,9 @@ When I contribute this code to _devex_sdk_, my hope is to have both the class _C
 ```python
 import devex_sdk
 # this is how I want to be able to use Circle and describe
-ci = mss.circles.Circle(radius, color)
+ci = devex_sdk.circles.Circle(radius, color)
 
-mss.circles.describe(ci)
+devex_sdk.circles.describe(ci)
 ```
 But since there is currently nothing in the __init__ file, in order to access the _describe_ function and _Circle_ class, the following notation would be needed to access the class and function:
 
@@ -121,9 +121,9 @@ But since there is currently nothing in the __init__ file, in order to access th
 ```python
 import devex_sdk
 # this is how you currently access Circle and describe
-ci = mss.circles.CirclesClass.Circle(radius, color)
+ci = devex_sdk.circles.CirclesClass.Circle(radius, color)
 
-mss.circles.CirclesClass.Circle(ci)
+devex_sdk.circles.CirclesClass.Circle(ci)
 ```
 As you can see, as the syntax currently sits, using the class and function require quite verbose calls.  However, the following use of the __init__ files eliminates the need to call the ___CirclesClass___ in the dot notation.  That's because the _describe_ function and _Circles_ class reside in _CirclesClass.py_ and are not directly present in the _circles_ directory, but including them in the __init__ file as follows effectively adds them there:
 
@@ -157,22 +157,22 @@ from .circles import CirclesClass
 With the above imports included in the respective __init__ files, the **Desired Syntax** from above can now be used: 
 
 ```python
-import devex_sdk as mss
+import devex_sdk
 # this syntax will work now
-ci = mss.circles.Circle(radius, color)
+ci = devex_sdk.circles.Circle(radius, color)
 
-mss.circles.describe(ci)
+devex_sdk.circles.describe(ci)
 ```
 Now, looking at the existing syntax, I may feel that the syntax is still too verbose in order to make a call to the class _Circle_; however, looking at the _describe_ function, I feel like this syntax is appropriate (I want people to know that _describe_ is only to be used on instances of _Circle_, so leaving the _circles_ dot notation is appropriate).  With this line of thinking, I would like to change the syntax to the following:
 
 **New Desired Syntax**:
 ```python
-import devex_sdk as mss
+import devex_sdk
 # I want to shorten the syntax for creating an instance of Circle
-ci = mss.Circle(radius, color)
+ci = devex_sdk.Circle(radius, color)
 
 # and keep the syntax the same for calling describe
-mss.circles.describe(ci)
+devex_sdk.circles.describe(ci)
 ```
 To do this, I simply add the following to the **Package Level __init__ file**:
 ```python
@@ -187,11 +187,11 @@ from .circles import Circle
 This effectively pulls only the class _Circle_ up to the level of _devex_sdk_ while leaving the _describe_ function at the level of the _circles_ directory.  So once these imports in the __init__ files are completed, the following syntax will be valid:
 
 ```python
-import devex_sdk as mss
+import devex_sdk
 
-ci = mss.Circle(radius, color)
+ci = devex_sdk.Circle(radius, color)
 
-mss.circles.describe(ci)
+devex_sdk.circles.describe(ci)
 ```
 Here are the example __init__ files for completeness and clarity:
 
@@ -361,7 +361,7 @@ If everything in your algorithm is functioning as expected, then it's time time 
 Each subpackage contributed to *devex_sdk* must have a README.md file included.  This tells other users how to sussecfully use your functions, the use cases for each function, and the expected outputs.  The README.md files should be included in the following location:
 
 ```console
-> devex_sdk
+> devex_sdkdish-devex-sdk
     > devex_sdk
         __init__.py
         > circles
