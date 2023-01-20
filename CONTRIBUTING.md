@@ -1,4 +1,4 @@
-# Contributing to MSS Packages
+# Contributing to DevEx SDK
 
 ## Introduction
 Adding your algorithm to _devex_sdk_ is easy with the following steps.  
@@ -109,7 +109,7 @@ When I contribute this code to _devex_sdk_, my hope is to have both the class _C
 
 **Desired Syntax**
 ```python
-import devex_sdk as mss
+import devex_sdk
 # this is how I want to be able to use Circle and describe
 ci = mss.circles.Circle(radius, color)
 
@@ -119,7 +119,7 @@ But since there is currently nothing in the __init__ file, in order to access th
 
 **Current Syntax**
 ```python
-import devex_sdk as mss
+import devex_sdk
 # this is how you currently access Circle and describe
 ci = mss.circles.CirclesClass.Circle(radius, color)
 

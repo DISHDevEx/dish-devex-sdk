@@ -1,4 +1,4 @@
-# MSS Packages
+# DevEx SDK
 ### __Installing devex_sdk__
 1. Navigate into the root _devex_sdk_ directory.
 ```console
