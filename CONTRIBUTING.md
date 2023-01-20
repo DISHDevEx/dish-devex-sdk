@@ -315,18 +315,18 @@ the _pytest_ command must be within the same directory that the ___tests___ dire
 ## Test Building _msspacakges_ With your Sub-Pacakge
 It is time for a test build!  If you've followed the steps above, and your unit tests are all passing, then it's time to test-build _devex_sdk_ with your sub-package on your local machine.  This involves the following steps:
 
-1. [Uninstall _devex_sdk_ from your pip package manager](#uninstall-msspacages-from-local-host)
+1. [Uninstall _devex_sdk_ from your pip package manager](#uninstall-devex_sdk-from-local-host)
 2. [Compile a new .whl file including your sub-package](#build-whl-file)
 3. [Install the new wheel file using pip](#install-new-whl-file)
 4. [Test the features of your sub-package](#test-the-sub-package)
 
-### Uninstall _msspacages_ from Local Host
+### Uninstall _devex_sdk_ from Local Host
 Issue the following command in your terminal to remove the existing install of _devex_sdk_:
 ```console
 $ pip uninstall devex_sdk
 ```
 ### Build _.whl_ File
-Navigate to the root of the _msspacakges_ directory you have been working in on your local host.  Then issue the following command:
+Navigate to the root of the _devex_sdk_ directory you have been working in on your local host.  Then issue the following command:
 ```console
 ~/devex_sdk$ python setup.py bdist_wheel
 ```
