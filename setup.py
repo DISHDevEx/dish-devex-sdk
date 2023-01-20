@@ -9,10 +9,7 @@ setup(
     version = '0.0.8',
     description = 'MSS team packages for distributed use',
     url = 'https://git-codecommit.us-west-2.amazonaws.com/v1/repos/devex_sdk',
-    author = 'Hamza Khokhar, Praveen Mada, Pierce Lovesee',
-    author_email = 'hamza.khokhar@dish.com, '
-                 + 'praveen.mada@dish.com, '
-                 + 'pierce.lovesee@dish.com ',
+    author_email = 'devex@dish.com',
     license='Dish Wireless',
     packages=find_packages(
         include=['devex_sdk',
@@ -28,10 +25,6 @@ setup(
                  'devex_sdk.feature_engine',
                  ]),
     include_package_data=True,
-#     entry_points = {
-#         'console_scripts':
-#             ['devex_sdk=devex_sdk.project_inital_setu:setup_runner'],}
-#     scripts=['devex_sdk/project_inital_setup/understanding_eks_setup.py'],
     install_requires = [
         'pyspark',
         'pandas',
