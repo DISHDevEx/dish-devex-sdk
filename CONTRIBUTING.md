@@ -181,7 +181,7 @@ To do this, I simply add the following to the **Package Level __init__ file**:
 # existing imports:
 from .circles import CirclesClass
 
-# add this line to shorten the sytax to mss.Circles(radius, color):
+# add this line to shorten the sytax to devex_sdk.Circles(radius, color):
 from .circles import Circle
 ```
 This effectively pulls only the class _Circle_ up to the level of _devex_sdk_ while leaving the _describe_ function at the level of the _circles_ directory.  So once these imports in the __init__ files are completed, the following syntax will be valid:
