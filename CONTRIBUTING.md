@@ -312,7 +312,7 @@ RUN pytest --slow from root dir to run slow tests.
 ```
 
 the _pytest_ command must be within the same directory that the ___tests___ directory is located.  Once run, _pytest_ will generate output on the test.
-## Test Building _msspacakges_ With your Sub-Pacakge
+## Test Building _devex_sdk_ With your Sub-Pacakge
 It is time for a test build!  If you've followed the steps above, and your unit tests are all passing, then it's time to test-build _devex_sdk_ with your sub-package on your local machine.  This involves the following steps:
 
 1. [Uninstall _devex_sdk_ from your pip package manager](#uninstall-devex_sdk-from-local-host)
@@ -354,7 +354,7 @@ Now, enter a Python Environment and test your sub-package.  Try various levels o
 >>> ci.describe(mycircle)
 This is a red circle with a radius of 2.
 ```
-If everything in your algorithm is functioning as expected, then it's time time to submit a merge request to have your code included in the next release of _msspacakges_!
+If everything in your algorithm is functioning as expected, then it's time time to submit a merge request to have your code included in the next release of _devex_sdk_!
 
 ## README.md File Requierments
 
