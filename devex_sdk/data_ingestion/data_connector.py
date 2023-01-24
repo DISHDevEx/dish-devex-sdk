@@ -2,6 +2,7 @@
 Read large parquet files from AWS S3.
 """
 
+
 import os
 import configparser
 from pyspark import SparkConf
@@ -9,37 +10,11 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, to_json
 from pyspark.sql.types import StructType
 import pyspark.sql as pysql
-from devex_sdk.data_ingestion import eks_raw_pyspark_schema
 
 
-def find_multilevel_schema_items(schema: pysql.types.StructType) -> list:
-    """
-    Takes pyspark schema and return a list of columns that have nested items.
-
-    Parameters
-    ----------
-    schema : pyspark.sql.dataframe.DataFrame
-        A pyspark dataframe.
-
-    Returns
-    -------
-    list
-        list of column names that have nested entries
-    """
-
-    multilevel_items = []
-
-    for item in schema.fields:
-
-        #convert schema field to json
-        item = item.jsonValue()
-        if isinstance(item["type"], dict):
-            multilevel_items.append(item["name"])
-
-    return multilevel_items
 
 
-class Pyspark_data_ingestion:
+class spark_data_connector():
 
     """
     Class for ingestion of data with attributes for 
@@ -137,10 +112,7 @@ class Pyspark_data_ingestion:
     """
 
 
-    def __init__(self,
-        year= -1, month = -1, day = -1, hour = -1,
-        filter_column_value ='Node',  setup = 'default'
-        ) -> None:
+    def __init__(self, s3_link = None, schema = None) -> None:
 
         #setup the s3 path variables to read data from
         self._filter_column_name = 'Type'
@@ -158,7 +130,7 @@ class Pyspark_data_ingestion:
         self.create_spark_utils(setup)
 
         ##setup read schema
-        self._read_schema = eks_raw_pyspark_schema.eks_performance_logs_schema
+        self._read_schema = none
 
         ##setup master schemas
         ## Read the master schema for the specified type (args)\
@@ -169,71 +141,10 @@ class Pyspark_data_ingestion:
         self._master_schema_json = self._spark.read.json(
             self._master_schema_path, multiLine=True)
 
-        self._final_training_data = None
+        self._data = None
 
         self._last_return_code = None
 
-
-    def set_rec_type(self, rec_type = 'Node'):
-        """
-        Respond to the user requested record type by
-        setting the master schema path
-        and reading the master schema json
-        """
-        self._filter_column_value = str(rec_type)
-        self._master_schema_path = os.path.join(
-            os.path.dirname(__file__),
-            "container_insights_schema",
-            self._filter_column_value + ".json")
-        self._master_schema_json = self._spark.read.json(
-            self._master_schema_path, multiLine=True)
-
-    def get_rec_type(self):
-        """Method for returning the attribute _filter_column_value"""
-        return self._filter_column_value
-
-    def get_s3_path(self):
-        """Method for returning the attribute _s3_file_path"""
-        return self._s3_file_path
-
-    def set_s3_path_link(self,s3_path):
-        """
-        Respond to the user requested s3_path
-        by setting the corresponding attribute value.
-        """
-        s3_path = str(s3_path)
-        self._s3_file_path = s3_path
-
-    def set_s3_path_datetime(self, year= -1, month = -1, day = -1, hour = -1):
-        """
-        Respond to the user requested date and time
-        by setting the attribute _s3_file_path accordingly.
-        """
-        year_filter = ''
-        month_filter = ''
-        day_filter = ''
-        hour_filter = ''
-
-        if year != -1:
-            year = str(year)
-            year_filter = '/year=' + year
-
-        if month != -1:
-            month = str(month)
-            month_filter = '/month=' + month
-
-        if day != -1:
-            day = str(day)
-            day_filter = '/day=' + day
-
-        if hour != -1:
-            hour = str(hour)
-            hour_filter = '/hour=' + hour
-
-        self._s3_file_path = ('s3a://'
-            + 'dish-dp-uswest2-992240864529-infra-metrics-raw/'
-            + 'eks_containerinsights_performance_logs' 
-            + year_filter + month_filter + day_filter + hour_filter)
 
     def get_master_schema_path(self):
         """Method for returning the attribute _master_schema_path"""
@@ -246,6 +157,19 @@ class Pyspark_data_ingestion:
     def get_read_schema(self):
         """Method for the attribute _read_schema"""
         return self._read_schema
+
+    
+    def get_s3_path(self):
+        """Method for returning the attribute _s3_file_path"""
+        return self._s3_file_path
+
+    def set_s3_path_link(self,s3_path):
+        """
+        Respond to the user requested s3_path
+        by setting the corresponding attribute value.
+        """
+        s3_path = str(s3_path)
+        self._s3_file_path = s3_path
 
     def create_spark_utils(self, setup, pkg_list = None):
         """
@@ -334,48 +258,13 @@ class Pyspark_data_ingestion:
         """Read parquet file partitions specified in object instantiation."""
         try:
             ##read in data using schema from the s3 path
+            if()
             training_data = self._spark.read.format("parquet")\
                 .schema(self._read_schema).load(self._s3_file_path)
-
-            #list of columns that are exploded from log_event_message column
-            names = self._master_schema_json.schema.names
-            unpack_names = [f"log_event_message.{name}" for name in names]
-
-            #using this select, and json tuple, we are able to explode the json
-            training_data = training_data.withColumn(
-                "log_event_message",
-                from_json(training_data.log_event_message,
-                    schema = self._master_schema_json.schema)
-                )\
-                .select(col("account_id"),
-                        col("log_group_name"),
-                        col("log_stream_name"),
-                        col("record_id"),
-                        col("stream_name"),
-                        col("record_arrival_stream_timestamp"),
-                        col("record_arrival_stream_epochtime"),
-                        col("log_event_timestamp"),
-                        col("log_event_epochtime"),
-                        col("log_event_id"),
-                        *unpack_names,
-                        col("region"),
-                       )
-
-            #filter dataframe by rec type
-            training_data = training_data\
-                .filter(col(self._filter_column_name) \
-                    == self._filter_column_value)
-
-            # find and convert the multilevel schema entries back to json
-            # using to_json
-            mlsi = find_multilevel_schema_items(self._master_schema_json.schema)
-            for item in mlsi:
-                training_data = training_data.withColumn(
-                    item, to_json(training_data[item])
-                    )
-
-            #assign the final data
-            self._final_training_data = training_data
+            
+            data = self._spark.read.format("parquet").load(self._s3_file_path)
+            
+            self.data = training_data
 
             #set the return code as Pass to indicate
             # that this function has succeeded in building out the dataframe.
