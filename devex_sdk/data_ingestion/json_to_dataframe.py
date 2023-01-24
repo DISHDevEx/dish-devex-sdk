@@ -3,7 +3,7 @@ Module with class to create dataframe from JSON or nested JSON format.
 """
 from pyspark.sql.types import StructType, ArrayType, MapType
 from pyspark.sql.functions import col, explode
-from spark_setup import spark_setup
+from .spark_setup import spark_setup
 
 class JsonToDataframe:
     """
