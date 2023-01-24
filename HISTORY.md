@@ -48,3 +48,10 @@ dev
 
 - renamed the repo to dish-devex-sdk from msspackages
 - renamed the package to devex-sdk from msspackages
+
+
+0.9dev (2023-01-24)
+------------------
+
+- Added spark session creation module
+- Added module that converts CSV, JSON or Parquet to dataframe
