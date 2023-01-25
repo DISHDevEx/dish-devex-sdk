@@ -115,13 +115,12 @@ class eks_connector(data_connector):
 
     def __init__(self,
         year= -1, month = -1, day = -1, hour = -1,
-        filter_column_value ='Node',  setup = 'default'
+        filter_column_value ='Node', 
         ) -> None:
 
         #setup the s3 path variables to read data from
         self._filter_column_name = 'Type'
         self._filter_column_value  = filter_column_value
-
         self.set_s3_path_datetime(year, month, day, hour)
 
         ##setup read schema
@@ -135,10 +134,6 @@ class eks_connector(data_connector):
 
         self._master_schema_json = self._spark.read.json(
             self._master_schema_path, multiLine=True)
-
-        self._final_training_data = None
-
-        self._last_return_code = None
         
         super().__init__(self)
 
