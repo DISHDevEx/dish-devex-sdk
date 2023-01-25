@@ -120,7 +120,7 @@ class spark_data_connector():
 
         ##setup the s3 file path from where to read data
         self._s3_file_path = None
-        self.set_s3_path_datetime(year, month, day, hour)
+        
 
         ##setup spark for use
         self._packages = None
