@@ -5,6 +5,39 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf
 
 class Spark_Utils():
+    """
+    
+        Attributes
+        ----------
+        
+    _packages : comma seperated STRING
+                packages for our spark object
+
+    _spark : SparkSession object
+
+    _spark_config : Spark Config object
+
+    _spark_context : Spark context
+
+    
+        Functions
+        ------
+        
+        get_packages() --> String
+
+        get_spark() --> Spark Obj
+            
+        get_spark_config() --> Spark Config
+            
+        get_spark_context() --> Spark Context
+
+        set_packages(self, packages: String comma delimited)
+
+        def create_spark_utils(self, setup, pkg_list = None)
+    
+    
+    
+    """
     
     ##setup spark for use
         self._packages = None

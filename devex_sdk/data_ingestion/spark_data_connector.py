@@ -1,8 +1,6 @@
 """
 Read large parquet files from AWS S3.
 """
-
-
 import os
 import configparser
 from pyspark import SparkConf
@@ -13,27 +11,16 @@ import pyspark.sql as pysql
 from spark_utils import Spark_Utils
 
 
-class spark_data_connector():
+class Spark_Data_Connector():
 
     """
     Class for ingestion of data with attributes for 
     
         Constructor -- inputs
         ----------
-            year : STRING | Int
-                the year from which to read data, leave empty for all years
-
-            month : STRING | Int
-                the month from which to read data, leave empty for all months
-
-            day : STRING | Int
-                the day from which to read data, leave empty for all days
-
-            hour: STRING | Int
-                the hour from which to read data, leave empty for all hours
-
-            filter_column_value : STRING
-                rec type for which to read data for
+           s3_link = None, 
+           schema = None, 
+           setup = 'default'
 
         .Read() --outputs
         ------
@@ -45,21 +32,6 @@ class spark_data_connector():
 
         Attributes
         ----------
-
-            filter_column_value : STRING
-                rec type for which to read data for
-
-            _s3_file_path : STRING
-                file path to read from
-
-            _packages : comma seperated STRING
-                packages for our spark object
-
-            _spark : SparkSession object
-
-            _spark_config : Spark Config object
-
-            _spark_context : Spark context
 
             _master_schema_path : String
                 path to the schema for the rec type 
@@ -78,32 +50,15 @@ class spark_data_connector():
 
         Functions
         ------
-            set_rec_type(self, rec_type = 'Node')
-
-            get_rec_type() --> String
-
             get_s3_path() --> String
 
             set_s3_path_link(self,s3_path:String)
-
-            set_s3_path_datetime(self,
-                year= -1, month = -1, day = -1, hour = -1)
 
             get_master_schema_path() --> String
 
             get_master_schema_json() --> JSON
 
             get_read_schema() --> StructObject
-
-            get_packages() --> String
-
-            get_spark() --> Spark Obj
-
-            get_spark_config() --> Spark Config
-
-            get_spark_context() --> Spark Context
-
-            set_packages(self, packages: String comma delimited)
 
             read() --> err,df
 
@@ -140,32 +95,39 @@ class spark_data_connector():
         self._s3_file_path = s3_path
 
 
-    def read(self):
+    def read_parquet(self):
         """Read parquet file partitions specified in object instantiation."""
         try:
             ##read in data using schema from the s3 path
-            if()
-            training_data = self._spark.read.format("parquet")\
-                .schema(self._read_schema).load(self._s3_file_path)
-            
-            data = self._spark.read.format("parquet").load(self._s3_file_path)
-            
-            self.data = training_data
+            if(self._read_schema):
+                training_data = self._spark._spark.read.format("parquet")\
+                    .schema(self._read_schema).load(self._s3_file_path)
+                
+                self.data = training_data
 
-            #set the return code as Pass to indicate
-            # that this function has succeeded in building out the dataframe.
-            self._last_return_code = 'PASS'
+                #set the return code as Pass to indicate
+                # that this function has succeeded in building out the dataframe.
+                self._last_return_code = 'PASS'
+            else: 
+                ##read in data using schema from the s3 path
+                training_data = self._spark._spark.read.format("parquet").load(self._s3_file_path)
+                self.data = training_data
+                
+                #set the return code as Pass to indicate
+                # that this function has succeeded in building out the dataframe.
+                self._last_return_code = 'PASS'
+                return df
 
         except Exception as e:
 
             # Create an empty RDD
-            emp_rdd = self._spark_context.emptyRDD()
+            emp_rdd = self._spark._spark_context.emptyRDD()
 
             # Create empty schema
             columns_empty = StructType([])
 
             # Create an empty RDD with empty schema
-            data_fail = self._spark.createDataFrame(data = emp_rdd,
+            data_fail = self._spark._spark.createDataFrame(data = emp_rdd,
                                          schema = columns_empty)
             self._final_training_data = data_fail
 
@@ -176,38 +138,26 @@ class spark_data_connector():
     
     
     
-def read_csv_data(self):
-"""
-Method to create a datafrom from data in CSV format.
-Returns:
-    df - Pyspark dataframe
-"""
+    def read_csv(self):
+        """
+        Method to create a datafrom from data in CSV format.
+        Returns:
+            df - Pyspark dataframe
+        """
 
-df = self.spark.read.option('header', True).option('inferSchema', True).csv(self.filepath)
+        df = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self.filepath)
 
-return df
-    
-    
-    
+        return df
 
-def read_json_data(self):
-    """
-    Method to create dataframe from data in JSON or TXT format.
-    Returns:
-        df - Pyspark dataframe
-    """
 
-    df = JsonToDataframe(self.filepath).dataframe
+    def read_json(self):
+        """
+        Method to create dataframe from data in JSON or TXT format.
+        Returns:
+            df - Pyspark dataframe
+        """
 
-    return df
+        df = self._spark._spark.read.json(self.filepath, multiLine=False)
 
-def read_parquet_data(self):
-    """
-    Method to create dataframe from data in parquet format.
-    Returns:
-        df - Pyspark dataframe
-    """
+        return df
 
-    df = self.spark.read.parquet(self.filepath)
-
-    return df

@@ -5,7 +5,7 @@ from pyspark.sql.types import StructType, ArrayType, MapType
 from pyspark.sql.functions import col, explode
 from .spark_setup import spark_setup
 
-class JsonToDataframe:
+class Nested_Json_Connector(Spark_Data_Connector):
     """
     Class to create pyspark dataframe from JSON or nested JSON format.
     """
@@ -19,7 +19,8 @@ class JsonToDataframe:
             filepath - data filepath on local directory or S3 bucket
         """
 
-        self.spark = spark_setup()
+        self.spark = Spark_Utils()
+        
         self.filepath = filepath
         self.dataframe = None
         self.main()

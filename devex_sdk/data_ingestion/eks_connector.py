@@ -11,11 +11,10 @@ from pyspark.sql.functions import col, from_json, to_json
 from pyspark.sql.types import StructType
 import pyspark.sql as pysql
 from devex_sdk.data_ingestion import eks_raw_pyspark_schema
-from devex_sdk.data_ingestion import data_connector
+from devex_sdk.data_ingestion import Spark_Data_Connector
+from devex_sdk.container_insights_schema import eks_performance_logs_schema
 
-
-
-class eks_connector(data_connector):
+class Eks_Connector(Spark_Data_Connector):
 
     """
     Class for ingestion of data with attributes for 
@@ -51,30 +50,11 @@ class eks_connector(data_connector):
             filter_column_value : STRING
                 rec type for which to read data for
 
-            _s3_file_path : STRING
-                file path to read from
-
-            _packages : comma seperated STRING
-                packages for our spark object
-
-            _spark : SparkSession object
-
-            _spark_config : Spark Config object
-
-            _spark_context : Spark context
-
             _master_schema_path : String
                 path to the schema for the rec type 
 
             _master_schema_json : JSON
                 schema for the rec_type we want to read
-
-
-            _final_training_data: DF
-                last data read() will be stored as a reference here
-
-            _last_return_code: String
-                last data read() error code will be saved here
 
 
 
@@ -96,16 +76,6 @@ class eks_connector(data_connector):
             get_master_schema_json() --> JSON
 
             get_read_schema() --> StructObject
-
-            get_packages() --> String
-
-            get_spark() --> Spark Obj
-
-            get_spark_config() --> Spark Config
-
-            get_spark_context() --> Spark Context
-
-            set_packages(self, packages: String comma delimited)
 
             read() --> err,df
 
@@ -132,7 +102,7 @@ class eks_connector(data_connector):
             os.path.dirname(__file__),"container_insights_schema",
             self._filter_column_value + ".json")
 
-        self._master_schema_json = self._spark.read.json(
+        self._master_schema_json = self._spark._spark.read.json(
             self._master_schema_path, multiLine=True)
         
         super().__init__(self)
@@ -175,7 +145,7 @@ class eks_connector(data_connector):
             os.path.dirname(__file__),
             "container_insights_schema",
             self._filter_column_value + ".json")
-        self._master_schema_json = self._spark.read.json(
+        self._master_schema_json = self._spark._spark.read.json(
             self._master_schema_path, multiLine=True)
 
     def get_rec_type(self):
@@ -217,7 +187,7 @@ class eks_connector(data_connector):
         """Read parquet file partitions specified in object instantiation."""
         try:
             ##read in data using schema from the s3 path
-            training_data = self._spark.read.format("parquet")\
+            training_data = self._spark._spark.read.format("parquet")\
                 .schema(self._read_schema).load(self._s3_file_path)
 
             #list of columns that are exploded from log_event_message column
@@ -251,7 +221,7 @@ class eks_connector(data_connector):
 
             # find and convert the multilevel schema entries back to json
             # using to_json
-            mlsi = find_multilevel_schema_items(self._master_schema_json.schema)
+            mlsi = self.find_multilevel_schema_items(self._master_schema_json.schema)
             for item in mlsi:
                 training_data = training_data.withColumn(
                     item, to_json(training_data[item])
@@ -267,13 +237,13 @@ class eks_connector(data_connector):
         except Exception as e:
 
             # Create an empty RDD
-            emp_rdd = self._spark_context.emptyRDD()
+            emp_rdd = self._spark._spark_context.emptyRDD()
 
             # Create empty schema
             columns_empty = StructType([])
 
             # Create an empty RDD with empty schema
-            data_fail = self._spark.createDataFrame(data = emp_rdd,
+            data_fail = self._spark._spark.createDataFrame(data = emp_rdd,
                                          schema = columns_empty)
             self._final_training_data = data_fail
 
