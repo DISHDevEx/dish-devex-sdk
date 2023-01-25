@@ -169,7 +169,25 @@ class Spark_Data_Connector():
             df - Pyspark dataframe
         """
 
-        self._data = self._spark._spark.read.json(self.filepath, multiLine=False)
+        try:
+            self._data = self._spark._spark.read.json(self.filepath, multiLine=False)
+            self._last_return_code = "PASS"
+            
+        except Exception as e:
+            # Create an empty RDD
+            emp_rdd = self._spark._spark_context.emptyRDD()
 
-        return self._data
+            # Create empty schema
+            columns_empty = StructType([])
+
+            # Create an empty RDD with empty schema
+            data_fail = self._spark._spark.createDataFrame(data = emp_rdd,
+                                         schema = columns_empty)
+            self._data = data_fail
+
+            self._last_return_code = "FAIL: " + f"{e}"
+
+        
+        return self._last_return_code, self._data
+            
 

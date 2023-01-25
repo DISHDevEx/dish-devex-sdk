@@ -19,6 +19,7 @@ from .data_ingestion import ReadDataPyspark
 from .data_ingestion import ReadDataPandas
 from .data_ingestion import Eks_Connector
 from .data_ingestion import Spark_Data_Connector
+from .data_ingestion import Nested_Json_Connector
 
 
 from .project_inital_setup import setup_runner
