@@ -3,6 +3,16 @@ Module to start a spark session in AWS environment.
 """
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
+import os
+import configparser
+from pyspark import SparkConf
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, from_json, to_json
+from pyspark.sql.types import StructType
+import pyspark.sql as pysql
+
+
+
 
 class Spark_Utils():
     """
@@ -38,14 +48,14 @@ class Spark_Utils():
     
     
     """
-    
-    ##setup spark for use
+    def __init__(self, s3_link = None, schema = None, setup = 'default') -> None:  
+##setup spark for use
         self._packages = None
         self._spark = None
         self._spark_config = None
         self._spark_context = None
         self.create_spark_utils(setup)
-        
+
         
 
     def create_spark_utils(self, setup, pkg_list = None):
@@ -96,7 +106,7 @@ class Spark_Utils():
             self._spark = spark
             self._spark_context = s_c
 
-                def get_packages(self):
+    def get_packages(self):
         """Method for the attribute _packages"""
         return self._packages
 

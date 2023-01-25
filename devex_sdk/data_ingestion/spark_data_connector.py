@@ -36,8 +36,8 @@ class Spark_Data_Connector():
             _master_schema_path : String
                 path to the schema for the rec type 
 
-            _master_schema_json : JSON
-                schema for the rec_type we want to read
+            _read_schema : spark Struct Type
+                schema for the parquet file we want to read
 
 
             _final_training_data: DF
@@ -85,6 +85,14 @@ class Spark_Data_Connector():
     def get_s3_path(self):
         """Method for returning the attribute _s3_file_path"""
         return self._s3_file_path
+    
+    def get_schema(self):
+        """Method for returning the attribute schema"""
+        return self._read_schema
+    
+    def set_schema(self,schema):
+        """Method for setting the attribute schema"""
+        self._read_schema = schema
 
     def set_s3_path_link(self,s3_path):
         """
@@ -98,25 +106,28 @@ class Spark_Data_Connector():
     def read_parquet(self):
         """Read parquet file partitions specified in object instantiation."""
         try:
+                
             ##read in data using schema from the s3 path
             if(self._read_schema):
                 training_data = self._spark._spark.read.format("parquet")\
-                    .schema(self._read_schema).load(self._s3_file_path)
-                
-                self.data = training_data
+                .schema(self._read_schema).load(self._s3_file_path)
+                self._data = training_data
 
                 #set the return code as Pass to indicate
                 # that this function has succeeded in building out the dataframe.
                 self._last_return_code = 'PASS'
+                
+
             else: 
                 ##read in data using schema from the s3 path
-                training_data = self._spark._spark.read.format("parquet").load(self._s3_file_path)
-                self.data = training_data
+                training_data = self._spark._spark.read.option('inferSchema', True)\
+                .format("parquet").load(self._s3_file_path)
+                self._data = training_data
                 
                 #set the return code as Pass to indicate
                 # that this function has succeeded in building out the dataframe.
                 self._last_return_code = 'PASS'
-                return df
+                
 
         except Exception as e:
 
@@ -129,11 +140,12 @@ class Spark_Data_Connector():
             # Create an empty RDD with empty schema
             data_fail = self._spark._spark.createDataFrame(data = emp_rdd,
                                          schema = columns_empty)
-            self._final_training_data = data_fail
+            self._data = data_fail
 
             self._last_return_code = "FAIL: " + f"{e}"
 
-        return self._last_return_code, self._final_training_data
+        
+        return self._last_return_code, self._data
     
     
     
@@ -145,9 +157,9 @@ class Spark_Data_Connector():
             df - Pyspark dataframe
         """
 
-        df = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self.filepath)
+        self._data = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self.filepath)
 
-        return df
+        return self._data
 
 
     def read_json(self):
@@ -157,7 +169,7 @@ class Spark_Data_Connector():
             df - Pyspark dataframe
         """
 
-        df = self._spark._spark.read.json(self.filepath, multiLine=False)
+        self._data = self._spark._spark.read.json(self.filepath, multiLine=False)
 
-        return df
+        return self._data
 

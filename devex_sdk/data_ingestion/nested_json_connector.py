@@ -18,25 +18,11 @@ class Nested_Json_Connector(Spark_Data_Connector):
             spark - spark session
             filepath - data filepath on local directory or S3 bucket
         """
-
-        self.spark = Spark_Utils()
         
-        self.filepath = filepath
-        self.dataframe = None
-        self.main()
+        Spark_Data_Connector.__init__(self,filepath)
 
-    def read_json_data(self):
-        """
-        Method to create dataframe from JSON data.
-        Returns:
-            df - dataframe
-        """
 
-        if self.filepath.endswith('.txt') or self.filepath.endswith('.json'):
-            df = self.spark.read.json(self.filepath, multiLine=False)
-        return df
-
-    @staticmethod
+    
     def filter_nested_columns(schema):
         """
         Method to discover columns in dataframe that have nested JSON.
@@ -107,7 +93,7 @@ class Nested_Json_Connector(Spark_Data_Connector):
 
         return df
 
-    def main(self):
+    def read_nested_json(self):
         """
         Method to organize the order in which other methods are called and returns a dataframe.
         """

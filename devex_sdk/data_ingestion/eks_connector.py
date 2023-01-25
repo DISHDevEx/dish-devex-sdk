@@ -10,9 +10,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, to_json
 from pyspark.sql.types import StructType
 import pyspark.sql as pysql
-from devex_sdk.data_ingestion import eks_raw_pyspark_schema
-from devex_sdk.data_ingestion import Spark_Data_Connector
-from devex_sdk.container_insights_schema import eks_performance_logs_schema
+from spark_data_connector import Spark_Data_Connector
+from container_insights_schema import eks_performance_logs_schema
 
 class Eks_Connector(Spark_Data_Connector):
 
@@ -88,13 +87,15 @@ class Eks_Connector(Spark_Data_Connector):
         filter_column_value ='Node', 
         ) -> None:
 
+        Spark_Data_Connector.__init__(self)
+        
         #setup the s3 path variables to read data from
         self._filter_column_name = 'Type'
         self._filter_column_value  = filter_column_value
         self.set_s3_path_datetime(year, month, day, hour)
 
         ##setup read schema
-        self._read_schema = eks_raw_pyspark_schema.eks_performance_logs_schema
+        self._read_schema = eks_performance_logs_schema
 
         ##setup master schemas
         ## Read the master schema for the specified type (args)\
@@ -105,7 +106,7 @@ class Eks_Connector(Spark_Data_Connector):
         self._master_schema_json = self._spark._spark.read.json(
             self._master_schema_path, multiLine=True)
         
-        super().__init__(self)
+        
 
     
     def find_multilevel_schema_items(self, schema: pysql.types.StructType) -> list:
