@@ -66,10 +66,10 @@ class Spark_Data_Connector():
     """
 
 
-    def __init__(self, s3_link = None, schema = None, setup = 'default') -> None:
+    def __init__(self, s3_file_path = None, schema = None, setup = 'default') -> None:
 
         ##setup the s3 file path from where to read data
-        self._s3_file_path = None
+        self._s3_file_path = s3_file_path
         
         self._spark = Spark_Utils()
         self._spark.create_spark_utils(setup)
@@ -157,7 +157,7 @@ class Spark_Data_Connector():
             df - Pyspark dataframe
         """
 
-        self._data = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self.filepath)
+        self._data = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self._s3_file_path)
 
         return self._data
 
@@ -170,7 +170,7 @@ class Spark_Data_Connector():
         """
 
         try:
-            self._data = self._spark._spark.read.json(self.filepath, multiLine=False)
+            self._data = self._spark._spark.read.json(self._s3_file_path, multiLine=False)
             self._last_return_code = "PASS"
             
         except Exception as e:

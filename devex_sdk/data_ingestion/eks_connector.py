@@ -13,7 +13,7 @@ import pyspark.sql as pysql
 from .spark_data_connector import Spark_Data_Connector
 from .container_insights_schema import eks_performance_logs_schema
 
-class Eks_Connector(Spark_Data_Connector):
+class EKS_Connector(Spark_Data_Connector):
 
     """
     Class for ingestion of data with attributes for 
