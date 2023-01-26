@@ -8,7 +8,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, to_json
 from pyspark.sql.types import StructType
 import pyspark.sql as pysql
-from spark_utils import Spark_Utils
+from .spark_utils import Spark_Utils
 
 
 class Spark_Data_Connector():

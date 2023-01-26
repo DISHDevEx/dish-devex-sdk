@@ -10,8 +10,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, to_json
 from pyspark.sql.types import StructType
 import pyspark.sql as pysql
-from spark_data_connector import Spark_Data_Connector
-from container_insights_schema import eks_performance_logs_schema
+from .spark_data_connector import Spark_Data_Connector
+from .container_insights_schema import eks_performance_logs_schema
 
 class Eks_Connector(Spark_Data_Connector):
 
@@ -62,10 +62,6 @@ class Eks_Connector(Spark_Data_Connector):
             set_rec_type(self, rec_type = 'Node')
 
             get_rec_type() --> String
-
-            get_s3_path() --> String
-
-            set_s3_path_link(self,s3_path:String)
 
             set_s3_path_datetime(self,
                 year= -1, month = -1, day = -1, hour = -1)

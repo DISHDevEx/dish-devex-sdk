@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 
-class ReadDataPandas:
+class Pandas_Data_Connector:
     """
     Class to create pandas dataframe from data in CSV and XLSX form.
     """
