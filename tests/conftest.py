@@ -116,21 +116,21 @@ def NodeNet():
 def Spark():
     
     obj = EKS_Connector()
-    spark = obj.get_spark()
+    spark = obj._spark.get_spark()
     return spark
 
 @pytest.fixture(scope="module")
 def Spark_context():
     
     obj = EKS_Connector()
-    spark_context = obj.get_spark_context()
+    spark_context = obj._spark.get_spark_context()
     return spark_context
 
 @pytest.fixture(scope="module")
 def Stop_spark():
 
     obj = EKS_Connector()
-    obj.stop_spark_context()
+    obj._spark.stop_spark_context()
     
 
 # fixture for static data
