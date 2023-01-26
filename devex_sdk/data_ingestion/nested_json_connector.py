@@ -104,17 +104,17 @@ class Nested_Json_Connector(Spark_Data_Connector):
         
         err, self._data = self.read_json()
 
-        print(err)
         
-        if(err == "Pass"):
+      
+        if(err == "PASS"):
         
+           
             nested_columns = self.filter_nested_columns(self._data.schema)
-
+            
             # Explode nested columns if present
             if len(nested_columns) > 0:
                 self._data = self.explode_nested_columns(self._data, nested_columns)
 
             self._last_return_code = "PASS"
-        
 
         return self._last_return_code,self._data
