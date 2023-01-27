@@ -1,5 +1,5 @@
 import os
-from devex_sdk import Pyspark_data_ingestion, find_multilevel_schema_items
+from devex_sdk import EKS_Connector
 from pyspark.sql.functions import to_json
 
 
@@ -26,8 +26,8 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
                                  schema = Schema)
 
     merged_df = data_fail.unionByName(master_schema_json, allowMissingColumns=True)
-
-    for item in find_multilevel_schema_items(merged_df.schema):
+    obj = EKS_Connector()
+    for item in obj.find_multilevel_schema_items(schema=merged_df.schema):
         merged_df = merged_df.withColumn(item, to_json(merged_df[item]))
         
     return merged_df

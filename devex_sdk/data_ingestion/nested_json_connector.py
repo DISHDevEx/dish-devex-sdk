@@ -3,40 +3,30 @@ Module with class to create dataframe from JSON or nested JSON format.
 """
 from pyspark.sql.types import StructType, ArrayType, MapType
 from pyspark.sql.functions import col, explode
-from .spark_setup import spark_setup
+from .spark_data_connector import Spark_Data_Connector
 
-class JsonToDataframe:
+class Nested_Json_Connector(Spark_Data_Connector):
     """
     Class to create pyspark dataframe from JSON or nested JSON format.
     """
 
-    def __init__(self, filepath):
+    def __init__(self, s3_file_path=None):
         """
-        Initiates class with spark session, filepath, dataframe and main function.
+        Initiates class with spark session, s3_file_path, dataframe and main function.
         The required dataframe is returned in 'dataframe' attribute of the class.
         Parameters:
-            spark - spark session
-            filepath - data filepath on local directory or S3 bucket
+            s3_file_path
         """
+        
+        ##this class is a child of Spark_Data_Connector
+        ##all variables and functioons that are generalized are stored there
+        Spark_Data_Connector.__init__(self,s3_file_path  = s3_file_path )
+        print("Nested_Json_Connector initialized with the following s3_file_path:"+str(self._s3_file_path))
+        
 
-        self.spark = spark_setup()
-        self.filepath = filepath
-        self.dataframe = None
-        self.main()
 
-    def read_json_data(self):
-        """
-        Method to create dataframe from JSON data.
-        Returns:
-            df - dataframe
-        """
-
-        if self.filepath.endswith('.txt') or self.filepath.endswith('.json'):
-            df = self.spark.read.json(self.filepath, multiLine=False)
-        return df
-
-    @staticmethod
-    def filter_nested_columns(schema):
+      
+    def filter_nested_columns(self,schema):
         """
         Method to discover columns in dataframe that have nested JSON.
         Parameters:
@@ -106,14 +96,24 @@ class JsonToDataframe:
 
         return df
 
-    def main(self):
+    def read_nested_json(self):
         """
         Method to organize the order in which other methods are called and returns a dataframe.
         """
-        self.dataframe = self.read_json_data()
+        
+        err, self._data = self.read_json()
 
-        nested_columns = self.filter_nested_columns(self.dataframe.schema)
+        
+      
+        if(err == "PASS"):
+        
+           
+            nested_columns = self.filter_nested_columns(self._data.schema)
+            
+            # Explode nested columns if present
+            if len(nested_columns) > 0:
+                self._data = self.explode_nested_columns(self._data, nested_columns)
 
-        # Explode nested columns if present
-        if len(nested_columns) > 0:
-            self.dataframe = self.explode_nested_columns(self.dataframe, nested_columns)
+            self._last_return_code = "PASS"
+
+        return self._last_return_code,self._data

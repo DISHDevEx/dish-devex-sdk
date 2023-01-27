@@ -6,52 +6,61 @@ dev
 
 - \[Short description of non-trivial change.\]
 
-0.1dev (2022-07-05)
+0.0.1 (2022-07-05)
 ------------------
 
 -   Conception
 -   Development
 
 
-0.2dev (2022-08-01)
+0.0.2 (2022-08-01)
 ------------------
 
 -   Added bucketization() function
 
-0.3dev (2022-09-14)
+0.0.3 (2022-09-14)
 ------------------
 
 -   Added update_cwd_to_root() function
 
-0.4dev (2022-10-14)
+0.0.4 (2022-10-14)
 ------------------
 
 -   Added pyspark ingestion and testing framework
 
-0.5dev (2022-10-19)
+0.0.5 (2022-10-19)
 ------------------
 
 -   Added project setup function for notebook and console
 
-0.6dev (2022-11-18)
+0.0.6 (2022-11-18)
 ------------------
 
 -   Added feature Store for eks anomaly detection models
 
-0.7dev (2022-12-09)
+0.0.7 (2022-12-09)
 ------------------
 
 - Added new features to version control feature store and nested json's
 
-0.8dev (2023-01-20)
+0.0.8 (2023-01-20)
 ------------------
 
 - renamed the repo to dish-devex-sdk from msspackages
 - renamed the package to devex-sdk from msspackages
 
 
-0.9dev (2023-01-24)
+0.0.9 (2023-01-24)
 ------------------
 
 - Added spark session creation module
 - Added module that converts CSV, JSON or Parquet to dataframe
+
+0.1.0 (2023-01-27)
+------------------
+
+- Updates to data ingestion framework to increase re-usability of code through "Connectors"
+- Created class "Spark_Utils" to allow for creation of spark objects with single function call
+- Created parent class "Spark_Data_Connector" that can read any s3 location using spark backend
+- Modified child classes: "EKS_Connector" and "Nested_Json_Connector" to inherit attributes and functions from parent class. 
+- Modified Parent class Pandas_Data_Connector to read s3 locations using pandas backend
