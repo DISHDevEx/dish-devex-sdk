@@ -18,7 +18,7 @@ class Spark_Data_Connector():
     
         Constructor -- inputs
         ----------
-           s3_link = None, 
+           s3_file_path = None, 
            schema = None, 
            setup = 'default'
 

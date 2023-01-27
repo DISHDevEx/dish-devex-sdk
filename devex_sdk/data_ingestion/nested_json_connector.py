@@ -15,7 +15,6 @@ class Nested_Json_Connector(Spark_Data_Connector):
         Initiates class with spark session, s3_file_path, dataframe and main function.
         The required dataframe is returned in 'dataframe' attribute of the class.
         Parameters:
-            spark - spark session
             s3_file_path
         """
         
