@@ -80,10 +80,10 @@ class EKS_Connector(Spark_Data_Connector):
 
     def __init__(self,
         year= -1, month = -1, day = -1, hour = -1,
-        filter_column_value ='Node', 
+        filter_column_value ='Node', setup = 'default'
         ) -> None:
 
-        Spark_Data_Connector.__init__(self)
+        Spark_Data_Connector.__init__(self,setup=setup)
         
         #setup the s3 path variables to read data from
         self._filter_column_name = 'Type'

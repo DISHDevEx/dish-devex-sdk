@@ -10,7 +10,7 @@ class Nested_Json_Connector(Spark_Data_Connector):
     Class to create pyspark dataframe from JSON or nested JSON format.
     """
 
-    def __init__(self, s3_file_path=None):
+    def __init__(self, s3_file_path=None, setup = 'default' ):
         """
         Initiates class with spark session, s3_file_path, dataframe and main function.
         The required dataframe is returned in 'dataframe' attribute of the class.
@@ -20,7 +20,7 @@ class Nested_Json_Connector(Spark_Data_Connector):
         
         ##this class is a child of Spark_Data_Connector
         ##all variables and functioons that are generalized are stored there
-        Spark_Data_Connector.__init__(self,s3_file_path  = s3_file_path )
+        Spark_Data_Connector.__init__(self,s3_file_path  = s3_file_path, setup = setup )
         print("Nested_Json_Connector initialized with the following s3_file_path:"+str(self._s3_file_path))
         
 
