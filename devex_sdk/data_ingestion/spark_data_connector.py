@@ -22,7 +22,23 @@ class Spark_Data_Connector():
            schema = None, 
            setup = 'default'
 
-        .Read() --outputs
+        .read_parquet() --outputs
+        ------
+            err_code : String
+                PASS or FAIL with the Exception code
+
+            df : DataFrame
+                Filled when success, Empty when fail
+                
+        .read_json() --outputs
+        ------
+            err_code : String
+                PASS or FAIL with the Exception code
+
+            df : DataFrame
+                Filled when success, Empty when fail
+                
+        .read_csv() --outputs
         ------
             err_code : String
                 PASS or FAIL with the Exception code
@@ -33,9 +49,12 @@ class Spark_Data_Connector():
         Attributes
         ----------
 
-            _master_schema_path : String
-                path to the schema for the rec type 
-
+            _s3_file_path: String
+                the path to the s3 file you are attempting to read
+                
+            _spark : Spark_Utils object
+                custom spark object for pyspark data reading
+                
             _read_schema : spark Struct Type
                 schema for the parquet file we want to read
 
@@ -157,9 +176,27 @@ class Spark_Data_Connector():
             df - Pyspark dataframe
         """
 
-        self._data = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self._s3_file_path)
+         try:
 
-        return self._data
+            self._data = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self._s3_file_path)
+            self._last_return_code = "PASS"
+            
+        except Exception as e:
+            # Create an empty RDD
+            emp_rdd = self._spark._spark_context.emptyRDD()
+
+            # Create empty schema
+            columns_empty = StructType([])
+
+            # Create an empty RDD with empty schema
+            data_fail = self._spark._spark.createDataFrame(data = emp_rdd,
+                                         schema = columns_empty)
+            self._data = data_fail
+
+            self._last_return_code = "FAIL: " + f"{e}"
+            
+
+        return self._last_return_code, self._data
 
 
     def read_json(self):

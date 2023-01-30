@@ -6,8 +6,33 @@ from pyspark.sql.functions import col, explode
 from .spark_data_connector import Spark_Data_Connector
 
 class Nested_Json_Connector(Spark_Data_Connector):
-    """
-    Class to create pyspark dataframe from JSON or nested JSON format.
+  """
+    Class for ingestion of data with attributes for 
+    
+        Constructor -- inputs
+        ----------
+           s3_file_path = None, 
+           setup = 'default'
+
+        .read_nested_json() --outputs
+        ------
+            err_code : String
+                PASS or FAIL with the Exception code
+
+            df : DataFrame
+                Filled when success, Empty when fail
+                
+        .filter_nested_columns(schema) --outputs
+        ------
+            nested_columns: list
+                List of columns that are nested and need expanding
+                
+        .explode_nested_columns( df, nested_columns) --outputs
+        ------
+            df: dataframe
+                dataframe with all columns fully expanded
+
+
     """
 
     def __init__(self, s3_file_path=None, setup = 'default' ):
