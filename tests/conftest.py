@@ -155,14 +155,5 @@ def Schema():
 # fixture for dask data
 @pytest.fixture(scope="module")
 def Dask_dd():
-    #df = dd.read_parquet("s3a://dish-dp-uswest2-992240864529-infra-metrics-raw/eks_containerinsights_performance_logs/year=2022/month=7/day=10/hour=10/*.snappy.parquet")
     df = dd.read_parquet(s3_link_dask)
     return df
-
-
-
-
-
-
-
-
