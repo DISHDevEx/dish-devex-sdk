@@ -34,6 +34,9 @@ class EKS_Connector(Spark_Data_Connector):
 
             filter_column_value : STRING
                 rec type for which to read data for
+                
+            setup: String
+                The setup value for the type of machine you are using to run spark
 
         .Read() --outputs
         ------
