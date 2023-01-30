@@ -79,7 +79,7 @@ class EKS_Connector(Spark_Data_Connector):
 
 
     def __init__(self,
-        bucket_name , year= -1, month = -1, day = -1, hour = -1,
+        bucket_name ,folder_name, year= -1, month = -1, day = -1, hour = -1,
         filter_column_value ='Node', setup = 'default'
         ) -> None:
 
@@ -88,7 +88,7 @@ class EKS_Connector(Spark_Data_Connector):
         #setup the s3 path variables to read data from
         self._filter_column_name = 'Type'
         self._filter_column_value  = filter_column_value
-        self.set_s3_path_datetime(bucket_name, year, month, day, hour)
+        self.set_s3_path_datetime(bucket_name, folder_name, year, month, day, hour)
 
         ##setup read schema
         self._read_schema = eks_performance_logs_schema
@@ -149,7 +149,7 @@ class EKS_Connector(Spark_Data_Connector):
         """Method for returning the attribute _filter_column_value"""
         return self._filter_column_value
 
-    def set_s3_path_datetime(self, bucket_name, year= -1, month = -1, day = -1, hour = -1):
+    def set_s3_path_datetime(self, bucket_name, folder_name, year= -1, month = -1, day = -1, hour = -1):
         """
         Respond to the user requested date and time
         by setting the attribute _s3_file_path accordingly.
@@ -174,10 +174,11 @@ class EKS_Connector(Spark_Data_Connector):
         if hour != -1:
             hour = str(hour)
             hour_filter = '/hour=' + hour
-
+        
         self._s3_file_path = ('s3a://'
-            + bucket_name
+            + bucket_name +'/'+ folder_name
             + year_filter + month_filter + day_filter + hour_filter)
+
 
     def read(self):
         """Read parquet file partitions specified in object instantiation."""
