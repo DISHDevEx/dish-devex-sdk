@@ -5,10 +5,10 @@ from pyspark.sql.functions import to_json
 
 # for pyspark job
 bucket_name = "hamza-sagemaker"
-folder_name = "test_data/part-00000-f95f3fdf-7bb8-4d4f-bdbf-7ac15f2a7f10.c000.snappy.parquet"
+folder_name = "test_data/part-00000-c83945eb-9667-46a6-855e-547c88e5c61c-c000.snappy.parquet"
 
 #for Dask job
-s3_link_dask = "s3a://hamza-sagemaker/test_data/part-00000-f95f3fdf-7bb8-4d4f-bdbf-7ac15f2a7f10.c000.snappy.parquet"
+s3_link_dask = "s3a://hamza-sagemaker/test_data/part-00000-c83945eb-9667-46a6-855e-547c88e5c61c-c000.snappy.parquet"
 
 
 # resuable function to merge master schema to filelds outside of the log messages
