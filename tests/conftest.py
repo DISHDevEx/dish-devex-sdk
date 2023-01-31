@@ -1,10 +1,10 @@
 # content of conftest.py
 # This file provides the ability to call functions once for the entire test suite.
 import pytest
-from devex_sdk import EKS_Connector
+from devex_sdk import EKS_Connector, Spark_Utils
 from pyspark.sql.types import *
 import dask.dataframe as dd
-from .commons import year, month, day, hour, s3_link_dask
+from .commons import bucket_name, folder_name, s3_link_dask
 
 
 # functions to mark slow tests and skip them.
@@ -28,13 +28,13 @@ def pytest_collection_modifyitems(config, items):
 # fixtures for pysaprk data
 @pytest.fixture(scope="module")
 def Pod():
-    pod_obj = EKS_Connector(year, month, day, hour, filter_column_value= "Pod")
+    pod_obj = EKS_Connector(bucket_name, folder_name, filter_column_value= "Pod")
     err_code, df = pod_obj.read()
     return err_code, df
 
 @pytest.fixture(scope="module")
 def NodeDiskIO():
-    nodediskio_obj = EKS_Connector(year, month, day, hour, filter_column_value="NodeDiskIO")
+    nodediskio_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeDiskIO")
     err_code, df = nodediskio_obj.read()
 
     return err_code, df
@@ -42,14 +42,14 @@ def NodeDiskIO():
 
 @pytest.fixture(scope="module")
 def PodNet():
-    podnet_obj = EKS_Connector(year, month, day, hour, filter_column_value="PodNet")
+    podnet_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="PodNet")
     err_code, df = podnet_obj.read()
 
     return err_code, df
 
 @pytest.fixture(scope="module")
 def Container():
-    conatiner_obj = EKS_Connector(year, month, day, hour, filter_column_value="Container")
+    conatiner_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Container")
     err_code, df = conatiner_obj.read()
 
     return err_code, df
@@ -57,7 +57,7 @@ def Container():
 
 @pytest.fixture(scope="module")
 def ContainerFS():
-    containerfs_obj = EKS_Connector(year, month, day, hour, filter_column_value="ContainerFS")
+    containerfs_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="ContainerFS")
     err_code, df = containerfs_obj.read()
  
     return err_code, df
@@ -65,7 +65,7 @@ def ContainerFS():
 
 @pytest.fixture(scope="module")
 def ClusterService():
-    clusterservice_obj = EKS_Connector(year, month, day, hour, filter_column_value="ClusterService")
+    clusterservice_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="ClusterService")
     err_code, df = clusterservice_obj.read()
 
     return err_code, df
@@ -74,7 +74,7 @@ def ClusterService():
 
 @pytest.fixture(scope="module")
 def NodeFS():
-    nodefs_obj = EKS_Connector(year, month, day, hour, filter_column_value="NodeFS")
+    nodefs_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeFS")
     err_code, df = nodefs_obj.read()
 
     return err_code, df
@@ -82,7 +82,7 @@ def NodeFS():
 
 @pytest.fixture(scope="module")
 def Node():
-    node_obj = EKS_Connector(year, month, day, hour, filter_column_value="Node")
+    node_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Node")
     err_code, df = node_obj.read()
 
     return err_code, df
@@ -90,7 +90,7 @@ def Node():
 
 @pytest.fixture(scope="module")
 def ClusterNamespace():
-    clusternamespace_obj = EKS_Connector(year, month, day, hour,  filter_column_value="ClusterNamespace")
+    clusternamespace_obj = EKS_Connector(bucket_name, folder_name,  filter_column_value="ClusterNamespace")
     err_code, df = clusternamespace_obj.read()
  
     return err_code, df
@@ -98,14 +98,14 @@ def ClusterNamespace():
 
 @pytest.fixture(scope="module")
 def Cluster():
-    cluster_obj = EKS_Connector(year, month, day, hour, filter_column_value="Cluster")
+    cluster_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Cluster")
     err_code, df = cluster_obj.read()
   
     return err_code, df
 
 @pytest.fixture(scope="module")
 def NodeNet():
-    nodenet_obj = EKS_Connector(year, month, day, hour, filter_column_value="NodeNet")
+    nodenet_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeNet")
     err_code, df = nodenet_obj.read()
    
     return err_code, df
@@ -115,22 +115,22 @@ def NodeNet():
 @pytest.fixture(scope="module")
 def Spark():
     
-    obj = EKS_Connector()
-    spark = obj._spark.get_spark()
+    obj = Spark_Utils()
+    spark = obj.get_spark()
     return spark
 
 @pytest.fixture(scope="module")
 def Spark_context():
     
-    obj = EKS_Connector()
-    spark_context = obj._spark.get_spark_context()
+    obj = Spark_Utils()
+    spark_context = obj.get_spark_context()
     return spark_context
 
 @pytest.fixture(scope="module")
 def Stop_spark():
 
-    obj = EKS_Connector()
-    obj._spark.stop_spark_context()
+    obj = Spark_Utils()
+    obj.stop_spark_context()
     
 
 # fixture for static data

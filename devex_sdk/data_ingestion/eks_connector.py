@@ -186,7 +186,7 @@ class EKS_Connector(Spark_Data_Connector):
             ##read in data using schema from the s3 path
             training_data = self._spark._spark.read.format("parquet")\
                 .schema(self._read_schema).load(self._s3_file_path)
-
+    
             #list of columns that are exploded from log_event_message column
             names = self._master_schema_json.schema.names
             unpack_names = [f"log_event_message.{name}" for name in names]

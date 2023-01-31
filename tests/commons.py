@@ -4,15 +4,11 @@ from pyspark.sql.functions import to_json
 
 
 # for pyspark job
-year = "2022"
-month = "7"
-day = "10"
-hour = "10"
-
-
+bucket_name = "hamza-sagemaker"
+folder_name = "test_data/part-00000-f95f3fdf-7bb8-4d4f-bdbf-7ac15f2a7f10.c000.snappy.parquet"
 
 #for Dask job
-s3_link_dask = f"s3a://dish-dp-uswest2-992240864529-infra-metrics-raw/eks_containerinsights_performance_logs/year={year}/month={month}/day={day}/hour={hour}/*.snappy.parquet"
+s3_link_dask = "s3a://hamza-sagemaker/test_data/part-00000-f95f3fdf-7bb8-4d4f-bdbf-7ac15f2a7f10.c000.snappy.parquet"
 
 
 # resuable function to merge master schema to filelds outside of the log messages
@@ -26,7 +22,7 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
                                  schema = Schema)
 
     merged_df = data_fail.unionByName(master_schema_json, allowMissingColumns=True)
-    obj = EKS_Connector()
+    obj = EKS_Connector(bucket_name,folder_name)
     for item in obj.find_multilevel_schema_items(schema=merged_df.schema):
         merged_df = merged_df.withColumn(item, to_json(merged_df[item]))
         
