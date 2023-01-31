@@ -182,7 +182,7 @@ class EKS_Connector(Spark_Data_Connector):
             + bucket_name +'/'+ folder_name
             + year_filter + month_filter + day_filter + hour_filter)
 
-
+        print(self._s3_file_path)
     def read(self):
         """Read parquet file partitions specified in object instantiation."""
         try:
