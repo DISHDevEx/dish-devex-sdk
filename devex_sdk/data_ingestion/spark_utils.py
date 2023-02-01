@@ -71,6 +71,15 @@ class Spark_Utils():
             self._spark = spark
         if setup == 'github_actions':
             conf = SparkConf()
+            packages = (",".join(pkg_list))
+            pkg_list = []
+            pkg_list.append("io.delta:delta-core_2.12:2.1.0")
+            pkg_list.append("org.apache.hadoop:hadoop-aws:3.3.4")
+            packages = (",".join(pkg_list))
+            conf.set("spark.jars.packages", packages)
+            conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+            conf.set("spark.sql.catalog.spark_catalog",
+                     "org.apache.spark.sql.delta.catalog.DeltaCatalog")
             conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
             conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
             spark = SparkSession.builder.config(conf=conf).getOrCreate()
