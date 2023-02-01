@@ -79,7 +79,7 @@ class EKS_Connector(Spark_Data_Connector):
 
 
     def __init__(self,
-        bucket_name ,folder_name, year= -1, month = -1, day = -1, hour = -1,
+        bucket_name = "" ,folder_name = "", year= -1, month = -1, day = -1, hour = -1,
         filter_column_value ='Node', setup = 'default'
         ) -> None:
 
