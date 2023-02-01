@@ -105,6 +105,7 @@ class Spark_Utils():
             self._spark = spark
             self._spark_context = s_c
 
+
         else:
             spark_config = configparser.ConfigParser()
             spark_config.read(os.path.join(os.path.dirname(__file__),
