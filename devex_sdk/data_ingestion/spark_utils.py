@@ -69,7 +69,7 @@ class Spark_Utils():
             #conf = SparkConf()
             spark = SparkSession.builder.appName("EMRSERVERLESS").getOrCreate()
             self._spark = spark
-        if setup == 'github-actions':
+        if setup == 'github_actions':
             conf = SparkConf()
             conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
             conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
@@ -95,11 +95,11 @@ class Spark_Utils():
                      "io.delta.sql.DeltaSparkSessionExtension")
             conf.set("spark.sql.catalog.spark_catalog",
                      "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-            # conf.set("fs.s3a.aws.credentials.provider",
-            #          "com.amazonaws.auth.ContainerCredentialsProvider"
-            #          )
-            conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
-            conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
+            conf.set("fs.s3a.aws.credentials.provider",
+                     "com.amazonaws.auth.ContainerCredentialsProvider"
+                     )
+            # conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
+            # conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
 
 
             if setup != 'default':
