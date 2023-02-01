@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
-          role-session-name: samplerolesession
+          role-session-name: ${{ secrets.SAMPLE_ROLE_SESSION }}
           aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
       - name: Install dependencies
@@ -37,6 +37,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
         env:
-           role_to_assume: ${{ secrets.ROLE_TO_ASSUME }}
+           ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
+           SAMPLE_ROLE_SESSION: ${{ secrets.SAMPLE_ROLE_SESSION }}
         run:
            pytest --slow

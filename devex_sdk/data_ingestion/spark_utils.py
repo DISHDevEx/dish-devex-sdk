@@ -91,7 +91,9 @@ class Spark_Utils():
             conf.set("fs.s3a.aws.credentials.provider",
                      "com.amazonaws.auth.ContainerCredentialsProvider"
                      )
-            conf.set("fs.s3a.assumed.role.arn", os.environ["role_to_assume"])
+            conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
+            conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
+
 
             if setup != 'default':
                 conf.set("spark.driver.memory",
