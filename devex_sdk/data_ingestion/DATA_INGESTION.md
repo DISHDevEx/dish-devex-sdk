@@ -10,10 +10,10 @@ We are building out a a suite of data connectors for the engineers to read data 
 * How to use:
 
 ```python
-from data_ingestion import Spark_Data_Connector
+from devex_sdk import Spark_Data_Connector
 read_random_s3 = Spark_Data_Connector()
 read_random_s3.set_s3_path_link(s3_file_path) ## Use your own s3 file path here
-err,df = read_rando_s3.read_parquet()
+err,df = read_random_s3.read_parquet()
 ```
 
     
@@ -24,7 +24,7 @@ err,df = read_rando_s3.read_parquet()
 * How to use:
 
 ```python
-from data_ingestion import EKS_Connector
+from devex_sdk import EKS_Connector
 read_one_hour_test = EKS_Connector(year = "2022",month = "10", day = "1",hour="0",filter_column_value="Pod",setup = "32gb")
 err,df = read_one_hour_test.read()
 ```
@@ -38,7 +38,7 @@ err,df = read_one_hour_test.read()
 * How to use:
 
 ```python
-from data_ingestion import Nested_Json_Connector
+from devex_sdk import Nested_Json_Connector
 obj = Nested_Json_Connector("") ## set your own s3 link here in the constructor
 err, df = obj.read_nested_json()
 ```
@@ -54,7 +54,7 @@ err, df = obj.read_nested_json()
 
 * How to use: 
 ```python
-from data_ingestion import Spark_Data_Connector
+from devex_sdk import Spark_Data_Connector
 spark = Spark_Utils()
 spark.create_spark_utils(setup = "32gb")
 ```
