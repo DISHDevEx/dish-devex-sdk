@@ -69,27 +69,41 @@ class Spark_Utils():
             #conf = SparkConf()
             spark = SparkSession.builder.appName("EMRSERVERLESS").getOrCreate()
             self._spark = spark
-        # elif setup == 'github_actions':
-        #     conf = SparkConf()
-        #     pkg_list = []
-        #     pkg_list.append("io.delta:delta-core_2.12:2.1.0")
-        #     pkg_list.append("org.apache.hadoop:hadoop-aws:3.3.4")
-        #     packages = (",".join(pkg_list))
-        #     conf.set("spark.jars.packages", packages)
-        #     conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
-        #     conf.set("spark.sql.catalog.spark_catalog",
-        #              "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-        #     conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
-        #     conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
-        #     spark = SparkSession.builder.config(conf=conf).getOrCreate()
-        #     self._packages = packages
-        #     self._spark_config = conf
-        #
-        #     # use the sparkContext to print information about the spark version
-        #     # that we are implementing
-        #     s_c = spark.sparkContext
-        #     self._spark = spark
-        #     self._spark_context = s_c
+
+        elif setup == 'github_actions':
+            spark_config = configparser.ConfigParser()
+            spark_config.read(os.path.join(os.path.dirname(__file__), "spark_config.ini"))
+
+            if pkg_list is None:
+                pkg_list = []
+                pkg_list.append("io.delta:delta-core_2.12:2.1.0")
+                pkg_list.append("org.apache.hadoop:hadoop-aws:3.3.4")
+
+            packages = (",".join(pkg_list))
+
+            ##create the config
+            conf = SparkConf()
+            conf.set("spark.jars.packages", packages)
+            conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+            conf.set("spark.sql.catalog.spark_catalog",
+                     "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+            conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
+            conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
+
+            if setup != 'default':
+                conf.set("spark.driver.memory", spark_config.get(setup, 'spark.driver.memory'))
+                conf.set("spark.driver.maxResultSize",
+                         spark_config.get(setup, 'spark.driver.maxResultSize'))
+
+            spark = SparkSession.builder.config(conf=conf).getOrCreate()
+            self._packages = packages
+            self._spark_config = conf
+
+            # use the sparkContext to print information about the spark version
+            # that we are implementing
+            s_c = spark.sparkContext
+            self._spark = spark
+            self._spark_context = s_c
 
         else:
             spark_config = configparser.ConfigParser()
@@ -110,13 +124,8 @@ class Spark_Utils():
                      "io.delta.sql.DeltaSparkSessionExtension")
             conf.set("spark.sql.catalog.spark_catalog",
                      "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-            if setup == 'github_actions':
-                conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
-                conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
-
-            else:
-                conf.set("fs.s3a.aws.credentials.provider",
-                         "com.amazonaws.auth.ContainerCredentialsProvider")
+            conf.set("fs.s3a.aws.credentials.provider",
+                     "com.amazonaws.auth.ContainerCredentialsProvider")
 
             if setup != 'default':
                 conf.set("spark.driver.memory",
