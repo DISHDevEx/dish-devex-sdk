@@ -4,8 +4,8 @@ from pyspark.sql.functions import to_json
 
 
 # for pyspark job
-bucket_name = "hamza-test-public"
-#bucket_name = "hamza-sagemaker"
+#bucket_name = "hamza-test-public"
+bucket_name = "hamza-sagemaker"
 folder_name = "test_data/part-00000-c83945eb-9667-46a6-855e-547c88e5c61c-c000.snappy.parquet"
 
 #for Dask job
@@ -23,7 +23,7 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
                                  schema = Schema)
 
     merged_df = data_fail.unionByName(master_schema_json, allowMissingColumns=True)
-    obj = EKS_Connector(bucket_name,folder_name)
+    obj = EKS_Connector(bucket_name,folder_name, setup="emr")
     for item in obj.find_multilevel_schema_items(schema=merged_df.schema):
         merged_df = merged_df.withColumn(item, to_json(merged_df[item]))
         
