@@ -69,6 +69,13 @@ class Spark_Utils():
             #conf = SparkConf()
             spark = SparkSession.builder.appName("EMRSERVERLESS").getOrCreate()
             self._spark = spark
+        if setup == 'github-actions':
+            conf = SparkConf()
+            conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
+            conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
+            spark = SparkSession.builder.config(conf=conf).getOrCreate()
+            self._spark = spark
+
         else:
             spark_config = configparser.ConfigParser()
             spark_config.read(os.path.join(os.path.dirname(__file__),
