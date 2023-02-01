@@ -71,7 +71,6 @@ class Spark_Utils():
             self._spark = spark
         if setup == 'github_actions':
             conf = SparkConf()
-            packages = (",".join(pkg_list))
             pkg_list = []
             pkg_list.append("io.delta:delta-core_2.12:2.1.0")
             pkg_list.append("org.apache.hadoop:hadoop-aws:3.3.4")
