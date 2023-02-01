@@ -24,7 +24,7 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
                                  schema = Schema)
 
     merged_df = data_fail.unionByName(master_schema_json, allowMissingColumns=True)
-    obj = EKS_Connector(bucket_name,folder_name, setup="github_actions")
+    obj = EKS_Connector(bucket_name,folder_name)
     for item in obj.find_multilevel_schema_items(schema=merged_df.schema):
         merged_df = merged_df.withColumn(item, to_json(merged_df[item]))
         

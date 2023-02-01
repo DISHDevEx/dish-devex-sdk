@@ -28,13 +28,13 @@ def pytest_collection_modifyitems(config, items):
 # fixtures for pysaprk data
 @pytest.fixture(scope="module")
 def Pod():
-    pod_obj = EKS_Connector(bucket_name, folder_name, filter_column_value= "Pod", setup="github_actions")
+    pod_obj = EKS_Connector(bucket_name, folder_name, filter_column_value= "Pod")
     err_code, df = pod_obj.read()
     return err_code, df
 
 @pytest.fixture(scope="module")
 def NodeDiskIO():
-    nodediskio_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeDiskIO", setup="github_actions")
+    nodediskio_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeDiskIO")
     err_code, df = nodediskio_obj.read()
 
     return err_code, df
@@ -42,14 +42,14 @@ def NodeDiskIO():
 
 @pytest.fixture(scope="module")
 def PodNet():
-    podnet_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="PodNet", setup="github_actions")
+    podnet_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="PodNet")
     err_code, df = podnet_obj.read()
 
     return err_code, df
 
 @pytest.fixture(scope="module")
 def Container():
-    conatiner_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Container", setup="github_actions")
+    conatiner_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Container")
     err_code, df = conatiner_obj.read()
 
     return err_code, df
@@ -57,7 +57,7 @@ def Container():
 
 @pytest.fixture(scope="module")
 def ContainerFS():
-    containerfs_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="ContainerFS", setup="github_actions")
+    containerfs_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="ContainerFS")
     err_code, df = containerfs_obj.read()
  
     return err_code, df
@@ -65,7 +65,7 @@ def ContainerFS():
 
 @pytest.fixture(scope="module")
 def ClusterService():
-    clusterservice_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="ClusterService", setup="github_actions")
+    clusterservice_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="ClusterService")
     err_code, df = clusterservice_obj.read()
 
     return err_code, df
@@ -74,7 +74,7 @@ def ClusterService():
 
 @pytest.fixture(scope="module")
 def NodeFS():
-    nodefs_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeFS", setup="github_actions")
+    nodefs_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeFS")
     err_code, df = nodefs_obj.read()
 
     return err_code, df
@@ -82,7 +82,7 @@ def NodeFS():
 
 @pytest.fixture(scope="module")
 def Node():
-    node_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Node", setup="github_actions")
+    node_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Node")
     err_code, df = node_obj.read()
 
     return err_code, df
@@ -90,7 +90,7 @@ def Node():
 
 @pytest.fixture(scope="module")
 def ClusterNamespace():
-    clusternamespace_obj = EKS_Connector(bucket_name, folder_name,  filter_column_value="ClusterNamespace", setup="github_actions")
+    clusternamespace_obj = EKS_Connector(bucket_name, folder_name,  filter_column_value="ClusterNamespace")
     err_code, df = clusternamespace_obj.read()
  
     return err_code, df
@@ -98,14 +98,14 @@ def ClusterNamespace():
 
 @pytest.fixture(scope="module")
 def Cluster():
-    cluster_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Cluster", setup="github_actions")
+    cluster_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="Cluster")
     err_code, df = cluster_obj.read()
   
     return err_code, df
 
 @pytest.fixture(scope="module")
 def NodeNet():
-    nodenet_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeNet", setup="github_actions")
+    nodenet_obj = EKS_Connector(bucket_name, folder_name, filter_column_value="NodeNet")
     err_code, df = nodenet_obj.read()
    
     return err_code, df
