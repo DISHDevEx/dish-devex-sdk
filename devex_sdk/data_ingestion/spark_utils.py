@@ -82,7 +82,6 @@ class Spark_Utils():
             conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
             conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
             spark = SparkSession.builder.config(conf=conf).getOrCreate()
-            self._spark = spark
             self._packages = packages
             self._spark_config = conf
 
