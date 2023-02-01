@@ -34,12 +34,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install  pytest
+          pip install boto3
+          pip install s3fs
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
         env:
            ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
            SAMPLE_ROLE_SESSION: ${{ secrets.SAMPLE_ROLE_SESSION }}
-        run:
+        run: |
            sudo yum install java
            java --version
            pytest --slow
