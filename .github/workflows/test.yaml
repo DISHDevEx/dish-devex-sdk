@@ -37,7 +37,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: env-test
         env:
-            role_to_assume:${{ secrets.ROLE_TO_ASSUME }}
+            role_to_assume: ${{ secrets.ROLE_TO_ASSUME }}
       - name: Test with pytest
         run:
            pytest --slow
