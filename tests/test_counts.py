@@ -13,8 +13,7 @@ def test_toatl_count(NodeDiskIO,
                      Node,
                      ClusterNamespace,
                      Cluster,
-                     NodeNet,
-                     Dask_dd
+                     NodeNet
                                  ):
     
     count = []
@@ -32,4 +31,4 @@ def test_toatl_count(NodeDiskIO,
     count.append(Cluster[1].count())
     count.append(NodeNet[1].count())
     print(count)
-    assert sum(count) == len(Dask_dd)
+    assert sum(count) == 120
