@@ -41,7 +41,5 @@ jobs:
         env:
            ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
            SAMPLE_ROLE_SESSION: ${{ secrets.SAMPLE_ROLE_SESSION }}
-        run: |
-           sudo yum install java
-           java --version
+        run:
            pytest --slow
