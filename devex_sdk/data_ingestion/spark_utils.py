@@ -89,9 +89,10 @@ class Spark_Utils():
             conf.set("spark.sql.catalog.spark_catalog",
                      "org.apache.spark.sql.delta.catalog.DeltaCatalog")
             conf.set("fs.s3a.aws.credentials.provider",
-                     "com.amazonaws.auth.ContainerCredentialsProvider")
-            conf.set("fs.s3a.assumed.role.arn",
-                     "fs.s3a.assumed.role.session.name")
+                     "com.amazonaws.auth.ContainerCredentialsProvider"
+                     )
+            conf.set("fs.s3a.assumed.role.arn", os.environ["role_to_assume"])
+
             if setup != 'default':
                 conf.set("spark.driver.memory",
                          spark_config.get(setup,'spark.driver.memory'))
