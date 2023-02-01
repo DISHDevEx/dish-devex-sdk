@@ -35,9 +35,8 @@ jobs:
           pip install -r requirements.txt
           pip install  pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: env
-        env:
-           role_to_assume:${{ secrets.ROLE_TO_ASSUME }}
       - name: Test with pytest
+        env:
+          role_to_assume:${{ secrets.ROLE_TO_ASSUME }}
         run:
            pytest --slow
