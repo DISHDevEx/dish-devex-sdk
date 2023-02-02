@@ -2,7 +2,7 @@
 ### __Installing devex_sdk__
 1. Navigate into the root _devex_sdk_ directory.
 ```console
-$ cd devex_sdk
+$ cd dish-devex-sdk
 ```
 2. Run the following command to create the wheel file
  
