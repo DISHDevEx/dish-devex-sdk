@@ -1,7 +1,7 @@
 # Data Ingestion Framework
 
 ### Components of the data ingestion framework
-We are building out a a suite of data connectors for the engineers to read data from Dish's 5g Data Platform. Here we define some master data readers that are data source agnostic and can work in a plethora of use cases, as well as some use case specific readers. We expose all backend spark functionality as well. 
+We are building out a suite of data connectors for the engineers to read data from Dish's 5g Data Platform. Here we define some master data readers that are data source agnostic and can work in a plethora of use cases, as well as some use case specific readers. We expose all backend spark functionality as well. 
 
 ### 1. Spark_Data_Connector
 
