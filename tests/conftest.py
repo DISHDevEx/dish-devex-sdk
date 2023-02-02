@@ -4,7 +4,7 @@ import pytest
 from devex_sdk import EKS_Connector, Spark_Utils
 from pyspark.sql.types import *
 import dask.dataframe as dd
-from .commons import bucket_name, folder_name, s3_link_dask
+from .commons import bucket_name, folder_name
 
 
 # functions to mark slow tests and skip them.
