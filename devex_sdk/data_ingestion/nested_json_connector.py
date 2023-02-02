@@ -6,9 +6,9 @@ from pyspark.sql.functions import col, explode
 from .spark_data_connector import Spark_Data_Connector
 
 class Nested_Json_Connector(Spark_Data_Connector):
-  """
+    """
     Class for ingestion of data with attributes for 
-    
+
         Constructor -- inputs
         ----------
            s3_file_path = None, 
@@ -21,12 +21,12 @@ class Nested_Json_Connector(Spark_Data_Connector):
 
             df : DataFrame
                 Filled when success, Empty when fail
-                
+
         .filter_nested_columns(schema) --outputs
         ------
             nested_columns: list
                 List of columns that are nested and need expanding
-                
+
         .explode_nested_columns( df, nested_columns) --outputs
         ------
             df: dataframe
