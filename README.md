@@ -42,4 +42,4 @@ View verion history and release notes in [HISTORY](HISTORY.md).
 Learn how about [CONTRIBUTING](CONTRIBUTING.md) to devex_sdk.
 
 ## Data Ingestion Framework
-Learn about the components and how to use [Data Ingestion](delete_once_done_with_pr/dish-devex-sdk/devex_sdk/data_ingestion/DATA_INGESTION.md)
+Learn about the components and how to use [Data Ingestion](devex_sdk/data_ingestion/DATA_INGESTION.md)
