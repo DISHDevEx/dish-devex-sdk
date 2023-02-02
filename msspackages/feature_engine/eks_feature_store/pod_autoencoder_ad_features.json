@@ -22,7 +22,7 @@
       },
       {
         "feature_name":"pod_network_total_bytes",
-        "feature_description":"The amount of all network recreived and transfered within the pod network per second.",
+        "feature_description":"The amount of all network received and transferred within the pod network per second.",
         "feature_datatype":"float",
         "feature_type": "existing"
       }
@@ -58,7 +58,7 @@
       },
       {
         "feature_name":"pod_network_total_bytes",
-        "feature_description":"The amount of all network recreived and transfered within the pod network per second.",
+        "feature_description":"The amount of all network received and transferred within the pod network per second.",
         "feature_datatype":"float",
         "feature_type": "existing"
       }
@@ -71,6 +71,42 @@
         "split_ratio": 0.8,
         "epochs":250
       }
+  },
+  {
+    "feature_group_name":"pod_autoencoder_ad",
+    "version": "v0.0.2",
+    "created_by": "Madhu Bandi, Evgeniya Dontsova",
+    "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "model_type": "autoencoder",
+    "problem_type": "anomaly detection",
+    "features_list":
+    [
+      {
+        "feature_name":"pod_cpu_utilization",
+        "feature_description":"The percentage of CPU cores utilized on a per pod basis",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"pod_memory_utilization",
+        "feature_description":"The percentage of memory currently being used by the pod compared to the total limit",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"pod_network_total_bytes",
+        "feature_description":"The amount of all network received and transferred within the pod network per second.",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      }
+    ],
+    "model_parameters":
+      {
+        "time_steps": 20,
+        "batch_size" : 32,
+        "train_sample_multiplier": 10000,
+        "split_ratio": 0.8,
+        "epochs":250
+      }
   }
-  
 ]

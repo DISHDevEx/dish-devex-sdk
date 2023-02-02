@@ -3,7 +3,7 @@
     "feature_group_name":"node_autoencoder_ad",
     "version": "v0.0.1",
     "created_by": "Vinayak Sharma",
-    "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "feature_group_description":"general features to track the infrastructure usage of underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
     "model_type": "autoencoder",
     "problem_type": "anomaly detection",
     "features_list":
@@ -22,7 +22,7 @@
       },
       {
         "feature_name":"node_network_total_bytes",
-        "feature_description":"The amount of all network recreived and transfered for the worker node network interfaces in a cluster.",
+        "feature_description":"The amount of all network received and transferred for the worker node network interfaces in a cluster.",
         "feature_datatype":"float",
         "feature_type": "existing"
       }
@@ -39,7 +39,7 @@
     "feature_group_name":"node_autoencoder_ad",
     "version": "v0.0.2",
     "created_by": "Vinayak Sharma",
-    "feature_group_description":"general features to track the infrastructure usage underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "feature_group_description":"general features to track the infrastructure usage of underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
     "model_type": "autoencoder",
     "problem_type": "anomaly detection",
     "features_list":
@@ -58,7 +58,7 @@
       },
       {
         "feature_name":"node_network_total_bytes",
-        "feature_description":"The amount of all network recreived and transfered for the worker node network interfaces in a cluster.",
+        "feature_description":"The amount of all network received and transferred for the worker node network interfaces in a cluster.",
         "feature_datatype":"float",
         "feature_type": "existing"
       }
@@ -68,6 +68,43 @@
         "time_steps": 20,
         "batch_size" : 36,
         "train_sample_multiplier": 1000,
+        "split_ratio": 0.8,
+        "epochs":250
+      }
+  },
+    {
+    "feature_group_name":"node_autoencoder_ad",
+    "version": "v0.0.3",
+    "created_by": "Vinayak Sharma",
+    "feature_group_description":"general features to track the infrastructure usage of underlying applications. By tracking these features through an anomaly detection model we can find generalized deviations from normal.",
+    "model_type": "autoencoder",
+    "problem_type": "anomaly detection",
+    "features_list":
+    [
+      {
+        "feature_name":"node_cpu_utilization ",
+        "feature_description":"The percentage of CPU cores utilized on a per node basis",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"node_memory_utilization",
+        "feature_description":"The percentage of memory currently being used by the node compared to the total limit",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name":"node_network_total_bytes",
+        "feature_description":"The amount of all network received and transferred for the worker node network interfaces in a cluster.",
+        "feature_datatype":"float",
+        "feature_type": "existing"
+      }
+    ],
+    "model_parameters":
+      {
+        "time_steps": 20,
+        "batch_size" : 36,
+        "train_sample_multiplier": 10000,
         "split_ratio": 0.8,
         "epochs":250
       }
