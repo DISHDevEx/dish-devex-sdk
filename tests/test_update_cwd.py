@@ -1,13 +1,13 @@
-from msspackages import update_cwd_to_root
+from devex_sdk import update_cwd_to_root
 import os
 
 
 def test_update_cwd():
     
-    os.chdir('msspackages/update_cwd')
+    os.chdir('devex_sdk/update_cwd')
     print(os.getcwd())
     
-    update_cwd_to_root('msspackages')
+    update_cwd_to_root('devex_sdk')
     cwd = os.getcwd()
     
-    assert cwd.endswith('msspackages') == True
+    assert cwd.endswith('devex_sdk') == True

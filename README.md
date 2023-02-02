@@ -1,8 +1,8 @@
-# MSS Packages
-### __Installing msspackages__
-1. Navigate into the root _msspackages_ directory.
+# DevEx SDK
+### __Installing devex_sdk__
+1. Navigate into the root _devex_sdk_ directory.
 ```console
-$ cd msspackages
+$ cd devex_sdk
 ```
 2. Run the following command to create the wheel file
  
@@ -11,26 +11,26 @@ $ python setup.py bdist_wheel
 ```
 3. Next, pip install the wheel file by running the following command, note that the _version_ will change depending upon the release:
 ```console
-$ pip install /dist/msspackages-(version)-py3-non-any.whl
+$ pip install /dist/devex_sdk-(version)-py3-non-any.whl
 ```
 ### __Usage__
 
-Once complete, _msspackages_ will be available in your Python evironment for use.  Enter your Python environment and import _msspackages_ as you would with any other library or package.
+Once complete, _devex_sdk_ will be available in your Python evironment for use.  Enter your Python environment and import _devex_sdk_ as you would with any other library or package.
 ```console
->>> import msspackages as mss
+>>> import devex_sdk
 ```
-All functions contained in _msspackages_ available for use can be listed by listing the package directory structure, using the alias of _mss_ specified on import:
+All functions contained in _devex_sdk_ available for use can be listed by listing the package directory structure:
 ```console
->>> dir(mss)
+>>> dir(devex_sdk)
 ```
 The package and included functions can then be used like any other Python library.  Functions can be used via dot notation with the specified packages:
 ```conscole
->>> mss.multiply(2,3)
+>>> devex_sdk.multiply(2,3)
 6
 ```
-Alternatively, you can import all algorithms from the _msspackages_ library and use each without the use of dot notation:
+Alternatively, you can import all algorithms from the _devex_sdk_ library and use each without the use of dot notation:
 ```console
->>> from msspackages import *
+>>> from devex_sdk import *
 >>> multiply(2,3)
 6
 ```
@@ -39,6 +39,6 @@ Alternatively, you can import all algorithms from the _msspackages_ library and 
 View verion history and release notes in [HISTORY](HISTORY.md). 
 
 ## __Contributing__
-Learn how about [CONTRIBUTING](CONTRIBUTING.md) to MSS Packages.
+Learn how about [CONTRIBUTING](CONTRIBUTING.md) to devex_sdk.
 
 

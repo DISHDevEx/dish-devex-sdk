@@ -1,4 +1,4 @@
-from msspackages import eks_bucketization
+from devex_sdk import eks_bucketization
 
 import pandas as pd
 

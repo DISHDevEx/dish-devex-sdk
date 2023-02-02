@@ -1,4 +1,4 @@
-from msspackages import add
+from devex_sdk import add
 
 
 def test_add():

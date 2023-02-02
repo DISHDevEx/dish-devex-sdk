@@ -2,7 +2,7 @@
 import os
 from pyspark.sql.types import StructType, StructField, StringType, TimestampType, LongType
 from .commons import merge_master_schema
-# from msspackages import update_cwd_to_root
+# from devex_sdk import update_cwd_to_root
 
 # update_cwd_to_root("eks-projects")
 
