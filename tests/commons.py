@@ -18,8 +18,7 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
     
     master_schema_path = f"/home/runner/work/dish-devex-sdk/dish-devex-sdk/data_ingestion/container_insights_schema/{name}.json"
     #master_schema_path = f"devex_sdk/data_ingestion/container_insights_schema/{name}.json"
-
-    #master_schema = master_schema_json.schema ##Extract the schema from DF
+    master_schema_json = Spark.read.json(master_schema_path, multiLine=True)
 
     data_fail = Spark.createDataFrame(data = Spark_context.emptyRDD(),
                                  schema = Schema)
