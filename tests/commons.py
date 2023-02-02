@@ -4,16 +4,9 @@ from pyspark.sql.functions import to_json
 from pyspark.sql.types import *
 
 # for pyspark job
-#bucket_name = "hamza-test-public"
-bucket_name = "hamza-sagemaker"
+bucket_name = os.environ["BUCKET_NAME_PYTEST"]
 folder_name = "test_data/part-00000-c83945eb-9667-46a6-855e-547c88e5c61c-c000.snappy.parquet"
-#folder_name = "test_data/"
 
-#for Dask job
-s3_link_dask = "s3a://hamza-sagemaker/test_data/part-00000-c83945eb-9667-46a6-855e-547c88e5c61c-c000.snappy.parquet"
-
-
-# resuable function to merge master schema to filelds outside of the log messages
 # resuable function to merge master schema to filelds outside of the log messages
 def merge_master_schema(name, Schema, Spark, Spark_context):
     master_schema_path = f"devex_sdk/data_ingestion/container_insights_schema/{name}.json"
