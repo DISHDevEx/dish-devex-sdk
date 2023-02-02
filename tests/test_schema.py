@@ -7,12 +7,12 @@ from .commons import merge_master_schema
 # update_cwd_to_root("eks-projects")
 
 
-def test_NodeDiskIO(NodeDiskIO,Spark,Schema,Spark_context):
+def test_NodeDiskIO(NodeDiskIO,Spark,Spark_context):
     name= "NodeDiskIO"
     err_code = NodeDiskIO[0]
     df = NodeDiskIO[1]
     
-    merged_df = merge_master_schema(name,Schema,Spark,Spark_context)
+    merged_df = merge_master_schema(name,Spark,Spark_context)
     
 
     assert set(df.dtypes).difference(set(merged_df.dtypes)) == set(), f"Difference= {set(df.dtypes).difference(set(merged_df.dtypes))}"
