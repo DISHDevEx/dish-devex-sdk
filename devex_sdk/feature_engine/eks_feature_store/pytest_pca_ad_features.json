@@ -1,0 +1,40 @@
+[
+  {
+    "feature_group_name":"pytest_pca_ad",
+    "version": "v0.0.1",
+    "created_by": "David Cherney",
+    "feature_group_description": "numerical time series data about containers running in Dish Wireless's EKS clusters, intended to train a pca for use in anomaly definition and detection.",
+    "model_type": "pca",
+    "problem_type": "anomaly detection",
+    "features_list":
+    [
+      {
+        "feature_name": "container_cpu_utilization",
+        "feature_description": "Percentage of utilization of total Node CPU capacity by node",
+        "feature_datatype": "float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name": "container_memory_utilization",
+        "feature_description": "Percentage of node RAM used by the container",
+        "feature_datatype": "float",
+        "feature_type": "existing"
+      },
+      {
+        "feature_name": "container_memory_working_set",
+        "feature_description": "accessed memory, dirty memory, and kernel memory",
+        "feature_datatype": "float",
+        "feature_type": "existing"
+      }
+    ],
+    "model_parameters":
+      {
+        "time_steps": 25,
+        "batch_size" : 10,
+        "train_sample_multiplier": 1000,
+        "split_ratio": 0.8,
+        "num_of_features": 3,
+        "number_of_temporal_slices":1
+      }
+  }
+]
