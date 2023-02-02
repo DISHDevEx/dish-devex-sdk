@@ -22,7 +22,9 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
     print(master_schema_path)
     print(master_schema_json)
     #data_fail = Spark.createDataFrame(data=Spark_context.emptyRDD(), schema=Schema)
-    data_fail = Spark.createDataFrame(schema=Schema)
+
+    data_fail = Spark.createDataFrame(Spark_context.emptyRDD(), Schema)
+    data_fail.collect()
 
     merged_df = data_fail.unionByName(master_schema_json, allowMissingColumns=True)
     obj = EKS_Connector()
