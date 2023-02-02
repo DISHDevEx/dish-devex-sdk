@@ -90,7 +90,7 @@ class Spark_Utils():
             conf.set("spark.sql.catalog.spark_catalog",
                      "org.apache.spark.sql.delta.catalog.DeltaCatalog")
 
-            if os.environ["PYTEST_FLAG"]:
+            if os.environ.get("PYTEST_FLAG",''):
                 conf.set("fs.s3a.assumed.role.arn", os.environ["ROLE_TO_ASSUME"])
                 conf.set("fs.s3a.assumed.role.session.name", os.environ["SAMPLE_ROLE_SESSION"])
             else:
