@@ -21,10 +21,6 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '17'
-      - uses: vemonet/setup-spark@v1
-        with:
-          spark-version: '3.2.1'
-          hadoop-version: '3.2'
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
