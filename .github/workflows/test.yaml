@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.9" ]
+        python-version: [ "3.8" ]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -36,6 +36,7 @@ jobs:
           pip install  pytest
           pip install boto3
           pip install s3fs
+          pip install cloudpickle
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
         env:
