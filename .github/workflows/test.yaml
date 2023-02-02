@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.11" ]
+        python-version: [ "3.9" ]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -41,4 +41,5 @@ jobs:
            ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
            SAMPLE_ROLE_SESSION: ${{ secrets.SAMPLE_ROLE_SESSION }}
         run:
+           python --version
            pytest --capture=tee-sys
