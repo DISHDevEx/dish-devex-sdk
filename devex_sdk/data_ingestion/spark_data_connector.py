@@ -176,7 +176,7 @@ class Spark_Data_Connector():
             df - Pyspark dataframe
         """
 
-         try:
+        try:
 
             self._data = self._spark._spark.read.option('header', True).option('inferSchema', True).csv(self._s3_file_path)
             self._last_return_code = "PASS"
