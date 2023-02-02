@@ -38,6 +38,7 @@ jobs:
         env:
            ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
            SAMPLE_ROLE_SESSION: ${{ secrets.SAMPLE_ROLE_SESSION }}
+           BUCKET_NAME_PYTEST: ${{ secrets.BUCKET_NAME_PYTEST }}
         run: |
            python --version
            pytest --slow
