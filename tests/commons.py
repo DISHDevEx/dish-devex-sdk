@@ -19,5 +19,4 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
     obj = EKS_Connector()
     for item in obj.find_multilevel_schema_items(schema=merged_df.schema):
         merged_df = merged_df.withColumn(item, to_json(merged_df[item]))
-
     return merged_df
