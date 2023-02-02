@@ -14,37 +14,17 @@ s3_link_dask = "s3a://hamza-sagemaker/test_data/part-00000-c83945eb-9667-46a6-85
 
 
 # resuable function to merge master schema to filelds outside of the log messages
-def merge_master_schema(name):
-    obj = Spark_Utils()
-    obj.create_spark_utils(setup="default")
-    spark = obj.get_spark()
-    #master_schema_path = f"/home/runner/work/dish-devex-sdk/dish-devex-sdk/devex_sdk/data_ingestion/container_insights_schema/{name}.json"
+# resuable function to merge master schema to filelds outside of the log messages
+def merge_master_schema(name, Schema, Spark, Spark_context):
     master_schema_path = f"devex_sdk/data_ingestion/container_insights_schema/{name}.json"
-    master_schema_json = spark.read.json(master_schema_path, multiLine=True)
-    print(master_schema_path)
-    print(master_schema_json)
+    master_schema_json = Spark.read.json(master_schema_path, multiLine=True)
+    # master_schema = master_schema_json.schema ##Extract the schema from DF
 
-
-
-    eks_performance_logs_schema_test = StructType(
-        [StructField("account_id", StringType(), True),  # col1
-         StructField("log_group_name", StringType(), True),  # col2 .. etc
-         StructField("log_stream_name", StringType(), True),
-         StructField("record_id", StringType(), True),
-         StructField("stream_name", StringType(), True),
-         StructField("record_arrival_stream_timestamp", TimestampType(), True),
-         StructField("record_arrival_stream_epochtime", LongType(), True),
-         StructField("log_event_timestamp", TimestampType(), True),
-         StructField("log_event_epochtime", LongType(), True),
-         StructField("log_event_id", StringType(), True),
-         StructField("region", StringType(), True), ])
-    data_fail = spark.createDataFrame(data=[], schema=eks_performance_logs_schema_test)
-
-
+    data_fail = Spark.createDataFrame(data=Spark_context.emptyRDD(), schema=Schema)
 
     merged_df = data_fail.unionByName(master_schema_json, allowMissingColumns=True)
     obj = EKS_Connector()
     for item in obj.find_multilevel_schema_items(schema=merged_df.schema):
         merged_df = merged_df.withColumn(item, to_json(merged_df[item]))
-    print(merged_df)
+
     return merged_df
