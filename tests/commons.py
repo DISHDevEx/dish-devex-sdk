@@ -16,13 +16,9 @@ s3_link_dask = "s3a://hamza-sagemaker/test_data/part-00000-c83945eb-9667-46a6-85
 # resuable function to merge master schema to filelds outside of the log messages
 def merge_master_schema(name, Schema, Spark, Spark_context):
     
-    #master_schema_path = f"devex_sdk/data_ingestion/container_insights_schema/{name}.json"
+    master_schema_path = f"/home/runner/work/dish-devex-sdk/dish-devex-sdk/data_ingestion/container_insights_schema/{name}.json"
     #master_schema_path = f"devex_sdk/data_ingestion/container_insights_schema/{name}.json"
 
-    master_schema_json = Spark.read.json(os.path.join(
-            os.path.dirname(__file__),
-            "container_insights_schema",
-            name + ".json"), multiLine=True)
     #master_schema = master_schema_json.schema ##Extract the schema from DF
 
     data_fail = Spark.createDataFrame(data = Spark_context.emptyRDD(),
