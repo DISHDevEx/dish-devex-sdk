@@ -1,7 +1,6 @@
 import os
 from devex_sdk import EKS_Connector, Spark_Utils
 from pyspark.sql.functions import to_json
-from pyspark.sql.types import *
 
 # for pyspark job
 bucket_name = os.environ["BUCKET_NAME_PYTEST"]
