@@ -20,6 +20,12 @@ class EKS_Connector(Spark_Data_Connector):
     
         Constructor -- inputs
         ----------
+             bucket_name : STRING | Int
+                The s3 bucket to read the data from
+
+             folder_name : STRING | Int
+                The s3 folder to read the data from(alos known as key)
+
             year : STRING | Int
                 the year from which to read data, leave empty for all years
 
