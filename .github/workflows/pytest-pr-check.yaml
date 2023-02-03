@@ -22,7 +22,6 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          python-version: ${{ matrix.python-version }}
           role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
           role-session-name: ${{ secrets.SAMPLE_ROLE_SESSION }}
           aws-region: ${{ env.AWS_REGION }}
