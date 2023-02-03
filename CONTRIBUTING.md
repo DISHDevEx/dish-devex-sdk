@@ -310,6 +310,11 @@ RUN pytest --slow from root dir to run slow tests.
 ~/devex_sdk$ pytest
 ~/devex_sdk$ pytest --slow
 ```
+```
+In order to run tests locally please change the bucket_name and folder_name to either local data or s3 stored data.
+The file exixts in dish-devex-sdk -> devex_sdk -> tests-> commons.py
+In our case we default to run these tests in the GitHub rrunnera so we pint to an s3 bucket. 
+```
 
 the _pytest_ command must be within the same directory that the ___tests___ directory is located.  Once run, _pytest_ will generate output on the test.
 ## Test Building _devex_sdk_ With your Sub-Pacakge
