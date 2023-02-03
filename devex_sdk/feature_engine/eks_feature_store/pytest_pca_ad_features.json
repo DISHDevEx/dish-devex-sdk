@@ -31,7 +31,7 @@
       {
         "time_steps": 25,
         "batch_size" : 10,
-        "train_sample_multiplier": 1000,
+        "train_sample_multiplier": 10,
         "split_ratio": 0.8,
         "num_of_features": 3,
         "number_of_temporal_slices":1
