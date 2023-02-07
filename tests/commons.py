@@ -4,7 +4,7 @@ from pyspark.sql.functions import to_json
 
 # for pyspark job
 bucket_name = os.environ["BUCKET_NAME_PYTEST"]
-folder_name = "test_data/part-00000-c83945eb-9667-46a6-855e-547c88e5c61c-c000.snappy.parquet"
+folder_name = "pytest_eks_sample_data/part-00000-c83945eb-9667-46a6-855e-547c88e5c61c-c000.snappy.parquet"
 
 # resuable function to merge master schema to filelds outside of the log messages
 def merge_master_schema(name, Schema, Spark, Spark_context):
