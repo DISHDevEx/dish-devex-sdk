@@ -1,8 +1,9 @@
 # DevEx SDK
 
 ### __Installing devex_sdk__ shortcut:
+```console
 pip install git+https://github.com/DISHDevEx/dish-devex-sdk.git
-
+```
 
 ### __Installing devex_sdk__ versioned:
 1. Navigate into the root _devex_sdk_ directory.
