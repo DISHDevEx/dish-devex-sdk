@@ -42,4 +42,3 @@ jobs:
         run: |
            python --version
            pytest --slow
-
