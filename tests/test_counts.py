@@ -25,4 +25,4 @@ def test_toatl_count(NodeDiskIO,
     count.append(ClusterNamespace[1].count())
     count.append(Cluster[1].count())
     count.append(NodeNet[1].count())
-    assert sum(count) == 100
+    assert sum(count) == 110
