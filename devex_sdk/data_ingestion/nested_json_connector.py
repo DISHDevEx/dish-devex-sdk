@@ -7,11 +7,11 @@ from .spark_data_connector import Spark_Data_Connector
 
 class Nested_Json_Connector(Spark_Data_Connector):
     """
-    Class for ingestion of data with attributes for 
+    Class for ingestion of data with attributes for
 
         Constructor -- inputs
         ----------
-           s3_file_path = None, 
+           s3_file_path = None,
            setup = 'default'
 
         .read_nested_json() --outputs
@@ -19,41 +19,32 @@ class Nested_Json_Connector(Spark_Data_Connector):
             err_code : String
                 PASS or FAIL with the Exception code
 
-            df : DataFrame
+            df : Pyspark DataFrame
                 Filled when success, Empty when fail
 
         .filter_nested_columns(schema) --outputs
         ------
-            nested_columns: list
+            nested_columns: List
                 List of columns that are nested and need expanding
 
         .explode_nested_columns( df, nested_columns) --outputs
         ------
-            df: dataframe
+            df: Pyspark Dataframe
                 dataframe with all columns fully expanded
-
-
     """
 
     def __init__(self, s3_file_path=None, setup = 'default' ):
         """
-        Initiates class with spark session, s3_file_path, dataframe and main function.
-        The required dataframe is returned in 'dataframe' attribute of the class.
-        Parameters:
-            s3_file_path
+        This class is a child of Spark_Data_Connector.
+        All variables and functioons that are generalized are stored there.
         """
-        
-        ##this class is a child of Spark_Data_Connector
-        ##all variables and functioons that are generalized are stored there
-        Spark_Data_Connector.__init__(self,s3_file_path  = s3_file_path, setup = setup )
-        print("Nested_Json_Connector initialized with the following s3_file_path:"+str(self._s3_file_path))
-        
+        Spark_Data_Connector.__init__(self, s3_file_path = s3_file_path, setup = setup)
+        print("Nested_Json_Connector initialized with the following s3_file_path:"\
+              +str(self._s3_file_path))
 
-
-      
     def filter_nested_columns(self,schema):
         """
-        Method to discover columns in dataframe that have nested JSON.
+        Method to discover list of columns that are nested and need expanding.
         Parameters:
             schema - schema of dataframe
         Returns:
@@ -97,44 +88,43 @@ class Nested_Json_Connector(Spark_Data_Connector):
                 if isinstance(field_dtype, ArrayType):
                     field_dtype = field_dtype.elementType
 
-                    if isinstance(field_dtype, StructType):
+                    if isinstance(field_dtype, (ArrayType, StructType, MapType)):
                         df = df.select(*[column for column in df.columns if field_name != column],
                                        explode(field_name).alias(field_name))
 
             nested_columns = self.filter_nested_columns(df.schema)
 
-            # Explode horizontally all fields that are StructType
-            for column in nested_columns:
+            # Explode horizontally all fields that are StructType or MapType
+            for nested_column in nested_columns:
 
-                rename_dict = {}
+                if isinstance(df.schema[nested_column].dataType, (StrucType, MapType)):
 
-                for sub_column in df.select(col(column + '.*')).columns:
-                    rename_dict[sub_column] = column + '_' + sub_column
+                    rename_dict = {}
 
-                df = df.select(*[c for c in df.columns if column != c], col(column + '.*'))
+                    for sub_column in df.select(col(nested_column + '.*')).columns:
+                        rename_dict[sub_column] = nested_column + '_' + sub_column
 
-                for old_name, new_name in rename_dict.items():
-                    df = df.withColumnRenamed(old_name, new_name)
+                    df = df.select(*[c for c in df.columns if nested_column != c], col(nested_column + '.*'))
+
+                    for old_name, new_name in rename_dict.items():
+                        df = df.withColumnRenamed(old_name, new_name)
 
             # Repeat
             df = self.explode_nested_columns(df, nested_columns)
 
         return df
-
+    
     def read_nested_json(self):
         """
         Method to organize the order in which other methods are called and returns a dataframe.
         """
-        
+
         err, self._data = self.read_json()
 
-        
-      
         if(err == "PASS"):
-        
-           
+
             nested_columns = self.filter_nested_columns(self._data.schema)
-            
+
             # Explode nested columns if present
             if len(nested_columns) > 0:
                 self._data = self.explode_nested_columns(self._data, nested_columns)

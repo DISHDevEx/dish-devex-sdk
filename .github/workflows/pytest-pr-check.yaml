@@ -41,4 +41,4 @@ jobs:
            PYTEST_FLAG:  "True"
         run: |
            python --version
-           pytest --slow
+           pytest -rp
