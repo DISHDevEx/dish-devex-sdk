@@ -97,6 +97,9 @@ class GzConnector():
         read(self)
             Utilize the methods of GzConnector to read .gz files and convert them to a dataframe.
             If pref_rec_type is provided, dataframe will be filtered by it.
+            
+        filter_by_columns(self, columns)
+            Filter dataframe by column(s).
     """
 
     def __init__(self, bucket, misc, log_type, year, month, day, hour, perf_rec_type=None,
@@ -600,7 +603,8 @@ class GzConnector():
 
         df = df.sort_values('log_timestamp').reset_index(drop=True)
         self.df = df
-        return df
+        
+        return self.df
     
     def filter_by_columns(self, columns):
         """
