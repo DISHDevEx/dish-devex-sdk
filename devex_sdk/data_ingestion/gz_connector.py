@@ -603,23 +603,23 @@ class GzConnector():
 
         df = df.sort_values('log_timestamp').reset_index(drop=True)
         self.df = df
-        
+
         return self.df
-    
+
     def filter_by_columns(self, columns):
         """
         Filter dataframe by column(s).
-        
+
         Parameters
         ----------
             columns : list
                 List of columns to filter by.
-        
+
         Returns
         -------
             df : dataframe
                 Filtered Pandas dataframe
         """
         self.df = self.df[columns]
-        
+
         return self.df
