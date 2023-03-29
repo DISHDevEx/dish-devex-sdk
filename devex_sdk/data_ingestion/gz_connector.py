@@ -198,8 +198,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of performance logs.
+            df : dataframe
+                Pandas dataframe of performance logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
@@ -232,8 +232,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of application logs.
+            df : dataframe
+                Pandas dataframe of application logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
@@ -268,8 +268,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of control plane scheduler logs.
+            df : dataframe
+                Pandas dataframe of control plane scheduler logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
@@ -306,8 +306,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of control plane kube controller manager logs.
+            df : dataframe
+                Pandas dataframe of control plane kube controller manager logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
@@ -341,8 +341,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of control plane kube api logs.
+            df : dataframe
+                Pandas dataframe of control plane kube api logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         row_type1 = []
@@ -384,8 +384,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of control plane authenticator logs.
+            df : dataframe
+                Pandas dataframe of control plane authenticator logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
 
@@ -421,8 +421,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of control plane cloud controller manager logs.
+            df : dataframe
+                Pandas dataframe of control plane cloud controller manager logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
 
@@ -454,8 +454,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of data plane logs.
+            df : dataframe
+                Pandas dataframe of data plane logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
 
@@ -490,8 +490,8 @@ class GzConnector():
 
         Returns
         -------
-            df : Pandas dataframe
-                Dataframe of data plane logs.
+            df : dataframe
+                Pandas dataframe of data plane logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents[:1]:
@@ -515,13 +515,13 @@ class GzConnector():
 
         Parameters
         ----------
-            df : pandas dataframe
-                Dataframe with a column that has a nested JSON.
+            df : dataframe
+                Pandas dataframe with a column that has a nested JSON.
 
         Returns
         -------
-            df : pandas dataframe
-                Dataframe with nested JSON column expldoded.
+            df : dataframe
+                Pandas dataframe with nested JSON column expldoded.
         """
         if self.log_type in ['performance', 'application', 'dataplane', 'host']:
             column = 'data'
@@ -553,8 +553,8 @@ class GzConnector():
 
         Returns
         -------
-            df : pandas dataframe
-                Dataframe whose nested JSON column is expldoded, filtered by perf_rec_type if it is
+            df : dataframe
+                Pandas dataframe whose nested JSON column is expldoded, filtered by perf_rec_type if it is
                 provided.
         """
         paths = self.get_paths()
@@ -599,5 +599,23 @@ class GzConnector():
             df = self.explode(df)
 
         df = df.sort_values('log_timestamp').reset_index(drop=True)
-
+        self.df = df
         return df
+    
+    def filter_by_columns(self, columns):
+        """
+        Filter dataframe by column(s).
+        
+        Parameters
+        ----------
+            columns : list
+                List of columns to filter by.
+        
+        Returns
+        -------
+            df : dataframe
+                Filtered Pandas dataframe
+        """
+        self.df = self.df[columns]
+        
+        return self.df
