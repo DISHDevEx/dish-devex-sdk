@@ -42,10 +42,6 @@ setup(
         'configparser',
         'dask',
         ],
-    classifiers = [
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Dish Wireless',
-        ],
     long_description=long_description,
     long_description_content_type='text/markdown'
     )
