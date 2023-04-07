@@ -3,6 +3,7 @@ import pandas as pd
 import pytest
 import boto3
 import json
+import pickle
 
 @pytest.fixture(scope='module')
 def gzc():
@@ -11,8 +12,28 @@ def gzc():
                       perf_rec_type=None, cp_log_type=None, test=True)
 
 @pytest.fixture(scope='module')
-def s3():
-    return boto3.resource('s3')    
+def s3_resource():
+    return boto3.resource('s3')
+
+def read_s3(filename):
+    s3_resource = boto3.resource('s3')
+    bucket = 'respons-logs'
+    key = f'pytest/{filename}.txt'
+    obj = s3_resource.Object(bucket_name=bucket, key=key)
+    body = obj.get()['Body'].read().decode('UTF-8')
+    return body
+
+def read_df_s3(filename):
+    s3_client = boto3.client('s3')
+    bucket = 'respons-logs'
+    key = f'pytest/{filename}_df.pickle'
+    response = s3_client.get_object(Bucket=bucket, Key=key)
+    body = response['Body'].read()
+    data = pickle.loads(body)
+    df = pd.DataFrame(data, columns=['log_timestamp', 'data'])
+    df['data'] = df.data.apply(json.loads)
+    
+    return df
 
 @pytest.fixture(scope='module')
 def get_paths_expected():
@@ -27,40 +48,40 @@ def get_paths_expected():
             'respons-logs/pytest/pod.gz', 'respons-logs/pytest/podnet.gz']
 
 @pytest.fixture(scope='module')
-def get_objects_expected(s3):
-    return [s3.Object(bucket_name='respons-logs', key='pytest/application.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/authenticator.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/cloud_controller_manager.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/cluster.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/clusternamespace.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/clusterservice.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/container.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/containerfs.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/host.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/kube_apiserver.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/kube_controller_manager.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/kube_scheduler.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/node.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/nodediskio.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/nodefs.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/nodenet.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/pod.gz'),
-            s3.Object(bucket_name='respons-logs', key='pytest/podnet.gz')]
+def get_objects_expected(s3_resource):
+    return [s3_resource.Object(bucket_name='respons-logs', key='pytest/application.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/authenticator.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/cloud_controller_manager.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/cluster.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/clusternamespace.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/clusterservice.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/container.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/containerfs.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/host.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/kube_apiserver.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/kube_controller_manager.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/kube_scheduler.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/node.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/nodediskio.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/nodefs.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/nodenet.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/pod.gz'),
+            s3_resource.Object(bucket_name='respons-logs', key='pytest/podnet.gz')]
 
 @pytest.fixture(scope='module')
 def process_objects_expected():
-    return [['2023-03-23T15:09:32.282Z {"log":"2023-03-23T15:09:32.28284833Z stderr F 2023-03-23T15:09:32Z I! no pod is found for namespace:default,podName:open5gs-udr-6c96f5d447-8gfmb, refresh the cache now...","kubernetes":{"pod_name":"cloudwatch-agent-spj2z","namespace_name":"default","pod_id":"c7d7e86f-68d2-420f-b563-91161f2e0e4f","host":"ip-10-0-101-15.ec2.internal","container_name":"cloudwatch-agent","docker_id":"d4bba41a8063a3702a918a7015395fd3fd6adfe1488662ea1996115da4cfda44","container_hash":"docker.io/amazon/cloudwatch-agent@sha256:33f0072c93d614b5dd32f044549f3d764d05a42f068e852e94bdd849098852c7","container_image":"docker.io/amazon/cloudwatch-agent:1.247354.0b251981"}}']]
+    return [['''2023-03-23T15:09:32.282Z {"log":"2023-03-23T15:09:32.28284833Z stderr F 2023-03-23T15:09:32Z I! no pod is found for namespace:default,podName:open5gs-udr-6c96f5d447-8gfmb, refresh the cache now...","kubernetes":{"pod_name":"cloudwatch-agent-spj2z","namespace_name":"default","pod_id":"c7d7e86f-68d2-420f-b563-91161f2e0e4f","host":"ip-10-0-101-15.ec2.internal","container_name":"cloudwatch-agent","docker_id":"d4bba41a8063a3702a918a7015395fd3fd6adfe1488662ea1996115da4cfda44","container_hash":"docker.io/amazon/cloudwatch-agent@sha256:33f0072c93d614b5dd32f044549f3d764d05a42f068e852e94bdd849098852c7","container_image":"docker.io/amazon/cloudwatch-agent:1.247354.0b251981"}}''']]
 
 @pytest.fixture(scope='module')
-def performance_contents():
-    return [['2023-03-23T15:00:32.000Z {"AutoScalingGroupName":"eks-response_large_nodes-3ec372ed-23a7-f809-4974-bee77e59e6ab","ClusterName":"response_expirimentation_cluster","InstanceId":"i-03672fb3a91ec2337","InstanceType":"m4.16xlarge","Namespace":"openverso","NodeName":"ip-10-0-101-15.ec2.internal","PodName":"open5gs-bsf","Service":"open5gs-bsf-sbi","Sources":["cadvisor","calculated"],"Timestamp":"1679583630663","Type":"PodNet","Version":"0","interface":"eth0","kubernetes":{"host":"ip-10-0-101-15.ec2.internal","labels":{"app.kubernetes.io/instance":"open5gs","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"bsf","helm.sh/chart":"bsf-2.0.4","pod-template-hash":"7bc8975fdb"},"namespace_name":"openverso","pod_id":"06b604d7-1ab0-40fa-93c4-d126dcc8905a","pod_name":"open5gs-bsf-7bc8975fdb-vgxfn","pod_owners":[{"owner_kind":"Deployment","owner_name":"open5gs-bsf"}],"service_name":"open5gs-bsf-sbi"},"pod_interface_network_rx_bytes":101.32306764285336,"pod_interface_network_rx_dropped":0,"pod_interface_network_rx_errors":0,"pod_interface_network_rx_packets":1.4430548799592544,"pod_interface_network_total_bytes":180.17570929776977,"pod_interface_network_tx_bytes":78.85264165491641,"pod_interface_network_tx_dropped":0,"pod_interface_network_tx_errors":0,"pod_interface_network_tx_packets":0.9276781371166636}']]
+def performance_contents(s3_resource):
+    return read_s3('performance_contents')
 
 @pytest.fixture(scope='module')
 def init_performance_expected_df():
-    data = [['2023-03-23T15:00:32.000Z', '''{"AutoScalingGroupName":"eks-response_large_nodes-3ec372ed-23a7-f809-4974-bee77e59e6ab","ClusterName":"response_expirimentation_cluster","InstanceId":"i-03672fb3a91ec2337","InstanceType":"m4.16xlarge","Namespace":"openverso","NodeName":"ip-10-0-101-15.ec2.internal","PodName":"open5gs-bsf","Service":"open5gs-bsf-sbi","Sources":["cadvisor","calculated"],"Timestamp":"1679583630663","Type":"PodNet","Version":"0","interface":"eth0","kubernetes":{"host":"ip-10-0-101-15.ec2.internal","labels":{"app.kubernetes.io/instance":"open5gs","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"bsf","helm.sh/chart":"bsf-2.0.4","pod-template-hash":"7bc8975fdb"},"namespace_name":"openverso","pod_id":"06b604d7-1ab0-40fa-93c4-d126dcc8905a","pod_name":"open5gs-bsf-7bc8975fdb-vgxfn","pod_owners":[{"owner_kind":"Deployment","owner_name":"open5gs-bsf"}],"service_name":"open5gs-bsf-sbi"},"pod_interface_network_rx_bytes":101.32306764285336,"pod_interface_network_rx_dropped":0,"pod_interface_network_rx_errors":0,"pod_interface_network_rx_packets":1.4430548799592544,"pod_interface_network_total_bytes":180.17570929776977,"pod_interface_network_tx_bytes":78.85264165491641,"pod_interface_network_tx_dropped":0,"pod_interface_network_tx_errors":0,"pod_interface_network_tx_packets":0.9276781371166636}''']]
-    df = pd.DataFrame(data, columns=['log_timestamp', 'data'])
-    df['data'] = df.data.apply(json.loads)
-    return df
+    # data = [['2023-03-23T15:00:32.000Z', '''{"AutoScalingGroupName":"eks-response_large_nodes-3ec372ed-23a7-f809-4974-bee77e59e6ab","ClusterName":"response_expirimentation_cluster","InstanceId":"i-03672fb3a91ec2337","InstanceType":"m4.16xlarge","Namespace":"openverso","NodeName":"ip-10-0-101-15.ec2.internal","PodName":"open5gs-bsf","Service":"open5gs-bsf-sbi","Sources":["cadvisor","calculated"],"Timestamp":"1679583630663","Type":"PodNet","Version":"0","interface":"eth0","kubernetes":{"host":"ip-10-0-101-15.ec2.internal","labels":{"app.kubernetes.io/instance":"open5gs","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"bsf","helm.sh/chart":"bsf-2.0.4","pod-template-hash":"7bc8975fdb"},"namespace_name":"openverso","pod_id":"06b604d7-1ab0-40fa-93c4-d126dcc8905a","pod_name":"open5gs-bsf-7bc8975fdb-vgxfn","pod_owners":[{"owner_kind":"Deployment","owner_name":"open5gs-bsf"}],"service_name":"open5gs-bsf-sbi"},"pod_interface_network_rx_bytes":101.32306764285336,"pod_interface_network_rx_dropped":0,"pod_interface_network_rx_errors":0,"pod_interface_network_rx_packets":1.4430548799592544,"pod_interface_network_total_bytes":180.17570929776977,"pod_interface_network_tx_bytes":78.85264165491641,"pod_interface_network_tx_dropped":0,"pod_interface_network_tx_errors":0,"pod_interface_network_tx_packets":0.9276781371166636}''']]
+    # df = pd.DataFrame(data, columns=['log_timestamp', 'data'])
+    # df['data'] = df.data.apply(json.loads)
+    return read_df_s3('performance')
 
 @pytest.fixture(scope='module')
 def application_contents():
