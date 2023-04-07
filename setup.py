@@ -4,6 +4,11 @@ Build the wheel file for the library devex_sdk.
 
 from setuptools import find_packages, setup
 
+
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
 setup(
     name = 'devex_sdk',
     version = '0.1.0',
@@ -38,4 +43,6 @@ setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Dish Wireless',
         ],
+    long_description=long_description,
+    long_description_content_type='text/markdown'
     )
