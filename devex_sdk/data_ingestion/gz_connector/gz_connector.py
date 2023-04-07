@@ -4,13 +4,16 @@ import json
 import pandas as pd
 import boto3
 
+# For dev
+from boto3_setup import boto3_setup
+
+
 class GzConnector():
     """
     Preprocess EKS logs in a gzip (.gz) file format.
 
     Parameters
-    -------------
-
+    ----------
         bucket : string
             s3 bucket to read.
 
@@ -108,10 +111,10 @@ class GzConnector():
         self.bucket = bucket
         self.log_type = log_type
         self.misc = misc        # This will later be renamed or removed. Currently not in docstring
-        self.year = str(year)
-        self.month = str(month)
-        self.day = str(day)
-        self.hour = str(hour)
+        self.year = year
+        self.month = month
+        self.day = day
+        self.hour = hour
         self.perf_rec_type = perf_rec_type
         self.cp_log_type = cp_log_type
         if cp_log_type:
@@ -120,7 +123,8 @@ class GzConnector():
             self.prefix = 'pytest'
         else:
             self.prefix = f'{misc}/{log_type}/{year}/{month}/{day}/{hour}'
-        self.s3_resource = boto3.resource('s3')
+        # self.s3_resource = boto3.resource('s3')       # Prod
+        self.s3_resource = boto3_setup('s3', True)[1]
 
     def get_paths(self):
         """
@@ -212,8 +216,7 @@ class GzConnector():
         
         for content in contents:
             rows_list = []
-            for i in range(len(content)):
-                row = content[i]
+            for row in content:
                 idx = row.find(' ')
                 row = [ row[:idx], row[idx:] ]
                 rows_list.append(row)
@@ -222,6 +225,7 @@ class GzConnector():
             df = pd.concat([df, gz_df])
 
         df = df.drop_duplicates().reset_index(drop=True)
+        print(df)
         df['data'] = df.data.apply(json.loads)
         
         return df
@@ -247,8 +251,7 @@ class GzConnector():
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
             rows_list = []
-            for i in range(len(content)):
-                row = content[i]
+            for row in content:
                 idx = row.find(' ')
                 row = [ row[:idx], row[idx:] ]
                 rows_list.append(row)
@@ -284,10 +287,8 @@ class GzConnector():
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
             rows_list = []
-            # for i in range(len(content)):
-            for i in content:    
-                # row = content[i]
-                row = i.split('      ')
+            for row in content:    
+                row = row.split('      ')
                 rows_list.append(row)
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
@@ -320,8 +321,7 @@ class GzConnector():
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
             rows_list = []
-            for i in range(len(content)):
-                row = content[i]
+            for row in content:
                 row = row.split('      ')
                 rows_list.append(row)
 
@@ -359,9 +359,7 @@ class GzConnector():
 
         for content in contents:
 
-            for i in range(len(content)):
-                row = content[i]
-
+            for row in content:
                 if ' {"kind"' in row:
                     idx = row.find(' ')
                     row = [ row[:idx], row[idx:] ]
@@ -372,12 +370,13 @@ class GzConnector():
 
             df_type1 = pd.DataFrame(row_type1, columns=['log_timestamp', 'data'])
             df_type1['data'] = df_type1.data.apply(lambda x: x.strip())
+            df_type1 = df_type1.drop_duplicates().reset_index(drop=True)
             df_type1['data'] = df_type1.data.apply(json.loads)
 
             df_type2 = pd.DataFrame(row_type2, columns=['log_timestamp', 'data'])
+            df_type2 = df_type2.drop_duplicates().reset_index(drop=True)
 
             df = pd.concat([df_type1, df_type2]).sort_values('log_timestamp').reset_index(drop=True)
-            df = df.drop_duplicates().reset_index(drop=True)
 
         return df
 
@@ -403,8 +402,7 @@ class GzConnector():
             log_timestamps = []
             data = []
 
-            for i in range(len(content)):
-                row = content[i]
+            for row in content:
                 log_timestamp = row[:row.find(' ')]
                 log_data = row[row.find(' ')+1:]
                 log_timestamps.append(log_timestamp)
@@ -439,8 +437,7 @@ class GzConnector():
         for content in contents:
             rows_list = []
 
-            for i in range(len(content)):
-                row = content[i]
+            for row in content:
                 row = row.split('      ')
                 rows_list.append(row)
 
@@ -472,17 +469,15 @@ class GzConnector():
         for content in contents:
             rows_list = []
 
-            for i in content:
-                # row = content[i]
-                idx = i.find(' ')
-                row = [ i[:idx], i[idx:].lstrip() ]
+            for row in content:
+                idx = row.find(' ')
+                row = [ row[:idx], row[idx:].lstrip() ]
                 rows_list.append(row)
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
             
         df['data'] = df.data.apply(lambda x: x.replace('\\"', '"'))
-
         df = df.drop_duplicates().reset_index(drop=True)
         
         return df
@@ -513,8 +508,6 @@ class GzConnector():
                 idx = row.find(' ')
                 row = [ row[:idx], row[idx:].lstrip() ]
                 rows_list.append(row)
-                print(row)
-                print()
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
@@ -542,7 +535,6 @@ class GzConnector():
         if self.log_type in ['performance', 'application', 'dataplane', 'host']:
             column = 'data'
             data_normalized = pd.json_normalize(df[column])
-            
             df = pd.concat([
                 df[['log_timestamp', 'data']].reset_index(drop=True),
                 data_normalized],
