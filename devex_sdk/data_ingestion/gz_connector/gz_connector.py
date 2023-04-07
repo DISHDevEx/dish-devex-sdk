@@ -9,7 +9,8 @@ class GzConnector():
     Preprocess EKS logs in a gzip (.gz) file format.
 
     Parameters
-    ----------
+    -------------
+
         bucket : string
             s3 bucket to read.
 
@@ -107,10 +108,10 @@ class GzConnector():
         self.bucket = bucket
         self.log_type = log_type
         self.misc = misc        # This will later be renamed or removed. Currently not in docstring
-        self.year = year
-        self.month = month
-        self.day = day
-        self.hour = hour
+        self.year = str(year)
+        self.month = str(month)
+        self.day = str(day)
+        self.hour = str(hour)
         self.perf_rec_type = perf_rec_type
         self.cp_log_type = cp_log_type
         if cp_log_type:
@@ -614,6 +615,7 @@ class GzConnector():
 
         df = df.sort_values('log_timestamp').reset_index(drop=True)
         self.df = df
+
         return self.df
 
     def filter_by_columns(self, columns):
