@@ -504,9 +504,10 @@ class GzConnector():
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
-
-        df = df.drop_duplicates().reset_index(drop=True)
+        
         df['data'] = df.data.apply(json.loads)
+        print(df.data.values)
+        df = df.drop_duplicates().reset_index(drop=True)
         
         return df
 

@@ -31,7 +31,7 @@ def read_df_s3(filename):
     response = s3_client.get_object(Bucket=bucket, Key=key)
     body = response['Body'].read()
     df = pickle.loads(body)
-    print('zzzzzz', df)
+    # print('zzzzzz', df)
     # df = pd.DataFrame(data, columns=['log_timestamp', 'data'])
     # print(type(df.data[0]))
     # df['data'] = df.data.apply(json.loads)
