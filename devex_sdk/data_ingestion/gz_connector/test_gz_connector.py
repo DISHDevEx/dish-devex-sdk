@@ -15,21 +15,22 @@ from gz_connector import GzConnector
     
 def test_init_performance(performance_contents, init_performance_expected_df):
     gzc = GzConnector(bucket='respons-logs', misc=None, log_type='performance',
-                                   year=None, month=None, day=None, hour=None, 
-                                   perf_rec_type=None, cp_log_type=None, test=True)
+                                      year=None, month=None, day=None, hour=None, 
+                                      perf_rec_type=None, cp_log_type=None, test=True)
+    
     actual_result = gzc.init_performance(performance_contents)
-    print(actual_result.data[0])
-    print(init_performance_expected_df.data[0])
+    # print(actual_result.data[0])
+    # print(init_performance_expected_df.data[0])
     assert actual_result.equals(init_performance_expected_df)
     
-# def test_init_application(application_contents, init_application_expected_df):
-#     gzc = GzConnector(bucket='respons-logs', misc=None, log_type='application',
-#                       year=None, month=None, day=None, hour=None,
-#                       perf_rec_type=None, cp_log_type=None, test=True)
-#     actual_result = gzc.init_application(application_contents)
-#     print(actual_result.data.values)
-#     print(init_application_expected_df.data.values)
-#     assert actual_result.equals(init_application_expected_df)
+def test_init_application(application_contents, init_application_expected_df):
+    gzc = GzConnector(bucket='respons-logs', misc=None, log_type='application',
+                                      year=None, month=None, day=None, hour=None,
+                                      perf_rec_type=None, cp_log_type=None, test=True)
+    actual_result = gzc.init_application(application_contents)
+    # print(actual_result.data.values)
+    # print(init_application_expected_df.data.values)
+    assert actual_result.equals(init_application_expected_df)
 
 # def test_init_cp_scheduler(kube_scheduler_contents, kube_scheduler_expected_df):
 #     gzc = GzConnector(bucket='respons-logs', misc=None, log_type='controlplane',

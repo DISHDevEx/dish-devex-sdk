@@ -4,10 +4,6 @@ import json
 import pandas as pd
 import boto3
 
-# For dev
-from boto3_setup import boto3_setup
-
-
 class GzConnector():
     """
     Preprocess EKS logs in a gzip (.gz) file format.
@@ -123,8 +119,7 @@ class GzConnector():
             self.prefix = 'pytest'
         else:
             self.prefix = f'{misc}/{log_type}/{year}/{month}/{day}/{hour}'
-        # self.s3_resource = boto3.resource('s3')       # Prod
-        self.s3_resource = boto3_setup('s3', True)[1]
+        self.s3_resource = boto3.resource('s3') 
 
     def get_paths(self):
         """
@@ -213,7 +208,7 @@ class GzConnector():
                 Pandas dataframe of performance logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
-        
+        print(contents)
         for content in contents:
             rows_list = []
             for row in content:
