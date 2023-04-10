@@ -208,7 +208,6 @@ class GzConnector():
                 Pandas dataframe of performance logs.
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
-        print(contents)
         for content in contents:
             rows_list = []
             for row in content:
@@ -220,7 +219,6 @@ class GzConnector():
             df = pd.concat([df, gz_df])
 
         df = df.drop_duplicates().reset_index(drop=True)
-        print(df)
         df['data'] = df.data.apply(json.loads)
         
         return df
