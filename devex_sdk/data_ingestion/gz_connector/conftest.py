@@ -115,7 +115,8 @@ def kube_scheduler_expected_df():
 
 @pytest.fixture(scope='module')
 def kube_controller_manager_contents():
-    return [['2023-03-23T15:00:23.000Z E0323 15:00:23.228069      11 horizontal.go:226] failed to compute desired number of replicas based on listed metrics for Deployment/openverso/open5gs-amf: invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)']]
+    # return [['2023-03-23T15:00:23.000Z E0323 15:00:23.228069      11 horizontal.go:226] failed to compute desired number of replicas based on listed metrics for Deployment/openverso/open5gs-amf: invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)']]
+    return read_s3('cp_scheduler_contents')
 
 @pytest.fixture(scope='module')
 def init_cp_kube_controller_expected_df():
