@@ -30,7 +30,6 @@ err,df = read_one_hour_test.read()
 ```
 
 
-
 ### 3. Nested_Json_Connector
 
 * Inherits features and functions from Spark_Data_Connector. Adds a few custom functions specific to any files that may contain Nested Json structures.
@@ -42,7 +41,6 @@ from devex_sdk import Nested_Json_Connector
 obj = Nested_Json_Connector("") ## set your own s3 link here in the constructor
 err, df = obj.read_nested_json()
 ```
-
 
 ### 4. Pandas_Data_Connector
 
@@ -57,4 +55,41 @@ err, df = obj.read_nested_json()
 from devex_sdk import Spark_Data_Connector
 spark = Spark_Utils()
 spark.create_spark_utils(setup = "32gb")
+```
+
+### 6. GzConnector
+* Used for ingesting logs that are bytes compressed in gzip (.gz) format.
+* Can process the following logs of an EKS cluster:
+    - Performance - all typess
+    - Applicaiton
+    - Control Plane
+        - API Server
+        - Authenticator
+        - Scheduler
+        - Kube Controller Manager
+        - Cloud Controller Manager
+    - Data Plane
+    - Host
+
+How to use:
+
+```python
+from devex_sdk import GzConnector
+
+bucket = 'respons-logs'
+misc = 'lambdatest'         # dev only
+year = '2023'
+month = '03'
+day = '23'  
+hour = '15'
+
+log_type = 'performance'
+perf_rec_type = 'pod'
+cp_log_type = None         # For use when log_type='controlplane' 
+
+gzc = GzConnector(bucket=bucket, misc=misc, log_type=log_type,
+                  year=year, month=month, day=day, hour=hour, 
+                  perf_rec_type=perf_rec_type, cp_log_type=cp_log_type)
+
+
 ```
