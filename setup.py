@@ -29,7 +29,7 @@ setup(
                  'devex_sdk.feature_engine.eks_feature_store',
                  'devex_sdk.feature_engine',
                  'devex_sdk.data_ingestion.gz_connector',
-                 'devex_sdk.utilities.test_gz_connector_utils'
+                 'devex_sdk.utilities'
         ]
     ),
     include_package_data=True,
