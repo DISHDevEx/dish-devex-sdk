@@ -60,12 +60,12 @@ spark.create_spark_utils(setup = "32gb")
 ### 6. GzConnector
 * Used for ingesting logs that are bytes compressed in gzip (.gz) format.
 * Can process the following logs of an EKS cluster:
-    - Performance - all typess
+    - Performance - all types
     - Applicaiton
     - Control Plane
-        - API Server
+        - Kube API Server
         - Authenticator
-        - Scheduler
+        - Kube Scheduler
         - Kube Controller Manager
         - Cloud Controller Manager
     - Data Plane
