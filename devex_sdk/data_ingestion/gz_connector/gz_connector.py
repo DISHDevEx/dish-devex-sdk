@@ -116,10 +116,11 @@ class GzConnector():
         if cp_log_type:
             self.prefix = f'{misc}/{log_type}/{cp_log_type}/{year}/{month}/{day}/{hour}'
         elif test:
-            self.prefix = 'pytest'
+            self.prefix = 'pytest/gz_files'
         else:
             self.prefix = f'{misc}/{log_type}/{year}/{month}/{day}/{hour}'
-        self.s3_resource = boto3.resource('s3') 
+        self.s3_resource = boto3.resource('s3')
+        self.df = None
 
     def get_paths(self):
         """
@@ -177,8 +178,8 @@ class GzConnector():
                 Content of .gz log file(s) in string format.
         """
         contents = []
-        
-        for obj in objects:            
+
+        for obj in objects:
             with gzip.GzipFile(fileobj=obj.get()['Body']) as gzfile:
                 content = gzfile.read().decode('utf-8')
                 content = content.split('\n')
@@ -220,7 +221,7 @@ class GzConnector():
 
         df = df.drop_duplicates().reset_index(drop=True)
         df['data'] = df.data.apply(json.loads)
-        
+
         return df
 
     def init_application(self, contents):
@@ -251,10 +252,10 @@ class GzConnector():
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
-        
+
         df = df.drop_duplicates().reset_index(drop=True)
         df['data'] = df.data.apply(json.loads)
-       
+
         return df
 
     def init_cp_scheduler(self, contents):
@@ -280,17 +281,18 @@ class GzConnector():
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
             rows_list = []
-            for row in content:    
+            for row in content:
                 row = row.split('      ')
                 rows_list.append(row)
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
-            
+
         df = df.drop_duplicates().reset_index(drop=True)
         df['message_type'] = df.data.copy().apply(lambda x: x[ :x.find(']') ] )
         df['message_code'] = df.message_type.copy().apply(lambda x: x[x.find(':')+1:])
         df['message'] = df.data.copy().apply(lambda x: x[x.find('] ')+1:].strip())
+
         return df
 
     def init_cp_kube_controller(self, contents):
@@ -320,7 +322,7 @@ class GzConnector():
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
-        
+
         df = df.drop_duplicates().reset_index(drop=True)
         df['message_type'] = df.data.copy().apply(lambda x: x[ :x.find(']') ] )
         df['message_code'] = df.message_type.copy().apply(lambda x: x[x.find(':')+1:])
@@ -469,10 +471,10 @@ class GzConnector():
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
-            
+
         df['data'] = df.data.apply(lambda x: x.replace('\\"', '"'))
         df = df.drop_duplicates().reset_index(drop=True)
-        
+
         return df
 
     def init_host(self, contents):
@@ -495,7 +497,6 @@ class GzConnector():
         """
         df = pd.DataFrame(columns=['log_timestamp', 'data'])
         for content in contents:
-            
             rows_list = []
             for row in content:
                 idx = row.find(' ')
@@ -504,11 +505,10 @@ class GzConnector():
 
             gz_df = pd.DataFrame(rows_list, columns=['log_timestamp', 'data'])
             df = pd.concat([df, gz_df])
-        
-        df['data'] = df.data.apply(json.loads)
-        print(df.data.values)
+
         df = df.drop_duplicates().reset_index(drop=True)
-        
+        df['data'] = df.data.apply(json.loads)
+
         return df
 
     def explode(self, df):
@@ -556,8 +556,8 @@ class GzConnector():
         Returns
         -------
             df : dataframe
-                Pandas dataframe whose nested JSON column is expldoded, filtered by perf_rec_type if it is
-                provided.
+                Pandas dataframe whose nested JSON column is expldoded, filtered by perf_rec_type
+                if it is provided.
         """
         paths = self.get_paths()
         objects = self.get_objects(paths)
