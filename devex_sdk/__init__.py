@@ -19,7 +19,7 @@ from .data_ingestion import Spark_Data_Connector
 from .data_ingestion import Nested_Json_Connector
 from .data_ingestion import Spark_Utils
 from .data_ingestion import eks_performance_logs_schema
-from .data_ingestion import gz_connector
+from .data_ingestion import GzConnector
 
 from .project_inital_setup import setup_runner
 
