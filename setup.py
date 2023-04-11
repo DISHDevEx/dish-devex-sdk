@@ -28,6 +28,7 @@ setup(
                  'devex_sdk.project_inital_setup',
                  'devex_sdk.feature_engine.eks_feature_store',
                  'devex_sdk.feature_engine',
+                 'devex_sdk.data_ingestion.gz_connector'
                  ]),
     include_package_data=True,
     install_requires = [
