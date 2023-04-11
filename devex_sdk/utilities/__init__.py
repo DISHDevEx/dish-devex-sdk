@@ -1,2 +1,2 @@
-from .test_gz_connector_utils import read_s3
-from .test_gz_connector_utils import read_df_s3
+from .GzConnector import read_s3
+from .GzConnector import read_df_s3
