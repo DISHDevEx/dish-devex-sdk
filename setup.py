@@ -28,7 +28,8 @@ setup(
                  'devex_sdk.project_inital_setup',
                  'devex_sdk.feature_engine.eks_feature_store',
                  'devex_sdk.feature_engine',
-                 'devex_sdk.data_ingestion.gz_connector'
+                 'devex_sdk.data_ingestion.gz_connector',
+                 'devex_sdk.utilities.test_gz_connector_utils'
                  ]),
     include_package_data=True,
     install_requires = [
