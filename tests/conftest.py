@@ -1,7 +1,8 @@
 # content of conftest.py
 # This file provides the ability to call functions once for the entire test suite.
 import pytest
-from devex_sdk import EKS_Connector, Spark_Utils, read_s3, read_df_s3
+from devex_sdk import EKS_Connector, Spark_Utils
+from gz_connector_utils import read_s3, read_df_s3
 from pyspark.sql.types import *
 import dask.dataframe as dd
 from .commons import bucket_name, folder_name
