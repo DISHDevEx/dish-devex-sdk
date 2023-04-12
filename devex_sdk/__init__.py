@@ -24,6 +24,3 @@ from .data_ingestion import GzConnector
 from .project_inital_setup import setup_runner
 
 from .feature_engine import get_features
-
-from .utilities import read_s3
-from .utilities import read_df_s3
