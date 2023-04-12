@@ -1,4 +1,4 @@
-from gz_connector import GzConnector
+from devex_sdk import GzConnector
 
 def test_get_paths(gzc, get_paths_expected):
     actual_result = gzc.get_paths()
