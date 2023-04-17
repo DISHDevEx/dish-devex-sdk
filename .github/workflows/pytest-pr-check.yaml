@@ -38,6 +38,7 @@ jobs:
            ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
            SAMPLE_ROLE_SESSION: ${{ secrets.SAMPLE_ROLE_SESSION }}
            BUCKET_NAME_PYTEST: ${{ secrets.BUCKET_NAME_PYTEST }}
+           GZ_BUCKET_NAME: ${{ secrets.GZ_BUCKET_NAME }}
            PYTEST_FLAG:  "True"
         run: |
            python --version
