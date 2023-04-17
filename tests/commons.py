@@ -27,7 +27,7 @@ gz_bucket_name = os.enviorn["GZ_BUCKET_NAME"]
 
 def read_s3(log_type, gz_bucket_name):
     """
-    Read a text file from an S3 bucket for use in testing.
+    Read a text file from an S3 bucket for use in testing of GzConnector.
 
     Parameters
     ----------
@@ -49,7 +49,7 @@ def read_s3(log_type, gz_bucket_name):
 
 def read_df_s3(log_type, gz_bucket_name):
     """
-    Read a dataframe in pickle format from an S3 bucket for use in testing.
+    Read a dataframe in pickle format from an S3 bucket for use in testing of Gz Connector.
 
     Parameters
     ----------
