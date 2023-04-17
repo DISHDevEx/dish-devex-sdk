@@ -25,7 +25,7 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
 # For GzConnector Testing
 gz_bucket_name = os.environ["GZ_BUCKET_NAME"]
 
-def read_s3(log_type, gz_bucket_name):
+def read_s3(log_type):
     """
     Read a text file from an S3 bucket for use in testing of GzConnector.
 
@@ -47,7 +47,7 @@ def read_s3(log_type, gz_bucket_name):
     contents = [[body]]
     return contents
 
-def read_df_s3(log_type, gz_bucket_name):
+def read_df_s3(log_type):
     """
     Read a dataframe in pickle format from an S3 bucket for use in testing of Gz Connector.
 
