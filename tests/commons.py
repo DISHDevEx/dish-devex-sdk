@@ -23,7 +23,7 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
     return merged_df
 
 # For GzConnector Testing
-gz_bucket_name = os.enviorn["GZ_BUCKET_NAME"]
+gz_bucket_name = os.environ["GZ_BUCKET_NAME"]
 
 def read_s3(log_type, gz_bucket_name):
     """
