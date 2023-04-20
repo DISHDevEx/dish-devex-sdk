@@ -18,7 +18,7 @@ $ git pull
 ```console
 $ git branch firstname/name_of_algo
 ```
-__For Example__: If Vinny put together a brand new algorithm for creating buckets with EKS data, his branch and command would look as follows:
+__For Example__: If Vinny put together a brand-new algorithm for creating buckets with EKS data, his branch and command would look as follows:
 ```console
 $ git branch vinny/bucketization
 ```
@@ -43,7 +43,7 @@ $ git push --set-upstream origin firstname/name_of_algo
 Adding your algorithm to the _devex_sdk_ library is a relatively easy process; however, it is important that the steps below are followed closely to ensure the new algorithm builds in correctly to the existing framework.  To make things easy to follow, an example algorithm ___circles___ has been included as an example to follow.
 
 #### 1. Create a New Directory Under the [_devex_sdk_](/devex_sdk/) Sub-Directory
-Navigate to the _devex_sdk_ sub-directory within the _devex_sdk_ repository:
+Navigate to the _devex_sdk_ subdirectory within the _devex_sdk_ repository:
 ```console
 > devex_sdk
     > devex_sdk
@@ -81,7 +81,7 @@ This example is following a simple class that is being added to the package.  Yo
 
 The __init__ file is used in Python to give access to aspects of your code from a higher level.  The general process is to explicitly elevate functions and classes that should be accessible at the level of the directory in-which the __init__ file resides.  Here is an example to illustrate this point:
 
-Following the _circles_ example from earlier, I have written a useful class called _Circle_ located in _CirclesClass.py_.  In the Python file, there are several class methods as well as a function outside of the class for describing circles:
+Following the _circles_ example from earlier, I have written a useful class called _Circle_ located in _CirclesClass.py_.  In the Python file, there are several class methods as well as a function outside the class for describing circles:
 ```python
 import math
 
@@ -137,7 +137,7 @@ As a reminder, we are adding these to the inner __init__ file within the _circle
             CirclesClass.py
         > [OtherPackages]
 ```
-To elevate _Circles_ and _describe_ to the _circles_ directory, add the following to the the __init__ file:
+To elevate _Circles_ and _describe_ to the _circles_ directory, add the following to the __init__ file:
 
 ```python
 # devex_sdk/devex_sdk/circles/__init__.py
@@ -214,6 +214,8 @@ Add all dependencies included in your algorithm / sub-package in the [_requireme
 
 Add your dependencies with the following format, this is taken directly from the existing [_requirements.txt_](requirements.txt) file:
 
+**Note**: make sure to remember what dependencies you added to the [_requirements.txt_](requirements.txt) file as you will need to add these same dependencies to the [_setup.py_](setup.py) file under *install_requires* in the next step.
+
 ```python
 pandas==1.4.3
 numpy==1.23.1
@@ -224,7 +226,7 @@ If your version specific dependencies are already included in the list, do not d
 #### 3. Modify the [_setup.py_](setup.py) File
 There are two points in the [_setup.py_](setup.py) that will need to be edited to incorporate your sub-package into _devex_sdk_.
 
-First, you will add your package directory to the _find_packages_ field.  To do this, add your package name with the format of ___devex_sdk.PackageDirectoryName___ to the _include_ list.  Simply add a comma after the last item and include the formatted package name as a string as specified above.
+***First***, you will add your package directory to the _find_packages_ field.  To do this, add your package name with the format of ___devex_sdk.PackageDirectoryName___ to the _include_ list.  Simply add a comma after the last item and include the formatted package name as a string as specified above.
 
 __For example__ if the _packages=find_packages_ field is currently set with the following list:
 ```python
@@ -234,17 +236,16 @@ and I want to add the ___circles___ sub-package, I would make the following addi
 ```python
 packages=find_packages(include=['devex_sdk', 'devex_sdk.extras', 'devex_sdk.circles'])
 ```
-Second, you will need to add any dependencies included in the [_requirements.txt_](requirements.txt) to the _install_requires_ list.  The version number is required to be included just like with the _requirements.txt_ file:
+***Second***, you must add any dependencies you added in the [_requirements.txt_](requirements.txt) to the _install_requires_ list.  Only the package name is required to be added here, the version number is not required in this section:
 
 ```python
-install_requires=['pandas==1.4.3',
-                      'numpy==1.23.1',
-                      'tqdm==4.64.0'
+install_requires=['pandas',
+                  'numpy',
+                  'tqdm',
                       ]
 ```
 
 ### Adding Your Test Cases
-
 
 #### Test File Setup
 In order to maintain the integrity of the _devex_sdk_ library, grow the set of algorithms sustainably, and future proof the code with increased maintainability, all new algorithms are required to include unit tests.  This is the process of testing each aspect/function of the code individually to gain insight to how each aspect of the code in performing and make the process of debugging much easier.
@@ -359,11 +360,11 @@ Now, enter a Python Environment and test your sub-package.  Try various levels o
 >>> ci.describe(mycircle)
 This is a red circle with a radius of 2.
 ```
-If everything in your algorithm is functioning as expected, then it's time time to submit a merge request to have your code included in the next release of _devex_sdk_!
+If everything in your algorithm is functioning as expected, then it's time to submit a pull request to have your code included in the next release of _devex_sdk_!
 
-## README.md File Requierments
+## README.md File Requirements
 
-Each subpackage contributed to *devex_sdk* must have a README.md file included.  This tells other users how to sussecfully use your functions, the use cases for each function, and the expected outputs.  The README.md files should be included in the following location:
+Each subpackage contributed to *devex_sdk* must have a README.md file included.  This tells other users how to successfully use your functions, the use cases for each function, and the expected outputs.  The README.md files should be included in the following location:
 
 ```console
 > dish-devex-sdk
@@ -382,13 +383,4 @@ The minimum topics for inclusion in the README file are as follows:
 3. An example call for each function you are contributing
 
 ## Submitting a Pull Request
-Once all of the above steps are completed, your unit tests are all passing, and you are able to succesfully build *devex_sdk* on your local machine, it's now time to submit a pull request.
-
-Pull requests are easy to complete on CodeCommit.  Perform the following steps:
-
-1. Commit and push your branch to the *devex_sdk* repository
-2. On CodeCommit, navigate to the *devex_sdk* repository
-3. On the left-hand-side, in the navigation menu, select **Sources --> Repositories --> Pull Requests**
-4. Select your branch as the source, select *main* as the destination
-5. Submit the pull request
-6. A senior member of the team will approve the pull request and reach out if any alterations are needed
+Once all of the above steps are completed, your unit tests are all passing, and you are able to successfully build *devex_sdk* on your local machine then commit and push your branch.  It's now time to [submit a pull request](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/working-with-your-remote-repository-on-github-or-github-enterprise/creating-an-issue-or-pull-request#creating-a-pull-request).
