@@ -1,11 +1,12 @@
 name: Upload Python Package
-
 on:
   push:
     tags:
     - '*'
     - '**'
-- name: Create GitHub Release
+jobs:
+  build-n-publish:
+    - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         env:
