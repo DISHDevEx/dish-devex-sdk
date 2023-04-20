@@ -2,6 +2,10 @@
 
 ### __Installing devex_sdk__ shortcut:
 ```console
+pip install devex-sdk
+```
+or
+```console
 pip install git+https://github.com/DISHDevEx/dish-devex-sdk.git
 ```
 
