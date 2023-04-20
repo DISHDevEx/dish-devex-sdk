@@ -6,7 +6,6 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-
 name: Upload Python Package to pypi
 
 on:
