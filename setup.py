@@ -10,11 +10,11 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name = 'devex_sdk',
-    version = 'v1.0.0-beta1',
-    description = 'Dish DevEx open source SDK',
-    url = 'https://git-codecommit.us-west-2.amazonaws.com/v1/repos/devex_sdk',
-    author_email = 'devex@dish.com',
+    name='devex_sdk',
+    version='{{VERSION_PLACEHOLDER}}',
+    description='Dish DevEx open source SDK',
+    url='https://git-codecommit.us-west-2.amazonaws.com/v1/repos/devex_sdk',
+    author_email='devex@dish.com',
     license='Dish Wireless',
     packages=find_packages(
         include=['devex_sdk',
@@ -33,7 +33,7 @@ setup(
         ]
     ),
     include_package_data=True,
-    install_requires = [
+    install_requires=[
         'pyspark',
         'pandas',
         'numpy',
