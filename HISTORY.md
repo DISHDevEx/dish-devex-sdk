@@ -73,3 +73,7 @@ dev
 - Added PyPi automatic versioning through GitHub Actions
 - Updated CONTRIBUTING documentation to ensure accurate addition of dependencies. 
 - Modified main README structure to include a directory of all packages within the DevEx SDK.
+
+1.0.1 (2023-04-20)
+------------------
+- PyPi release to resolve versioning conflict.
