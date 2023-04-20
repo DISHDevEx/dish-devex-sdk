@@ -11,7 +11,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name = 'devex_sdk',
-    version = '0.1.0',
+    version = '1.0.0',
     description = 'Dish DevEx open source SDK',
     url = 'https://git-codecommit.us-west-2.amazonaws.com/v1/repos/devex_sdk',
     author_email = 'devex@dish.com',
