@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-  build-n-publish:
+    build-n-publish:
     - name: Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
