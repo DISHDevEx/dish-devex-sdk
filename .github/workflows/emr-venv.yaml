@@ -1,37 +1,37 @@
-name: emr-venv
-on:
-  pull_request:
-    types:
-      - closed
-env:
-  BUCKET_NAME : ${{ secrets.EKS_BUCKET_NAME }}
-  AWS_REGION : ${{ secrets.AWS_REGION }}
-# permission can be added at job level or workflow level
-permissions:
-      id-token: write   # This is required for requesting the JWT
-      contents: read    # This is required for actions/checkout
-jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [ "3.9" ]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          python-version: ${{ matrix.python-version }}
-          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
-          role-session-name: samplerolesession
-          aws-region: ${{ env.AWS_REGION }}
-      # Upload a file to AWS s3
-      - name:  run docker build
-        run: |
-          DOCKER_BUILDKIT=1 docker build --output . .
-      - name: upload to s3
-        run: |
-          aws s3 cp ./pyspark_deps_github.tar.gz s3://${{ env.BUCKET_NAME }}/emr_serverless/code/spark_dependency/
+#name: emr-venv
+#on:
+#  pull_request:
+#    types:
+#      - closed
+#env:
+#  BUCKET_NAME : ${{ secrets.EKS_BUCKET_NAME }}
+#  AWS_REGION : ${{ secrets.AWS_REGION }}
+## permission can be added at job level or workflow level
+#permissions:
+#      id-token: write   # This is required for requesting the JWT
+#      contents: read    # This is required for actions/checkout
+#jobs:
+#  if_merged:
+#    if: github.event.pull_request.merged == true
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        python-version: [ "3.9" ]
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Set up Python ${{ matrix.python-version }}
+#        uses: actions/setup-python@v3
+#      - name: configure aws credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          python-version: ${{ matrix.python-version }}
+#          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+#          role-session-name: samplerolesession
+#          aws-region: ${{ env.AWS_REGION }}
+#      # Upload a file to AWS s3
+#      - name:  run docker build
+#        run: |
+#          DOCKER_BUILDKIT=1 docker build --output . .
+#      - name: upload to s3
+#        run: |
+#          aws s3 cp ./pyspark_deps_github.tar.gz s3://${{ env.BUCKET_NAME }}/emr_serverless/code/spark_dependency/
