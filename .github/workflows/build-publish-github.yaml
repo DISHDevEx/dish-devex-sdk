@@ -4,6 +4,7 @@ on:
     tags:
     - '*'
     - '**'
+
 jobs:
   release:
     name: "Release"
