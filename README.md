@@ -1,6 +1,6 @@
 # DevEx SDK
 
-### __Installing devex_sdk__ shortcut:
+### __Installing devex_sdk__ from PyPi (Latest Release):
 ```console
 pip install devex-sdk
 ```
@@ -9,7 +9,7 @@ or
 pip install git+https://github.com/DISHDevEx/dish-devex-sdk.git
 ```
 
-### __Installing devex_sdk__ versioned:
+### __Installing devex_sdk__ from local build (beta testing):
 1. Navigate into the root _devex_sdk_ directory.
 ```console
 $ cd dish-devex-sdk
@@ -46,10 +46,19 @@ Alternatively, you can import all algorithms from the _devex_sdk_ library and us
 ```
 
 ## __History__
-View verion history and release notes in [HISTORY](HISTORY.md). 
+View version history and release notes in [HISTORY](https://github.com/DISHDevEx/dish-devex-sdk/blob/main/HISTORY.md). 
 
 ## __Contributing__
-Learn how about [CONTRIBUTING](CONTRIBUTING.md) to devex_sdk.
+Learn how about [CONTRIBUTING](https://github.com/DISHDevEx/dish-devex-sdk/blob/main/CONTRIBUTING.md) to devex_sdk.
 
-## Data Ingestion Framework
-Learn about the components and how to use [Data Ingestion](devex_sdk/data_ingestion/DATA_INGESTION.md)
+## __Releases on GitHub__
+View all [DevEx SDK releases](https://github.com/DISHDevEx/dish-devex-sdk/releases) on GitHub.
+
+## __Releases on PyPi__
+View all [DevEx SDK release](https://pypi.org/project/devex-sdk/#history) history on PyPi.
+
+
+## Python Packages in DevEx SDK
+- [Data Ingestion](https://github.com/DISHDevEx/dish-devex-sdk/tree/main/devex_sdk/data_ingestion)
+- [Feature Engine](https://github.com/DISHDevEx/dish-devex-sdk/tree/main/devex_sdk/feature_engine)
+- [Bucketization](https://github.com/DISHDevEx/dish-devex-sdk/tree/main/devex_sdk/bucketization)
