@@ -91,5 +91,5 @@ gzc = GzConnector(bucket=bucket, misc=misc, log_type=log_type,
                   year=year, month=month, day=day, hour=hour, 
                   perf_rec_type=perf_rec_type, cp_log_type=cp_log_type)
 
-
+df = gzc.read()
 ```
