@@ -14,23 +14,27 @@ class GzConnector():
             s3 bucket to read.
 
         log_type : {'application', 'controlplane', 'dataplane', 'host', 'performance'}
-            Log-type to ingest.
+            Log-type to process.
 
         year : string
-            The year from which to ingest logs.
+            The year for which to process logs.
 
         month : string
-            The month from which to ingest logs.
+            The month for which to process logs.
 
         day : string
-            The day of the month from which to ingest logs.
+            The day of the month for which to process logs.
 
         hour : string
-            The hour of day from which to ingest logs.
+            The hour of day for which to process logs.
 
         perf_rec_type : {'node', 'nodefs', 'nodediskio', 'nodenet', 'pod', 'podnet', 'container',
                          'containerfs', 'cluster', 'clusterservice', 'clusternamespace'}
             The performance log record type to filter by.
+            
+        cp_log_type : {'kube-scheduler', 'kube-controller-manager', 'kube-apiserver',
+                       'authenticator', 'cloud-controller-manager'}
+            The control plane component for which to process logs.
 
     Methods
     -------
@@ -574,7 +578,6 @@ class GzConnector():
         elif self.log_type == 'controlplane':
             if self.cp_log_type == 'kube-scheduler':
                 df = self.init_cp_scheduler(contents)
-                # df = self.explode(df)
 
             elif self.cp_log_type == 'kube-controller-manager':
                 df = self.init_cp_kube_controller(contents)
