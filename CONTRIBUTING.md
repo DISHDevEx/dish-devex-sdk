@@ -334,9 +334,12 @@ $ pip uninstall devex_sdk
 ### Build _.whl_ File
 Navigate to the root of the _devex_sdk_ directory you have been working in on your local host.  Then issue the following command:
 ```console
-~/devex_sdk$ python setup.py bdist_wheel
+~/devex_sdk$ python setup.py bdist_wheel --version <VERSION_NUMBER>
 ```
 This will generate the .whl file in the _dist_ directory at the root of the _devex_sdk_ file structure.
+
+**NOTE**: the ***<VERSION_NUMBER>*** only effects your local build.  You can use any version number you like.  This can be helpful in testing prior to submitting a pull request.  Alternatively, you can eclude the ***--version <VERSION_NUMBER>*** flag and the .whl file name will output as ***devex_sdk-_VERSION_PLACEHOLDER_-py3-none-any.whl***
+
 ### Install New _.whl_ File
 Next, from the same directory, execute the following command:
 ```console
