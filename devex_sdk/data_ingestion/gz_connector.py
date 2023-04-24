@@ -529,7 +529,6 @@ class GzConnector():
             df : dataframe
                 Pandas dataframe with nested JSON column expldoded.
         """
-        print('explode called.')
         if self.log_type in ['performance', 'application', 'dataplane', 'host']:
             column = 'data'
             data_normalized = pd.json_normalize(df[column])
@@ -574,6 +573,7 @@ class GzConnector():
             if self.perf_rec_type:
                 df['Type'] = df['Type'].apply(lambda x: x.lower())
                 df = df[df.Type == self.perf_rec_type.lower()]
+                df = df.dropna(how='all', axis=1)
 
         elif self.log_type == 'controlplane':
             if self.cp_log_type == 'kube-scheduler':
