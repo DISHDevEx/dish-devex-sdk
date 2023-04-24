@@ -3,11 +3,43 @@ Build the wheel file for the library devex_sdk.
 """
 
 from setuptools import find_packages, setup
-
+from sys import argv
 
 from pathlib import Path
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
+
+# Pierce, working with command line arguments
+
+# total arguments
+def total_args():
+    n = len(sys.argv)
+    print("Total arguments passed:", n)
+
+
+# Arguments passed
+def list_args():
+    print("\nName of Python script:", sys.argv[0])
+
+    print("\nArguments passed:", end=" ")
+    for i in range(1, n):
+        print(sys.argv[i], end=" ")
+
+
+# def get_version(rel_path):
+#     for line in read(rel_path).splitlines():
+#         if line.startswith('__version__'):
+#             delim = '"' if '"' in line else "'"
+#             return line.split(delim)[1]
+#     else if ('{{VERSION_PLACEHOLDER}}')
+#     else:
+#         raise RuntimeError("Unable to find version string.")
+
+# Pierce additions
+total_args()
+list_args()
+
+# End Pierce additions
 
 setup(
     name='devex_sdk',
