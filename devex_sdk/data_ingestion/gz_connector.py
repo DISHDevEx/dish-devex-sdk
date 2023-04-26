@@ -115,10 +115,16 @@ class GzConnector():
         self.bucket = bucket
         self.log_type = log_type
         self.misc = misc        # This will later be renamed or removed. Currently not in docstring
-        self.year = int(year)
-        self.month = int(month)
-        self.day = int(day)
-        self.hour = int(hour)
+        if test:
+            self.year = None
+            self.month = None
+            self.day = None
+            self.hour = None
+        else:
+            self.year = int(year)
+            self.month = int(month)
+            self.day = int(day)
+            self.hour = int(hour)
         self.perf_rec_type = perf_rec_type
         self.cp_log_type = cp_log_type
         if cp_log_type:
