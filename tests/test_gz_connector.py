@@ -76,8 +76,8 @@ def test_init_host(host_contents, init_host_expected_df):
     actual_result = gzc.init_host(host_contents)
     assert actual_result.equals(init_host_expected_df)
 
-def test_explode(gzc, df_to_explode, exploded_df_expected):
-    actual_result = gzc.explode(df_to_explode)
+def test_normalize(gzc, df_to_explode, exploded_df_expected):
+    actual_result = gzc.normalize(df_to_explode)
     assert actual_result.equals(exploded_df_expected)
 
 def test_read(gzc, df_read_expected):
