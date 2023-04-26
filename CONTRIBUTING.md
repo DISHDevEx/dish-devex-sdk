@@ -11,32 +11,32 @@ Perform the following commands within your _devex_sdk_ repository:
 
 1. Get a fresh pull on the the _devex_sdk_ repository:
 ```console
-$ git pull
+git pull
 ```
 
 2. Next, create a branch from _main_ on your local machine by executing following command; you will need to replace the fields with your first name and the name of your algorithm:
 ```console
-$ git branch firstname/name_of_algo
+  git branch firstname/name_of_algo
 ```
 __For Example__: If Vinny put together a brand-new algorithm for creating buckets with EKS data, his branch and command would look as follows:
 ```console
-$ git branch vinny/bucketization
+ git branch vinny/bucketization
 ```
 3. Now, you are still working in the _main_ branch on your local machine.  This can be confirmed by issuing the _branch_ command which will show the current branch as highlighted:
 ```console
-$ git branch
+ git branch
 ```
 4. You will now need to switch your branch to the new branch you created.  To do this, execute the following command, replacing _firstname/name_of_algo_ with your previously defined branch name:
 ```console
-$ git switch firstname/name_of_algo
+ git switch firstname/name_of_algo
 ```
 5. Confirm you are now working in your branch by issuing the branch command:
 ```console
-$ git branch
+ git branch
 ```
 6. Now, you will need to push your current branch and set it as the upstream equivalent.  This will add your branch held on your local machine to the repository online:
 ```console
-$ git push --set-upstream origin firstname/name_of_algo
+ git push --set-upstream origin firstname/name_of_algo
 ```
 
 ### Adding Your Algorithm to The Directory Hierarchy
@@ -308,8 +308,8 @@ When your test functions are complete, you can run the test cases by navigating 
 RUN: pytest from root dir.
 RUN pytest --slow from root dir to run slow tests.
 ```console
-~/devex_sdk$ pytest
-~/devex_sdk$ pytest --slow
+pytest
+pytest --slow
 ```
 ```
 In order to run tests locally please change the bucket_name and folder_name to either local data or s3 stored data.
@@ -329,12 +329,12 @@ It is time for a test build!  If you've followed the steps above, and your unit 
 ### Uninstall _devex_sdk_ from Local Host
 Issue the following command in your terminal to remove the existing install of _devex_sdk_:
 ```console
-$ pip uninstall devex_sdk
+ pip uninstall devex_sdk
 ```
 ### Build _.whl_ File
 Navigate to the root of the _devex_sdk_ directory you have been working in on your local host.  Then issue the following command:
 ```console
-~/devex_sdk$ python setup.py bdist_wheel --version <VERSION_NUMBER>
+  python setup.py bdist_wheel --version <VERSION_NUMBER>
 ```
 This will generate the .whl file in the _dist_ directory at the root of the _devex_sdk_ file structure.
 
@@ -343,14 +343,14 @@ This will generate the .whl file in the _dist_ directory at the root of the _dev
 ### Install New _.whl_ File
 Next, from the same directory, execute the following command:
 ```console
-~/devex_sdk$ pip install /dist/*.whl
+  pip install /dist/*.whl
 ```
 **Note:** in Windows, you will need to hit ___tab___ prior to executing the above command, this will autocomplete the name of the _.whl_ file. 
 
 ### Test the Sub-Package
 Now navigate to your home directory to get out of the _devex_sdk_ folder, this will ensure that you are testing _devex_sdk_ off of the pip installed version, not the _devex_sdk_ directory:
 ```console
-$ cd ~
+ cd ~
 ```
 Now, enter a Python Environment and test your sub-package.  Try various levels of imports, test all the features, and ensure everything is behaving as it should.  For example, the _cricles_ sub-packge would be tested as follows
 ```console
