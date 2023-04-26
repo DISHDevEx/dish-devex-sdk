@@ -59,6 +59,7 @@ spark.create_spark_utils(setup = "32gb")
 
 ### 6. GzConnector
 * Used for ingesting logs that are bytes compressed in gzip (.gz) format.
+* Current functionality allows for use in AWS Sagemaker only.
 * Can process the following logs of an EKS cluster:
     - Performance - all types
     - Applicaiton
