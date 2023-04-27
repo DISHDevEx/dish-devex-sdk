@@ -78,7 +78,7 @@ dev
 ------------------
 - PyPi release to resolve versioning conflict.
 
-1.0.2 (2023-04-20)
+1.0.2 (2023-04-27)
 ------------------
 - Added ability to version .whl files manually when compiling local builds.
 - Added error handling, and minor changes to GzConnector and its tests.
