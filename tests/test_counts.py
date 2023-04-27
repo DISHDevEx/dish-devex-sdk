@@ -1,8 +1,5 @@
 # function to check the count of pyspark dataframe and dask dataframe.
 import pytest
-
-
-
 def test_toatl_count(NodeDiskIO,
                      Pod,
                      PodNet,
@@ -15,10 +12,8 @@ def test_toatl_count(NodeDiskIO,
                      Cluster,
                      NodeNet
                                  ):
-    
+
     count = []
-
-
     count.append(NodeDiskIO[1].count())
     count.append(Pod[1].count())
     count.append(PodNet[1].count())
