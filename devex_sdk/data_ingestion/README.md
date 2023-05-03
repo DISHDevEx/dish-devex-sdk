@@ -77,20 +77,20 @@ How to use:
 ```python
 from devex_sdk import GzConnector
 
-bucket = 'respons-logs'
-misc = 'lambdatest'         # dev only
+log_type = 'application'
+bucket = 'open5gs-respons-logs'
 year = '2023'
-month = '03'
-day = '23'  
-hour = '15'
+month = '05'
+day = '02'  
+hour = '14'
 
-log_type = 'performance'
-perf_rec_type = 'pod'
+perf_rec_type = None       # For use when log_type='performance'
 cp_log_type = None         # For use when log_type='controlplane' 
 
-gzc = GzConnector(bucket=bucket, misc=misc, log_type=log_type,
-                  year=year, month=month, day=day, hour=hour, 
-                  perf_rec_type=perf_rec_type, cp_log_type=cp_log_type)
+gzc = GzConnector(bucket=bucket, log_type=log_type, year=year,
+                  month=month, day=day, hour=hour, 
+                  perf_rec_type=perf_rec_type,
+                  cp_log_type=cp_log_type)
 
 df = gzc.read()
 ```
