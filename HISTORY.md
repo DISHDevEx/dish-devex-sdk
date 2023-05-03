@@ -82,3 +82,7 @@ dev
 ------------------
 - Added ability to version .whl files manually when compiling local builds.
 - Added error handling, and minor changes to GzConnector and its tests.
+
+1.0.2 (2023-05-02)
+------------------
+- Reworked GzConnector to reflect changes in logging infrastructure and format.
