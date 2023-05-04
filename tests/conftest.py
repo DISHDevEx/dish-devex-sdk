@@ -4,7 +4,7 @@ import pytest
 from devex_sdk import EKS_Connector, Spark_Utils, GzConnector
 from pyspark.sql.types import *
 import dask.dataframe as dd
-from .commons import bucket_name, folder_name, read_s3, read_df_s3
+from .commons import bucket_name, folder_name, read_s3, read_df_s3, gz_bucket_name
 import boto3
 import pandas as pd
 import json
@@ -139,7 +139,7 @@ def Dask_dd():
 # Fixtures to test GzConnector
 @pytest.fixture(scope='module')
 def gzc():
-    return GzConnector(bucket='open5gs-respons-logs', log_type='test',
+    return GzConnector(bucket=gz_bucket_name, log_type='test',
                        year=None, month=None, day=None, hour=None,
                        perf_rec_type=None, cp_log_type=None)
 
@@ -149,11 +149,11 @@ def s3_resource():
 
 @pytest.fixture(scope='module')
 def get_paths_expected():
-    return ['open5gs-respons-logs/pytest/gz_files/test.gz']
+    return [f'{gz_bucket_name}/pytest/gz_files/test.gz']
 
 @pytest.fixture(scope='module')
 def get_objects_expected(s3_resource):
-    return [s3_resource.Object(bucket_name='open5gs-respons-logs', key='pytest/gz_files/test.gz')]
+    return [s3_resource.Object(bucket_name=gz_bucket_name, key='pytest/gz_files/test.gz')]
 
 @pytest.fixture(scope='module')
 def process_objects_expected():
