@@ -6,6 +6,7 @@ import boto3
 
 # for pyspark job
 bucket_name = os.environ["BUCKET_NAME_PYTEST"]
+gz_bucket_name = os.environ["GZ_BUCKET_NAME"]
 folder_name = "test_data/EKS_SAMPLE_DATA.snappy.parquet"
 
 # resuable function to merge master schema to filelds outside of the log messages
@@ -23,7 +24,6 @@ def merge_master_schema(name, Schema, Spark, Spark_context):
     return merged_df
 
 # For GzConnector Testing
-gz_bucket_name = os.environ["GZ_BUCKET_NAME"]
 
 def read_s3(log_type):
     """
