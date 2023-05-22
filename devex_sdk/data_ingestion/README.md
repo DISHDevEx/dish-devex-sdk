@@ -84,9 +84,6 @@ month = '05'
 day = '02'  
 hour = '14'
 
-perf_rec_type = None       # For use when log_type='performance'
-cp_log_type = None         # For use when log_type='controlplane' 
-
 gzc = GzConnector(bucket=bucket, log_type=log_type, year=year,
                   month=month, day=day, hour=hour, 
                   perf_rec_type=perf_rec_type,
