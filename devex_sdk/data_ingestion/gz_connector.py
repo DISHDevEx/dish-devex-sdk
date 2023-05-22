@@ -61,15 +61,13 @@ class GzConnector():
             Filter dataframe by column(s).
     """
 
-    def __init__(self, bucket, log_type, year, month, day, hour, perf_rec_type=None,
-                 cp_log_type=None):
+    def __init__(self, bucket, log_type, year, month, day, hour, perf_rec_type=None):
         """
         Construct all the necessary parameters for the GzConnector object.
         """
         self.bucket = bucket
         self.log_type = log_type
         self.perf_rec_type = perf_rec_type
-        self.cp_log_type = cp_log_type
         self.prefix = f'{log_type}-logs/{year}/{month}/{day}/{hour}'
         if log_type == 'performance':
             self.prefix = f'lambdatest/performance/{year}/{month}/{day}/{hour}'
