@@ -21,7 +21,7 @@ def test_initial_df(gzc, process_objects_expected, inital_df_expected):
 def test_initial_df_performance(gzc, performance_contents, initial_df_performance_expected):
     gzc = GzConnector(bucket='open5gs-respons-logs', log_type='test',
                   year=None, month=None, day=None, hour=None, 
-                  perf_rec_type='test', cp_log_type=None)
+                  perf_rec_type='test')
     actual_result = gzc.initial_df_performance(performance_contents)
     assert actual_result.equals(initial_df_performance_expected)
 

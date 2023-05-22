@@ -141,7 +141,7 @@ def Dask_dd():
 def gzc():
     return GzConnector(bucket=gz_bucket_name, log_type='test',
                        year=None, month=None, day=None, hour=None,
-                       perf_rec_type=None, cp_log_type=None)
+                       perf_rec_type=None)
 
 @pytest.fixture(scope='module')
 def s3_resource():
