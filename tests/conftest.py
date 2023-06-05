@@ -139,7 +139,7 @@ def Dask_dd():
 # Fixtures to test GzConnector
 @pytest.fixture(scope='module')
 def gzc():
-    return GzConnector(bucket=gz_bucket_name, log_type='test',
+    return GzConnector(bucket=gz_bucket_name, log_type='test', cluster = None,
                        year=None, month=None, day=None, hour=None,
                        perf_rec_type=None)
 
