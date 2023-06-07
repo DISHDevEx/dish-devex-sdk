@@ -78,14 +78,15 @@ How to use:
 from devex_sdk import GzConnector
 
 log_type = 'application'
-bucket = 'open5gs-respons-logs'
+bucket = 'test-bucket'
+cluster = 'test-cluster'
 year = '2023'
 month = '05'
-day = '02'  
+day = '18'  
 hour = '14'
 
-gzc = GzConnector(bucket=bucket, log_type=log_type, year=year,
-                  month=month, day=day, hour=hour, 
+gzc = GzConnector(bucket=bucket, log_type=log_type, cluster=cluster,
+                  year=year, month=month, day=day, hour=hour, 
                   perf_rec_type=perf_rec_type,
                   cp_log_type=cp_log_type)
 
