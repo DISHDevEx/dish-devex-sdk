@@ -96,6 +96,11 @@ class Spark_Utils():
             else:
                 conf.set("fs.s3a.aws.credentials.provider",
                      "com.amazonaws.auth.ContainerCredentialsProvider")
+            
+            conf.set("fs.s3a.impl","org.apache.hadoop.fs.s3a.S3AFileSystem")
+            conf.set("fs.AbstractFileSystem.s3a.impl", "org.apache.hadoop.fs.s3a.S3A")
+            conf.set("spark.hadoop.fs.s3a.path.style.access", True)
+            conf.set("spark.hadoop.fs.s3a.connection.ssl.enabled", True)
 
             if setup != 'default':
                 conf.set("spark.driver.memory",
