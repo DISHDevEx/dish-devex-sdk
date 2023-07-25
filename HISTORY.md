@@ -86,3 +86,7 @@ dev
 1.0.3 (2023-05-02)
 ------------------
 - Reworked GzConnector to reflect changes in logging infrastructure and format.
+
+1.0.4 (2023-07-25)
+------------------
+- Updated spark config to enable read/write access for s3 buckets with dots.
